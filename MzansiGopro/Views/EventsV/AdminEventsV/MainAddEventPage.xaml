@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" BackgroundColor="#fff" Shell.NavBarIsVisible="False"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:admineventsvm="clr-namespace:MzansiGopro.ViewModels.EventsVM.AdminEventsVM" xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:busy="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             x:Class="MzansiGopro.Views.EventsV.AdminEventsV.MainAddEventPage">
+    <ContentPage.BindingContext>
+        <admineventsvm:AdminEventsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            
+        <Frame Padding="0" BackgroundColor="Transparent" >
+            
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="220" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
+            <Frame Padding="0" BackgroundColor="Transparent" Margin="10" CornerRadius="10" >
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Image Source="{Binding Cover}" Aspect="AspectFit" />
+                    <BoxView BackgroundColor="#000" Opacity="0.4" CornerRadius="10" x:Name="selectImage"  >
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="selectPhoto" Tapped="selectPhoto_Tapped" />
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <Label Text="Tap To Change Poster" TextColor="#fff" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                </Grid>
+            </Frame>
+
+
+            <ScrollView Grid.Row="1" Margin="10,0" >
+                <StackLayout Spacing="10">
+                    <Label Text="What is your event called?" TextColor="#000" FontSize="17" />
+
+                    <punny:PancakeView Style="{StaticResource entryPan}" Grid.Row="2" >
+                        <punny:PancakeView.Shadow>
+                            <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                        </punny:PancakeView.Shadow>
+
+                        <Entry Style="{StaticResource EntryGL}" Placeholder="Name" Text="{Binding Name}"  />
+                    </punny:PancakeView>
+
+
+                    <Label Text="When is event?" TextColor="#000" FontSize="17" />
+
+                    <DatePicker  BackgroundColor="#eee" Date="{Binding EventDate}"   >
+                       
+                    </DatePicker>
+                    
+
+                    <Label Text="Where is the Venue?" TextColor="#000" FontSize="17" />
+
+
+                    <Button TextColor="#fff" BackgroundColor="{StaticResource secondaryPurple}" Text="Use Current Location" CornerRadius="10" x:Name="useLocation" Clicked="useLocation_Clicked"  />
+
+                    <Frame Padding="0" BackgroundColor="Transparent" x:Name="signFrame" IsVisible="false" HeightRequest="150" >
+                        <map:Map x:Name="signMap" IsShowingUser="True" MapType="Street" >
+
+                        </map:Map>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+
+
+
+
+            <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="2">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    
+                <Button BackgroundColor="Transparent" BorderColor="Red" BorderWidth="1" Text="Cancel" HorizontalOptions="Start" x:Name="cancel" Clicked="cancel_Clicked" TextColor="Red" />
+                    <Button Text="Save" BackgroundColor="GreenYellow" TextColor="#fff" HorizontalOptions="EndAndExpand" x:Name="save" Clicked="save_Clicked" />
+                </Grid>
+                
+            </Frame>
+                   
+            
+        </Grid>
+        </Frame>
+
+
+
+            <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />
+            <Frame Padding="0" BackgroundColor="Transparent" x:Name="busyFrame" IsVisible="{Binding IsBusy}">
+
+
+                <busy:SfBusyIndicator AnimationType="Ball" EnableAnimation="{Binding IsBusy}"  WidthRequest="400" HeightRequest="700" HorizontalOptions="Center" VerticalOptions="Center"></busy:SfBusyIndicator>
+
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

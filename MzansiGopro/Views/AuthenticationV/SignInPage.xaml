@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:busy="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.FlyoutItemIsVisible="False" Shell.NavBarIsVisible="False"
+             xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:authenticationvm="clr-namespace:MzansiGopro.ViewModels.AuthenticationVM"
+             x:Class="MzansiGopro.Views.AuthenticationV.SignInPage">
+    <ContentPage.BindingContext>
+        <authenticationvm:SignInVM />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            
+            
+         
+            
+        <punny:PancakeView Margin="10,20" CornerRadius="20" BackgroundColor="#fff" Padding="0">
+            <punny:PancakeView.Shadow>
+                <punny:DropShadow BlurRadius="15"  Color="#191919" Offset="1,1" />
+            </punny:PancakeView.Shadow>
+            <punny:PancakeView.Border>
+                <punny:Border Color="Transparent" DrawingStyle="Inside" Thickness="1" />
+            </punny:PancakeView.Border>
+
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+
+
+                </Grid.RowDefinitions>
+
+                <Image Source="signin.png"  Aspect="AspectFit"></Image>
+                <Label Text="Welcome" TextColor="{StaticResource Primary}" Grid.Row="1" FontAttributes="Bold" FontFamily="cursive" FontSize="49" VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <ScrollView Orientation="Vertical" Grid.Row="2" VerticalOptions="CenterAndExpand">
+                    <StackLayout Spacing="20">
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Name}" x:Name="entryFullName" TextChanged="entryFullName_TextChanged" Placeholder="Full Name"/>
+                        </punny:PancakeView>
+
+
+
+
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Email}" x:Name="entryEmail" TextChanged="entryEmail_TextChanged" Placeholder="Email" />
+                        </punny:PancakeView>
+                        
+                        
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" x:Name="numberShadow" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Number}" TextChanged="entryNumber_TextChanged"  Placeholder="071........"  x:Name="entryNumber"/>
+                        </punny:PancakeView>
+
+
+
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+                            <Grid BackgroundColor="#fff">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+                                
+                                
+                            <CheckBox IsChecked="{Binding IsShop}"   />
+                                <Label Text="Is this A Business" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Grid>
+
+                        </punny:PancakeView>
+
+
+                        
+
+
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" x:Name="PasswordShadow" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Password}"  Placeholder="Password" x:Name="password" TextChanged="password_TextChanged" />
+                        </punny:PancakeView>
+
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" x:Name="confirmPasswordColor" Color="#191919" Offset="1,1"  />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" x:Name="confirmPassword" TextChanged="confirmPassword_TextChanged" />
+                        </punny:PancakeView>
+
+
+
+
+                    </StackLayout>
+
+                </ScrollView>
+
+                <punny:PancakeView Grid.Row="3" Padding="0">
+                    <punny:PancakeView.Shadow>
+                        <punny:DropShadow BlurRadius="10" Color="#000" Offset="1,1" />
+                    </punny:PancakeView.Shadow>
+
+                    <Button  Text="Sign Up" x:Name="signIn" Clicked="signIn_Clicked"  CornerRadius="10"/>
+                </punny:PancakeView>
+
+
+
+                <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Login" TextColor="{StaticResource Primary}" >
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="loginBTN" Tapped="loginBTN_Tapped" />
+                        </Label.GestureRecognizers>
+                </Label>
+                <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Have an Account:" TextColor="#191919" >
+
+                </Label>
+
+
+
+
+
+            </Grid>
+
+        </punny:PancakeView>
+
+
+            <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />
+            <Frame Padding="0" BackgroundColor="Transparent" x:Name="busyFrame" IsVisible="{Binding IsBusy}">
+
+                
+                <busy:SfBusyIndicator AnimationType="Ball" ViewBoxWidth="100" ViewBoxHeight="300" EnableAnimation="{Binding IsBusy}"  WidthRequest="400" HeightRequest="700" HorizontalOptions="Center" VerticalOptions="Center"></busy:SfBusyIndicator>
+                
+            </Frame>
+            
+            
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

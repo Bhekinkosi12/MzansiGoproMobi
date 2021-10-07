@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:model="clr-namespace:MzansiGopro.Models" Shell.NavBarIsVisible="False"
+             xmlns:micromodel="clr-namespace:MzansiGopro.Models.microModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:businessvm="clr-namespace:MzansiGopro.ViewModels.BusinessVM" xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="MzansiGopro.Views.CompanyV.BusinessOfferEditPage">
+    <ContentPage.BindingContext>
+        <businessvm:BusinessOfferEditViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button Text="Save" Command="{Binding SaveEditedOffer}"  HorizontalOptions="EndAndExpand" BackgroundColor="#787ff6" TextColor="#fff"  />
+            <Button Text="Cancel" x:Name="CancelOffer" Clicked="CancelOffer_Clicked"  HorizontalOptions="StartAndExpand" BackgroundColor="#fff" BorderColor="Red" BorderWidth="1" TextColor="Red"  />
+
+            <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1">
+            
+        <ScrollView>
+            
+        <StackLayout>
+
+                <Frame BackgroundColor="Transparent" Padding="0" Margin="0,15,0,0">
+                    <Grid RowSpacing="10" >
+                        <Grid.RowDefinitions >
+                            
+                            <RowDefinition Height="40"  />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+
+                        <Frame Padding="0" BackgroundColor="Transparent" x:Name="labelOfferFrame" >
+                            
+                        <Label Text="{Binding OfferName}" FontSize="23" TextColor="{StaticResource text}" HorizontalOptions="CenterAndExpand" WidthRequest="200" Margin="15,0" />
+                        </Frame>
+                        <Frame Padding="0" BorderColor="{StaticResource Primary}"  BackgroundColor="Transparent"  IsVisible="False" x:Name="editNameFrame">
+                         
+                                        <Entry Text="{Binding OfferName}" TextColor="{StaticResource Primary}" />
+                                    
+                                </Frame>
+                        <Label Text="Edit" TextColor="{StaticResource Primary}" x:Name="labelEdit"  FontSize="17" FontFamily="cursive" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="10,0" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="editName" Tapped="editName_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+
+
+                        <Frame BackgroundColor="Transparent" Grid.Row="1" Padding="0" >
+                            <Label   Margin="15,0" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="Layout :  " TextColor="{StaticResource Primary}" FontSize="15" />
+                                            <Span Text="Card" TextColor="{StaticResource Primary}" FontSize="15" />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            
+                        </Frame>
+
+
+
+                    </Grid>
+                    
+                </Frame>
+
+
+
+                <ScrollView>
+
+                    <StackLayout Orientation="Horizontal" Padding="10"  >
+
+                        <CollectionView ItemsSource="{Binding ProductList}" >
+
+                                    <CollectionView.Header>
+                                        <Frame BackgroundColor="Transparent" Padding="10,0" HeightRequest="30">
+                                            <Button Text="Add" TextColor="#fff" Command="{Binding AddProduct}" BackgroundColor="{StaticResource defaultPurple}" Padding="0" CornerRadius="15" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                                        </Frame>
+                                    </CollectionView.Header>
+                            
+
+                            <CollectionView.EmptyViewTemplate>
+                                <DataTemplate>
+                                    <Frame >
+                                        <StackLayout>
+                                            <Image Source="imageFolder.png" Aspect="AspectFit" />
+                                            <Label Text="No Items Yet" TextColor="#191919" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.EmptyViewTemplate>
+
+
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="1" Orientation="Vertical" VerticalItemSpacing="10" HorizontalItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="Transparent" Margin="0,10,0,0" Padding="10,10,10,0" WidthRequest="190" BorderColor="#000" x:DataType="model:Products"   CornerRadius="15">
+                                        <Grid RowSpacing="10" >
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="90" />
+                                                <RowDefinition Height="60" />
+                                                <RowDefinition Height="30" />
+                                            </Grid.RowDefinitions>
+
+                                            <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15">
+                                                
+                                            <Image Source="{Binding Image}" BackgroundColor="Transparent"  Aspect="AspectFill"  />
+                                            </Frame>
+
+
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="30" />
+                                                            <RowDefinition Height="30" />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="90" />
+                                                        </Grid.ColumnDefinitions>
+
+
+                                                        <Label Text="{Binding Name}" FontSize="18" TextColor="{StaticResource text}" Grid.ColumnSpan="2" HorizontalOptions="Center" />
+
+                                                        <Label  Margin="10,0" TextColor="{StaticResource text}" VerticalOptions="Center" Grid.Column="1" Grid.Row="1" HorizontalOptions="End">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="R " TextColor="{StaticResource text}" />
+                                                        <Span Text="{Binding Price}" TextColor="{StaticResource text}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+
+
+
+
+
+                                                        <CollectionView ItemsSource="{Binding Ingredient}" Grid.Row="1"  HeightRequest="37" Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
+                                                            <CollectionView.ItemsLayout>
+                                                                <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                                            </CollectionView.ItemsLayout>
+                                                            <CollectionView.EmptyViewTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame CornerRadius="10" BorderColor="#000080" BackgroundColor="Transparent" Padding="7,3" >
+                                                                        <Label Text="Add item Ingrient" TextColor="#191919" />
+                                                                    </Frame>
+                                                                </DataTemplate>
+
+                                                            </CollectionView.EmptyViewTemplate>
+
+                                                            <CollectionView.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame BackgroundColor="Transparent" Padding="7,3" x:DataType="micromodel:offer"  CornerRadius="10" BorderColor="#000080"  >
+                                                                        <Grid>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*" />
+                                                                                
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                                                       
+
+                                                                        </Grid>
+                                                                    </Frame>
+                                                                </DataTemplate>
+                                                            </CollectionView.ItemTemplate>
+
+
+                                                        </CollectionView>
+
+
+
+
+
+
+
+
+
+                                                    </Grid>
+                                            
+                                            
+                                            
+                                            
+                                            
+
+
+                                                    <Button Text="Edit"  Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:BusinessOfferEditViewModel}}, Path=SelectItem}"		
+                                CommandParameter="{Binding .}" BackgroundColor="#787ff6" HeightRequest="28" HorizontalOptions="EndAndExpand" WidthRequest="100" VerticalOptions="EndAndExpand"  CornerRadius="10" Padding="0" TextColor="{StaticResource background}" Grid.Row="2" />
+
+
+                                                    <Button Text="Delete"  Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:BusinessOfferEditViewModel}}, Path=DeleteRequest}"		
+                                CommandParameter="{Binding .}" BackgroundColor="#fff" HeightRequest="28" HorizontalOptions="StartAndExpand" WidthRequest="100" VerticalOptions="EndAndExpand" BorderColor="Red" BorderWidth="1"  CornerRadius="10" Padding="0" TextColor="Red" Grid.Row="2" />
+
+
+
+                                        </Grid>
+
+
+
+                                    </Frame>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+
+                        </CollectionView>
+
+
+
+
+
+
+                    </StackLayout>
+                </ScrollView>
+
+
+
+
+            </StackLayout>
+        </ScrollView>
+        </Frame>
+
+
+
+
+
+
+            <Frame Padding="0" BackgroundColor="#fff" Grid.RowSpan="2" IsVisible="{Binding IsSelected}" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+
+
+
+                    <Frame BackgroundColor="Transparent" Padding="10" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="240" />
+                                <RowDefinition Height="*" />
+                                
+                            </Grid.RowDefinitions>
+
+
+
+                            <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15" >
+                                <Image Source="{Binding SelectedImage}" Aspect="AspectFill" />
+                            </Frame>
+                            <BoxView BackgroundColor="#000" Opacity="0.5" CornerRadius="15">
+                                <BoxView.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="selectImageBox" Tapped="selectImageBox_Tapped" />
+                                </BoxView.GestureRecognizers>
+                            </BoxView>
+                            <Label Text="Tap To Select New Image" TextColor="#fff"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+
+
+                            <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" >
+                                <ScrollView>
+                                    <StackLayout Spacing="10">
+
+                                        <Label Text="Price" TextColor="{StaticResource text}" FontSize="21" FontFamily="cursive" />
+
+
+                                        <punny:PancakeView Style="{StaticResource entryPan}" Grid.Row="2">
+                                            <punny:PancakeView.Shadow>
+                                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                            </punny:PancakeView.Shadow>
+
+                                            <Entry Style="{StaticResource EntryGL}" Text="{Binding SelectedPrice}" Keyboard="Numeric" Placeholder="25.99" x:Name="EntryPrice" TextChanged="EntryPrice_TextChanged"
+                                                   />
+                                        </punny:PancakeView>
+
+
+
+                                        <Label Text="Product Name" TextColor="{StaticResource text}" FontSize="21" FontFamily="cursive" />
+
+
+
+                                        <punny:PancakeView Style="{StaticResource entryPan}" Grid.Row="1">
+                                            <punny:PancakeView.Shadow>
+                                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                            </punny:PancakeView.Shadow>
+
+                                            <Entry Style="{StaticResource EntryGL}" Text="{Binding SelectedName}" />
+                                        </punny:PancakeView>
+
+
+
+                                        <Label Text="What makes the product" TextColor="{StaticResource text}" FontSize="21" FontFamily="cursive" />
+
+
+
+
+                                        <Grid Padding="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="80" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <punny:PancakeView Style="{StaticResource entryPan}" >
+                                                <punny:PancakeView.Shadow>
+                                                    <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                                </punny:PancakeView.Shadow>
+
+
+
+
+                                                <Entry Style="{StaticResource EntryGL}" Text="{Binding OfferInput}"  Placeholder="Ingrident"/>
+
+
+
+                                            </punny:PancakeView>
+
+
+
+                                            <Button Text="Add" Margin="0,10" Command="{Binding AddItem}" Grid.Column="1" BackgroundColor="#fff" TextColor="#000080" BorderColor="#000080" BorderWidth="1"></Button>
+
+                                        </Grid>
+
+                                        <Frame BackgroundColor="Transparent" Padding="0"  >
+                                            <ScrollView>
+                                                <StackLayout Orientation="Horizontal">
+
+                                                    <CollectionView ItemsSource="{Binding Offer}" HeightRequest="37" Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
+                                                        <CollectionView.ItemsLayout>
+                                                            <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                                        </CollectionView.ItemsLayout>
+                                                        <CollectionView.EmptyViewTemplate>
+                                                            <DataTemplate>
+                                                                <Frame BackgroundColor="Transparent" Padding="7"  CornerRadius="10" BorderColor="#000080" >
+                                                                    <Label Text="Add item" TextColor="#191919" />
+                                                                </Frame>
+                                                            </DataTemplate>
+
+                                                        </CollectionView.EmptyViewTemplate>
+
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Frame BackgroundColor="Transparent" Padding="7" x:DataType="micromodel:offer" CornerRadius="10" BorderColor="#000080"  >
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="*" />
+                                                                            <ColumnDefinition Width="30" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        
+                                                                    <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                                                        <ImageButton BackgroundColor="Transparent" Grid.Column="1" Source="delete_"  Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:BusinessOfferEditViewModel}}, Path=DeleteOffer}"		
+                                CommandParameter="{Binding .}" />
+
+                                                                    </Grid>
+                                                                </Frame>
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+
+
+                                                    </CollectionView>
+                                                </StackLayout>
+                                            </ScrollView>
+                                        </Frame>
+
+
+                                        <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
+
+
+
+
+
+
+                                    </StackLayout>
+                                    
+                                </ScrollView>
+                                
+                            </Frame>
+
+
+                      
+
+                        </Grid>
+                        
+                        
+                         
+                        
+                        
+                        
+                        
+                    </Frame>
+                    
+
+
+                    <Button Text="Save" x:Name="productsave"  Clicked="productsave_Clicked" Grid.Row="1" HorizontalOptions="EndAndExpand" BackgroundColor="#787ff6" TextColor="#fff"  />
+                    <Button Text="Cancel" x:Name="productCancel" Clicked="productCancel_Clicked" Grid.Row="1"  HorizontalOptions="StartAndExpand" BackgroundColor="#fff" BorderColor="Red" BorderWidth="1" TextColor="Red"  />
+
+                </Grid>
+                
+                
+            </Frame>
+
+
+
+
+
+            <Frame IsVisible="{Binding IsDelete}" BackgroundColor="Transparent" Padding="10"  Grid.RowSpan="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <BoxView BackgroundColor="#fff"  />
+                    <Frame Padding="0" BackgroundColor="Transparent">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                
+                            </Grid.RowDefinitions>
+
+
+
+                            <Frame BackgroundColor="#fff" Padding="0" >
+
+                                <Label Text="Are you sure you want to delete" TextColor="{StaticResource text}" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Frame>
+
+                            <Button Text="No" Command="{Binding DeleteDenied}" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="StartAndExpand" TextColor="Green" BackgroundColor="#fff" BorderWidth="1" BorderColor="Green" />
+                            <Button Text="Yes" Command="{Binding DeleteConfirm}"  Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="EndAndExpand" TextColor="Red" BackgroundColor="#fff" BorderWidth="1" BorderColor="Red" />
+
+
+
+                        </Grid>
+                    </Frame>
+
+
+                </Grid>
+                
+            </Frame>
+            
+            
+            
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

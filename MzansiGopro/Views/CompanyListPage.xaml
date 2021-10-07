@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:vm="clr-namespace:MzansiGopro.ViewModels"
+             xmlns:local="clr-namespace:MzansiGopro.Models"
+             xmlns:micro="clr-namespace:MzansiGopro.Models.microModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:viewmodels="clr-namespace:MzansiGopro.ViewModels" Shell.NavBarIsVisible="False" BackgroundColor="{StaticResource background}"
+             x:Class="MzansiGopro.Views.CompanyListPage">
+    <ContentPage.BindingContext>
+        <viewmodels:ShopViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RefreshView>
+            
+        <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <punny:PancakeView Margin="15,0"  BackgroundColor="{StaticResource background}" x:Name="searchBar" CornerRadius="10"  >
+                    <punny:PancakeView.Shadow>
+                        <punny:DropShadow Color="{StaticResource Primary}" BlurRadius="1" Opacity="0.6" Offset="1,1" />
+                    </punny:PancakeView.Shadow>
+
+                    <SearchBar Placeholder="Search" HorizontalOptions="Center"   VerticalOptions="Center" PlaceholderColor="{StaticResource Primary}"  />
+
+                </punny:PancakeView>
+
+                <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreashing}"  Command="{Binding RefreshShop}">
+                    <StackLayout>
+                        
+                <CollectionView  x:Name="storeCollective"  ItemsSource="{Binding ShopList}" >
+                    <CollectionView.ItemsLayout >
+                        <GridItemsLayout Span="2" Orientation="Vertical" VerticalItemSpacing="15" HorizontalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <Label Text="Pull down to refreash" TextColor="#191919"  />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <punny:PancakeView Padding="0" BackgroundColor="Transparent" x:DataType="local:Shop" CornerRadius="10" WidthRequest="160" >
+                                <punny:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ShopViewModel}}, Path=ShopTap}"		
+                                CommandParameter="{Binding .}" >
+                                    </TapGestureRecognizer>
+
+                                </punny:PancakeView.GestureRecognizers>
+                                <punny:PancakeView.Border>
+                                    <punny:Border Color="#aaa" DrawingStyle="Inside" Thickness="1" />
+                                </punny:PancakeView.Border>
+
+                                <Grid RowSpacing="0" >
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="80" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Frame  Padding="0" BackgroundColor="Transparent">
+                                        <Image Source="{Binding Cover_Img}" HeightRequest="80"  Aspect="AspectFill" />
+                                    </Frame>
+
+
+                                    <Frame Padding="0" BackgroundColor="{StaticResource background}" Grid.Row="1">
+                                        <StackLayout Orientation="Vertical">
+
+
+                                            <Label Text="{Binding Name}" TextColor="#191919" HorizontalOptions="Center" FontSize="16" />
+
+                                            <ScrollView Orientation="Horizontal">
+                                                <StackLayout Orientation="Horizontal" Spacing="0" Margin="7,0" >
+
+                                                    <CollectionView ItemsSource="{Binding Offers}" HeightRequest="24"  >
+                                                        <CollectionView.ItemsLayout>
+                                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                                        </CollectionView.ItemsLayout>
+
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Frame Padding="5,1"  HeightRequest="17" x:DataType="micro:offer"   HasShadow="True" BorderColor="#303030" >
+                                                                    <Label Text="{Binding Name}" TextColor="#191919" />
+                                                                </Frame>
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+
+                                                    </CollectionView>
+
+
+                                                    <CollectionView ItemsSource="{Binding ExtraList}" HeightRequest="24" >
+                                                        <CollectionView.ItemsLayout>
+                                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                                        </CollectionView.ItemsLayout>
+
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Frame Padding="5,1" BackgroundColor="#000080" x:DataType="micro:offer"  HasShadow="True" BorderColor="#303030" >
+                                                                    <Label Text="{Binding Name}" TextColor="#fff" />
+                                                                </Frame>
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+
+                                                    </CollectionView>
+
+
+                                                </StackLayout>
+                                            </ScrollView>
+
+
+
+                                            <Label Text="Open untill 20h00" Margin="10,0"  TextColor="#191919" HorizontalOptions="End" />
+
+
+
+                                            <Button Text="Visit" HeightRequest="39"  x:Name="visit"  />
+
+
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                </Grid>
+
+
+                            </punny:PancakeView>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+
+
+                </CollectionView>
+                    </StackLayout>
+                </RefreshView>
+
+
+
+
+
+            </Grid>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

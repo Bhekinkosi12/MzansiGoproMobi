@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:model="clr-namespace:MzansiGopro.Models" Shell.NavBarIsVisible="False"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:admineventsvm="clr-namespace:MzansiGopro.ViewModels.EventsVM.AdminEventsVM"
+             x:Class="MzansiGopro.Views.EventsV.AdminEventsV.MainAdminEventsPage">
+    <ContentPage.BindingContext>
+        <admineventsvm:AdminEventsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Padding="0" BackgroundColor="Transparent" HeightRequest="130" >
+                <Image Source="events.png" Aspect="AspectFit" />
+            </Frame>
+
+            <Frame Padding="10,0" BackgroundColor="Transparent" HeightRequest="30" >
+                <Button BackgroundColor="{StaticResource secondaryPurple}" CornerRadius="10" Padding="0" Text="Add Event" x:Name="addEvent" Clicked="addEvent_Clicked"  TextColor="#fff" HorizontalOptions="EndAndExpand" />
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding HostedEvents}">
+                <CollectionView.EmptyView>
+                    <Image Source="imageFolder.png" Aspect="AspectFit" HorizontalOptions="Center" />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="0" BackgroundColor="Transparent" x:DataType="model:Events" CornerRadius="10" HeightRequest="200" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type admineventsvm:AdminEventsViewModel}}, Path=SelectEvent}"		
+                                CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <Image Source="{Binding Cover}" Aspect="AspectFill" />
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+             
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

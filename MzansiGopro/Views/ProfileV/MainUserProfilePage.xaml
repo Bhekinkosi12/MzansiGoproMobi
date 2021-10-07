@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.NavBarIsVisible="False"
+             xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:profilevm="clr-namespace:MzansiGopro.ViewModels.ProfileVM"
+             x:Class="MzansiGopro.Views.ProfileV.MainUserProfilePage">
+
+    <ContentPage.BindingContext>
+        <profilevm:ProfileViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Image Source="travel.png" Aspect="AspectFit" />
+            <Button BackgroundColor="{StaticResource secondaryPurple}" Margin="10" Padding="0"  x:Name="UserLogged" Text="Log out" Command="{Binding LogOut}" IsVisible="{Binding IsLogged}" CornerRadius="20" HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand" />
+
+
+            <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1" >
+                <StackLayout >
+
+                    <punny:PancakeView Margin="30,16" HeightRequest="70" CornerRadius="20" BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="1,1" WidthRequest="300" HorizontalOptions="Center"  >
+                        <punny:PancakeView.Shadow>
+                            <punny:DropShadow BlurRadius="4" Color="#000" Offset=".5,.5" />
+                        </punny:PancakeView.Shadow>
+                        <punny:PancakeView.BackgroundGradientStops>
+                            <punny:GradientStopCollection>
+                                <punny:GradientStop Color="#cc208e" Offset="0" />
+                                <punny:GradientStop Color="#6713d2" Offset="1" />
+                            </punny:GradientStopCollection>
+                        </punny:PancakeView.BackgroundGradientStops>
+                        <punny:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer  x:Name="business" Command="{Binding ToBusiness}" />
+                        </punny:PancakeView.GestureRecognizers>
+
+                        <Label Text="Open Business" TextColor="#fff" FontSize="19" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </punny:PancakeView>
+
+
+
+
+                    <punny:PancakeView Margin="30,16" HeightRequest="70" CornerRadius="20" BackgroundGradientStartPoint="0,0" BackgroundGradientEndPoint="1,1" WidthRequest="300" HorizontalOptions="Center"  >
+                        <punny:PancakeView.Shadow>
+                            <punny:DropShadow BlurRadius="4" Color="#000" Offset=".5,.5" />
+                        </punny:PancakeView.Shadow>
+                        <punny:PancakeView.BackgroundGradientStops>
+                            <punny:GradientStopCollection>
+                                <punny:GradientStop Color="#f43b47" Offset="0" />
+                                <punny:GradientStop Color="#453a94" Offset="1" />
+                            </punny:GradientStopCollection>
+                        </punny:PancakeView.BackgroundGradientStops>
+                        <punny:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="events" Command="{Binding ToEvents}" />
+                        </punny:PancakeView.GestureRecognizers>
+
+                        <Label Text="Hosted Events" TextColor="#fff" FontSize="19" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </punny:PancakeView>
+
+
+
+                </StackLayout>
+                
+            </Frame>
+            
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

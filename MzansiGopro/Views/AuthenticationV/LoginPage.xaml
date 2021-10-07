@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:busy="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.FlyoutItemIsVisible="False" Shell.NavBarIsVisible="False" BackgroundColor="#fff"
+             xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:authenticationvm="clr-namespace:MzansiGopro.ViewModels.AuthenticationVM"
+             x:Class="MzansiGopro.Views.AuthenticationV.LoginPage">
+    <ContentPage.BindingContext>
+        <authenticationvm:LoginVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            
+        <punny:PancakeView Margin="10,20" CornerRadius="20" BackgroundColor="#fff" Padding="0">
+            <punny:PancakeView.Shadow>
+                <punny:DropShadow BlurRadius="15"  Color="#191919" Offset="1,1" />
+            </punny:PancakeView.Shadow>
+            <punny:PancakeView.Border>
+                <punny:Border Color="Transparent" DrawingStyle="Inside" Thickness="1" />
+            </punny:PancakeView.Border>
+
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+
+
+                </Grid.RowDefinitions>
+
+                <Image Source="location.png"  Aspect="AspectFit"></Image>
+                <Label Text="Welcome Back" TextColor="{StaticResource Primary}" Grid.Row="1" FontAttributes="Bold" FontFamily="cursive" FontSize="49" VerticalOptions="Center" HorizontalOptions="Center" />
+
+                <ScrollView Orientation="Vertical" Grid.Row="2" VerticalOptions="CenterAndExpand">
+                    <StackLayout Spacing="20">
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+                            
+                        <Entry Style="{StaticResource EntryGL}" Text="{Binding Username}" Placeholder="User Name"/>
+                        </punny:PancakeView>
+                        
+                        
+                        
+                        
+                        <punny:PancakeView Style="{StaticResource entryPan}">
+                            <punny:PancakeView.Shadow>
+                                <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                            </punny:PancakeView.Shadow>
+
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Password}" Placeholder="Password" />
+                        </punny:PancakeView>
+
+
+                    </StackLayout>
+                    
+                </ScrollView>
+
+                <punny:PancakeView Grid.Row="3" Padding="0">
+                    <punny:PancakeView.Shadow>
+                        <punny:DropShadow BlurRadius="10" Color="#000" Offset="1,1" />
+                    </punny:PancakeView.Shadow>
+
+                    <Button  Text="Login" Command="{Binding login}" CornerRadius="10"/>
+                </punny:PancakeView>
+
+
+
+                <Label HorizontalOptions="End" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Sign Up" TextColor="{StaticResource Primary}" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="sign" Tapped="sign_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="No Account:" TextColor="#191919" >
+                    
+                </Label>
+                
+
+
+
+
+            </Grid>
+            
+        </punny:PancakeView>
+
+
+
+
+            <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />
+            <Frame Padding="0" BackgroundColor="Transparent" x:Name="busyFrame" IsVisible="{Binding IsBusy}">
+
+
+                <busy:SfBusyIndicator AnimationType="Ball" ViewBoxWidth="100" ViewBoxHeight="300" EnableAnimation="{Binding IsBusy}"  WidthRequest="400" HeightRequest="700" HorizontalOptions="Center" VerticalOptions="Center"></busy:SfBusyIndicator>
+
+            </Frame>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

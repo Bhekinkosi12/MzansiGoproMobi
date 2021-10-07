@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:micromodel="clr-namespace:MzansiGopro.Models.microModel"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:authenticationvm="clr-namespace:MzansiGopro.ViewModels.AuthenticationVM" xmlns:busy="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             Shell.FlyoutItemIsVisible="False"  Shell.NavBarIsVisible="False"
+             x:Class="MzansiGopro.Views.AuthenticationV.StoreSetupPage">
+    <ContentPage.BindingContext>
+        <authenticationvm:SignInVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--First Slide-->
+
+
+            <punny:PancakeView  x:Name="first" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="240" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+
+                    <Image Source="destination.png" Aspect="AspectFit" />
+
+                    <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1" Margin="0,30,0,0" >
+                        <ScrollView>
+                        <StackLayout >
+                                <Label Text="Business Name" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <punny:PancakeView Style="{StaticResource entryPan}">
+                                    <punny:PancakeView.Shadow>
+                                        <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                    </punny:PancakeView.Shadow>
+
+                                    <Entry Style="{StaticResource EntryGL}" Text="{Binding ShopName}" Placeholder="Business Name" MaxLength="15"/>
+                                </punny:PancakeView>
+
+                                <Label Text="Shop Cover Image(Requered)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                            <punny:PancakeView HeightRequest="150" Margin="15,10" >
+                                <punny:PancakeView.Shadow>
+                                    <punny:DropShadow BlurRadius="5" Color="#191919" Offset="1,1" />
+                                </punny:PancakeView.Shadow>
+
+                                    <Image Source="{Binding CoverImage}" Aspect="AspectFill" />
+
+
+                                </punny:PancakeView>
+                            <Button Text="Add Image" BackgroundColor="{StaticResource Primary}" Command="{Binding AddMediaCover}"  TextColor="{StaticResource background}" HorizontalOptions="CenterAndExpand" />
+
+
+                            <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
+                            <Label Text="Where are you located?" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+
+
+                            <Button Text="Use Current Location" x:Name="currentLocation" Clicked="currentLocation_Clicked" TextColor="#000080"  BorderWidth="1" HorizontalOptions="Center" BorderColor="#000080" BackgroundColor="#fff" />
+
+
+                            <Frame Padding="0" BackgroundColor="Transparent" x:Name="signFrame" IsVisible="false" HeightRequest="150" >
+                                <map:Map x:Name="signMap" IsShowingUser="True" MapType="Street" >
+                                    
+                                </map:Map>
+                            </Frame>
+                            
+                            
+                            
+
+                        </StackLayout>
+
+                        </ScrollView>
+                    </Frame>
+
+
+                    <Frame Grid.Row="2" BackgroundColor="Transparent" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button HeightRequest="70" HorizontalOptions="Start" BorderColor="Red" BorderWidth="1" x:Name="firstBack" Clicked="firstBack_Clicked"  Text="Back" BackgroundColor="#fff" TextColor="Red"/>
+                            <Button HeightRequest="70" x:Name="firstNext" Clicked="firstNext_Clicked" Text="Confirm" Grid.Column="1" HorizontalOptions="End" />
+                            
+                           
+
+
+                        </Grid>
+                    </Frame>
+
+
+
+                </Grid>
+                
+                
+            </punny:PancakeView>
+            
+            
+            
+            
+            
+            <!--Second Slide-->
+            <punny:PancakeView x:Name="second" IsVisible="False">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="180" />
+                        <RowDefinition Height="*" />
+                        
+                    </Grid.RowDefinitions>
+
+                    <Image Source="streetFood.png" Aspect="AspectFit" />
+
+                    <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1" >
+                        <ScrollView>
+                            
+                        
+                        <StackLayout Spacing="7" >
+                            <Label Text="Bussiness Profile" FontSize="30" FontFamily="cursive" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Text="What services do you offer?"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
+
+
+                            <Grid Padding="10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
+
+                                <punny:PancakeView Style="{StaticResource entryPan}" >
+                                    <punny:PancakeView.Shadow>
+                                        <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                    </punny:PancakeView.Shadow>
+                                  
+
+
+
+                                        <Entry Style="{StaticResource EntryGL}" Text="{Binding OfferInput}"  Placeholder="kotas, shisa nyama, car wash, salon" MaxLength="13"/>
+
+
+
+                                </punny:PancakeView>
+
+
+
+                                <Button Text="Add" Margin="0,10" Command="{Binding AddItem}" Grid.Column="1" BackgroundColor="#fff" TextColor="#000080" BorderColor="#000080" BorderWidth="1"></Button>
+
+                            </Grid>
+
+                            <Frame BackgroundColor="Transparent" Padding="0"  >
+                                    <ScrollView>
+                                        <StackLayout Orientation="Horizontal">
+                                            
+                                <CollectionView ItemsSource="{Binding Offer}" HeightRequest="37" Margin="10,0">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyViewTemplate>
+                                        <DataTemplate>
+                                            <Frame >
+                                                <Label Text="Add item" TextColor="#191919" />
+                                            </Frame>
+                                        </DataTemplate>
+                                        
+                                    </CollectionView.EmptyViewTemplate>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                                <Frame BackgroundColor="Transparent" x:DataType="micromodel:offer" Padding="7"  CornerRadius="10" BorderColor="#000080"  >
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="30" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                                                <ImageButton BackgroundColor="Transparent" Grid.Column="1" Source="delete_"  Command="{Binding Source={RelativeSource AncestorType={x:Type authenticationvm:SignInVM}}, Path=DeleteOffer}"		
+                                CommandParameter="{Binding .}" />
+
+                                                            </Grid>
+                                                        </Frame>
+                                            </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                    
+                                    
+                                </CollectionView>
+                                        </StackLayout>
+                                    </ScrollView>
+                            </Frame>
+
+
+                             
+
+
+                                <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
+
+
+
+                                <Frame Padding="0" BackgroundColor="Transparent" >
+                                    <ScrollView>
+                                        <StackLayout>
+
+
+                                            <Label Text="Company images(Required)"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
+
+
+                                            <Button Text="Add Images" Margin="10,0"  x:Name="addimage" Command="{Binding AddMedia}"  HorizontalOptions="End" BackgroundColor="#fff" TextColor="#000080" BorderColor="#000080" BorderWidth="1"></Button>
+                                             
+
+
+                                            <CollectionView ItemsSource="{Binding Images}" HeightRequest="150" Margin="10,0" >
+
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                                </CollectionView.ItemsLayout>
+                                                
+                                                
+                                                <CollectionView.EmptyView>
+                                                    <StackLayout Spacing="6">
+                                                        <Image Source="imageFolder.png"  HeightRequest="120"  Aspect="AspectFit" />
+                                                        <Label Text="No Images" TextColor="#191919" HorizontalOptions="Center" />
+                                                    </StackLayout>
+                                                </CollectionView.EmptyView>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Image Source="{Binding Url}" HeightRequest="150" Aspect="AspectFill" />
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                                
+                                            </CollectionView>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                        </StackLayout>
+                                    </ScrollView>
+                                    
+                                    
+                                </Frame>
+
+
+
+
+
+
+                                <Frame  BackgroundColor="Transparent" HeightRequest="70" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button HeightRequest="70" HorizontalOptions="Start" BorderColor="Red" BorderWidth="1"  Text="Back" x:Name="secondback" Clicked="secondback_Clicked" BackgroundColor="#fff" TextColor="Red"/>
+                                        <Button HeightRequest="70" Text="Create" x:Name="create" Grid.Column="1" HorizontalOptions="End" Clicked="create_Clicked" />
+
+
+
+
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+
+                        </ScrollView>
+
+                    </Frame>
+
+
+                   
+
+
+
+                </Grid>
+
+
+            </punny:PancakeView>
+
+
+            <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />
+            <Frame Padding="0" BackgroundColor="Transparent" x:Name="busyFrame" IsVisible="{Binding IsBusy}">
+
+
+                <busy:SfBusyIndicator AnimationType="Ball" EnableAnimation="{Binding IsBusy}"  WidthRequest="400" HeightRequest="700" HorizontalOptions="Center" VerticalOptions="Center"></busy:SfBusyIndicator>
+
+            </Frame>
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

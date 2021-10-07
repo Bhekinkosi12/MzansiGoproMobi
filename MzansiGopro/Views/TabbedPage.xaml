@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.FlyoutItemIsVisible="False" Shell.NavBarIsVisible="False"
+             xmlns:tab="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms" xmlns:viewmodels="clr-namespace:MzansiGopro.ViewModels"
+             x:Class="MzansiGopro.Views.TabbedPage">
+    <ContentPage.BindingContext>
+        <viewmodels:TabbedViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <tab:SfTabView Items="{Binding Pages}" TabHeaderPosition="Bottom" EnableSwiping="False"   OverflowMode="CenterButton"  CenterButtonTapped="SfTabView_CenterButtonTapped"  FlowDirection="LeftToRight"   >
+            <tab:SfTabView.CenterButtonView >
+                
+                <ImageButton BackgroundColor="Transparent" x:Name="center" Clicked="center_Clicked" Source="circle.png" Aspect="AspectFit" />
+            </tab:SfTabView.CenterButtonView>
+            
+            
+            
+        </tab:SfTabView>
+    </ContentPage.Content>
+</ContentPage>

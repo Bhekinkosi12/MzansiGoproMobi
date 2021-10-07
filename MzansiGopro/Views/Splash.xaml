@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False"
+             BackgroundColor="White"
+             xmlns:punny="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             
+             x:Class="MzansiGopro.Views.Splash">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+               
+            </Grid.RowDefinitions>
+
+            <Image Source="logo.png" Aspect="AspectFit" />
+           
+                                       
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

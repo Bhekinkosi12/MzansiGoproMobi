@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.NavBarIsVisible="False"
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:eventsvm="clr-namespace:MzansiGopro.ViewModels.EventsVM"
+             x:Class="MzansiGopro.Views.EventsV.DisplayEventPage">
+    <ContentPage.BindingContext>
+        <eventsvm:EventDisplayViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                
+                <RowDefinition Height="200" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <map:Map x:Name="locationMap" ItemsSource="{Binding Pins}" MapType="Street" >
+                <map:Map.ItemTemplate>
+                    <DataTemplate>
+                        <map:Pin Position="{Binding Position}" Address="{Binding Address}" Label="{Binding Label}"   />
+                    </DataTemplate>
+                </map:Map.ItemTemplate>
+
+            </map:Map>
+            <Label Text="{Binding Name}" TextColor="{StaticResource text}" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Row="1" FontFamily="cursive" />
+
+
+            
+            
+            <Image Source="{Binding Image}" Aspect="AspectFit" Grid.Row="2"  />
+
+
+            <Button Text="Going" x:Name="goingToEvent" Clicked="goingToEvent_Clicked" TextColor="#fff" BackgroundColor="{StaticResource secondaryPurple}" CornerRadius="8" HorizontalOptions="CenterAndExpand" Grid.Row="3" />
+
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
