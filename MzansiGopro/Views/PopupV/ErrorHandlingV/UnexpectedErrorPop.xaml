@@ -2,16 +2,16 @@
 <xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-            Size="300,500" 
+            Size="300,500" Color="Transparent" BackgroundColor="Transparent"
              x:Class="MzansiGopro.Views.PopupV.ErrorHandlingV.UnexpectedErrorPop">
 
-    <Frame Padding="0" BackgroundColor="Transparent" >
+    <Frame Padding="0" BackgroundColor="#fff" CornerRadius="20" >
 
 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <Image Source="unexpected.png" Aspect="AspectFit" />
