@@ -8,6 +8,8 @@ using Xamarin.Forms.Maps;
 using MzansiGopro.Models.microModel;
 using MzansiGopro.Services;
 using MzansiGopro.Services.EventsSV;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 
 
 namespace MzansiGopro.ViewModels.EventsVM
@@ -108,7 +110,7 @@ namespace MzansiGopro.ViewModels.EventsVM
             Pins = _pins;
 
             
-
+            
 
         }
 
@@ -152,7 +154,7 @@ namespace MzansiGopro.ViewModels.EventsVM
                     }
                     catch
                     {
-
+                         Shell.Current.ShowPopup(new InternetConnectionPop());
                     }
 
 
@@ -161,7 +163,7 @@ namespace MzansiGopro.ViewModels.EventsVM
                 }
                 else
                 {
-
+                    Shell.Current.ShowPopup(new UnexpectedErrorPop());
                 }
 
                 

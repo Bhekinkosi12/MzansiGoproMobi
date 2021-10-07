@@ -7,6 +7,9 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using Xamarin.Essentials;
 using System.IO;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV.SuccessNotifyV;
 
 
 namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
@@ -168,7 +171,7 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
             }
             catch
             {
-                await Shell.Current.DisplayAlert("Error", "Unexpected Error", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
 
             }
 
@@ -226,7 +229,7 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "Unexpected Error", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
             IsBusy = false;

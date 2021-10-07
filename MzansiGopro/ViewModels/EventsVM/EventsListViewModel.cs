@@ -7,6 +7,9 @@ using MzansiGopro.Models;
 using MzansiGopro.Services;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV.SuccessNotifyV;
 
 namespace MzansiGopro.ViewModels.EventsVM
 {
@@ -72,7 +75,7 @@ namespace MzansiGopro.ViewModels.EventsVM
             }
             catch
             {
-                await Shell.Current.DisplayAlert("Error", "Could not refreash", "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
             }
 
             IsRefreshingEvent = false;

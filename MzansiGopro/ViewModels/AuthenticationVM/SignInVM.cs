@@ -12,6 +12,9 @@ using MzansiGopro.Models;
 using MzansiGopro.Models.CollectiveModel;
 using MzansiGopro.Services.AuthSercurity;
 using MzansiGopro.Services.LocalData;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV.SuccessNotifyV;
 
 namespace MzansiGopro.ViewModels.AuthenticationVM
 {
@@ -339,12 +342,12 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 if (complete)
                 {
                     await userDB.AddEmailAndPassword(Email,abcHash.StandardPasswordHash(Password), IsShop);
-                    await Shell.Current.DisplayAlert("Congrats", "You are registed", "OK");
+                    Shell.Current.ShowPopup(new SuccessSigninPop());
                     await Shell.Current.GoToAsync("//TabbedPage");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Check Network connection", "OK");
+                    Shell.Current.ShowPopup(new InternetConnectionPop());
 
                 }
 
@@ -525,7 +528,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
             }
             catch(Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
             }
 
 
@@ -566,7 +569,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "Unexpected Error", "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
             }
 
             IsBusy = false;
@@ -671,19 +674,19 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
                 if (IsComplete && isCompleted)
                 {
-                    await Shell.Current.DisplayAlert("Success", "You are registered", "OK");
+                    Shell.Current.ShowPopup(new SuccessSigninPop());
                     await Shell.Current.GoToAsync("//TabbedPage");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Check your internet connection and retry", "OK");
+                    Shell.Current.ShowPopup(new InternetConnectionPop());
                 }
 
 
             }
             catch(Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "Unexpected Error", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 

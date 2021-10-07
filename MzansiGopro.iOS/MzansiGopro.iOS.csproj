@@ -157,7 +157,7 @@
       <Version>1.8.0-beta</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Licensing">
-      <Version>19.2.0.60</Version>
+      <Version>19.3.0.44</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>19.2.0.60</Version>
