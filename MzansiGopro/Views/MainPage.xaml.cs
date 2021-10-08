@@ -175,7 +175,7 @@ namespace MzansiGopro.Views
             _shopsList = model.ShopList.ToList();
             
             _shops = model.ShopList;
-            var searchTerm = e.NewTextValue;
+            var searchTerm = SearchBar.Text;
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
 

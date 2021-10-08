@@ -5,7 +5,7 @@
             Size="300,500" Color="Transparent"  BackgroundColor="Transparent"
              x:Class="MzansiGopro.Views.PopupV.ErrorHandlingV.InternetConnectionPop">
 
-    <Frame Padding="0" BackgroundColor="#fff" CornerRadius="20">
+    <Frame Padding="10" BackgroundColor="#fff" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

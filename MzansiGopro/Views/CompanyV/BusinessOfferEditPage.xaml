@@ -277,7 +277,7 @@
                                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
                                             </punny:PancakeView.Shadow>
 
-                                            <Entry Style="{StaticResource EntryGL}" Text="{Binding SelectedPrice}" Keyboard="Numeric" Placeholder="25.99" x:Name="EntryPrice" TextChanged="EntryPrice_TextChanged"
+                                            <Entry Style="{StaticResource EntryGL}" Text="{Binding SelectedPrice}" Keyboard="Numeric" Placeholder="25.99" PlaceholderColor="#aaa" x:Name="EntryPrice" TextChanged="EntryPrice_TextChanged"
                                                    />
                                         </punny:PancakeView>
 

@@ -23,7 +23,7 @@ namespace MzansiGopro
        async void splash()
         {
             MainPage = new Splash();
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             MainPage = new AppShell();
         }
 

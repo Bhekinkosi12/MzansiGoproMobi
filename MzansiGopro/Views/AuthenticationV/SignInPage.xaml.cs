@@ -164,5 +164,12 @@ namespace MzansiGopro.Views.AuthenticationV
         {
             await Shell.Current.GoToAsync("..");
         }
+
+        protected override void OnAppearing()
+        {
+            var model = BindingContext as SignInVM;
+            model.IsBusy = false;
+            base.OnAppearing();
+        }
     }
 }

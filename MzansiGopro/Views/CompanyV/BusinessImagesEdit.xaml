@@ -7,9 +7,9 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
 
-        <Grid>
+        <Grid Padding="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
@@ -28,8 +28,8 @@
             
             
             
-            <Button BackgroundColor="Transparent" HorizontalOptions="Start" Command="{Binding Cancel}" Text="Cancel" BorderColor="Red" BorderWidth="1" TextColor="Red" Grid.Row="2" />
-            <Button BackgroundColor="Red" HorizontalOptions="EndAndExpand" Command="{Binding Delete}" Text="Delete" BorderColor="Red"  BorderWidth="1" TextColor="#fff" Grid.Row="2" />
+            <Button BackgroundColor="Transparent" HorizontalOptions="Start" Command="{Binding Cancel}" Text="Cancel" BorderColor="Red" BorderWidth="1" TextColor="Red" Grid.Row="1" />
+            <Button BackgroundColor="Red" HorizontalOptions="EndAndExpand" Command="{Binding Delete}" Text="Delete" BorderColor="Red"  BorderWidth="1" TextColor="#fff" Grid.Row="1" />
             
 
 

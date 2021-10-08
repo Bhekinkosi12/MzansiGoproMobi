@@ -22,7 +22,7 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="240" />
+                        <RowDefinition Height="190" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="80" />
                     </Grid.RowDefinitions>
@@ -32,14 +32,7 @@
                     <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1" Margin="0,30,0,0" >
                         <ScrollView>
                         <StackLayout >
-                                <Label Text="Business Name" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <punny:PancakeView Style="{StaticResource entryPan}">
-                                    <punny:PancakeView.Shadow>
-                                        <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
-                                    </punny:PancakeView.Shadow>
-
-                                    <Entry Style="{StaticResource EntryGL}" Text="{Binding ShopName}" Placeholder="Business Name" MaxLength="15"/>
-                                </punny:PancakeView>
+                           
 
                                 <Label Text="Shop Cover Image(Requered)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
 
@@ -54,12 +47,17 @@
                                 </punny:PancakeView>
                             <Button Text="Add Image" BackgroundColor="{StaticResource Primary}" Command="{Binding AddMediaCover}"  TextColor="{StaticResource background}" HorizontalOptions="CenterAndExpand" />
 
+                                <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
+                                <Label Text="Business Name" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <punny:PancakeView Style="{StaticResource entryPan}">
+                                    <punny:PancakeView.Shadow>
+                                        <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
+                                    </punny:PancakeView.Shadow>
 
-                            <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
+                                    <Entry Style="{StaticResource EntryGL}" Text="{Binding ShopName}" Placeholder="Business Name" MaxLength="15"/>
+                                </punny:PancakeView>
+                                <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
                             <Label Text="Where are you located?" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
-
-
-                            <Button Text="Use Current Location" x:Name="currentLocation" Clicked="currentLocation_Clicked" TextColor="#000080"  BorderWidth="1" HorizontalOptions="Center" BorderColor="#000080" BackgroundColor="#fff" />
 
 
                             <Frame Padding="0" BackgroundColor="Transparent" x:Name="signFrame" IsVisible="false" HeightRequest="150" >
@@ -67,6 +65,9 @@
                                     
                                 </map:Map>
                             </Frame>
+                            <Button Text="Use Current Location" x:Name="currentLocation" Clicked="currentLocation_Clicked" TextColor="#000080"  BorderWidth="1" HorizontalOptions="Center" BorderColor="#000080" BackgroundColor="#fff" />
+
+
                             
                             
                             

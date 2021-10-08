@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,12 +33,12 @@ namespace MzansiGopro.Views
             try
             {
 
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             await Shell.Current.GoToAsync("//MainPage");
             }
-            catch(Exception ex)
+            catch
             {
-                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
         }

@@ -4,7 +4,7 @@
               xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
             Size="300,500"  Color="Transparent" BackgroundColor="Transparent"
              x:Class="MzansiGopro.Views.PopupV.SuccessNotifyV.SuccessSigninPop">
-    <Frame Padding="0" BackgroundColor="#fff" CornerRadius="20">
+    <Frame Padding="10" BackgroundColor="#fff" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />

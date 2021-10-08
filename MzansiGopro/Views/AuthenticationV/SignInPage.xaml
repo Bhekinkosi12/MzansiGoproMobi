@@ -97,7 +97,7 @@
                                 <punny:DropShadow BlurRadius="10" x:Name="PasswordShadow" Color="#191919" Offset="1,1" />
                             </punny:PancakeView.Shadow>
 
-                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Password}"  Placeholder="Password" x:Name="password" TextChanged="password_TextChanged" />
+                            <Entry Style="{StaticResource EntryGL}" IsPassword="True" Text="{Binding Password}"  Placeholder="Password" x:Name="password" TextChanged="password_TextChanged" />
                         </punny:PancakeView>
 
                         <punny:PancakeView Style="{StaticResource entryPan}">
@@ -105,7 +105,7 @@
                                 <punny:DropShadow BlurRadius="10" x:Name="confirmPasswordColor" Color="#191919" Offset="1,1"  />
                             </punny:PancakeView.Shadow>
 
-                            <Entry Style="{StaticResource EntryGL}" Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" x:Name="confirmPassword" TextChanged="confirmPassword_TextChanged" />
+                            <Entry Style="{StaticResource EntryGL}" IsPassword="True" Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" x:Name="confirmPassword" TextChanged="confirmPassword_TextChanged" />
                         </punny:PancakeView>
 
 
@@ -125,7 +125,7 @@
 
 
 
-                <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Login" TextColor="{StaticResource Primary}" >
+                <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Login"  TextColor="{StaticResource Primary}" >
 
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer x:Name="loginBTN" Tapped="loginBTN_Tapped" />
