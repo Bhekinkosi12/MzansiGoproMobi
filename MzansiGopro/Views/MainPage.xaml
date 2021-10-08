@@ -143,6 +143,10 @@
                                             <punny:PancakeView.Shadow>
                                                 <punny:DropShadow BlurRadius="3" Color="#000" Offset="1,1" />
                                             </punny:PancakeView.Shadow>
+                                            <punny:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ShopViewModel}}, Path=FilterTap}"		
+                                CommandParameter="{Binding .}" />
+                                            </punny:PancakeView.GestureRecognizers>
                                             
                                             <Label Text="{Binding Name}" BackgroundColor="Transparent" TextColor="#fff" VerticalTextAlignment="Center"  />
                                         </punny:PancakeView>

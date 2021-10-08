@@ -23,8 +23,8 @@ namespace MzansiGopro.Views.EventsV
             var model = BindingContext as EventsListViewModel;
 
            
-           await model.OnRefreshEvents();
             base.OnAppearing();
+           await model.OnRefreshEvents();
         }
 
     }

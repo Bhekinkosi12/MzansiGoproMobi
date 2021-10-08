@@ -21,8 +21,11 @@
                     <punny:PancakeView.Shadow>
                         <punny:DropShadow Color="{StaticResource Primary}" BlurRadius="1" Opacity="0.6" Offset="1,1" />
                     </punny:PancakeView.Shadow>
+                    <punny:PancakeView.Border>
+                        <punny:Border Color="{StaticResource secondaryPurple}" Thickness="1" DrawingStyle="Inside" />
+                    </punny:PancakeView.Border>
 
-                    <SearchBar Placeholder="Search" HorizontalOptions="Center"   VerticalOptions="Center" PlaceholderColor="{StaticResource Primary}"  />
+                    <SearchBar Placeholder="Search" x:Name="SearchBar" HorizontalOptions="Center" TextChanged="SearchBar_TextChanged"  VerticalOptions="Center" PlaceholderColor="{StaticResource Primary}"  />
 
                 </punny:PancakeView>
 
@@ -40,93 +43,94 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <punny:PancakeView Padding="0" BackgroundColor="Transparent" x:DataType="local:Shop" CornerRadius="10" WidthRequest="160" >
-                                <punny:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer 
+                                    <punny:PancakeView Padding="8" BackgroundColor="{StaticResource background}" x:DataType="local:Shop"  CornerRadius="10" WidthRequest="160" >
+                                        <punny:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ShopViewModel}}, Path=ShopTap}"		
-                                CommandParameter="{Binding .}" >
-                                    </TapGestureRecognizer>
+                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
 
-                                </punny:PancakeView.GestureRecognizers>
-                                <punny:PancakeView.Border>
-                                    <punny:Border Color="#aaa" DrawingStyle="Inside" Thickness="1" />
-                                </punny:PancakeView.Border>
+                                        </punny:PancakeView.GestureRecognizers>
+                                        <punny:PancakeView.Border>
+                                            <punny:Border Color="#aaa" DrawingStyle="Inside" Thickness="1" />
+                                        </punny:PancakeView.Border>
 
-                                <Grid RowSpacing="0" >
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height="80" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
+                                        <Grid RowSpacing="0" >
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="80" />
+                                                <RowDefinition Height="auto" />
+                                            </Grid.RowDefinitions>
 
-                                    <Frame  Padding="0" BackgroundColor="Transparent">
-                                        <Image Source="{Binding Cover_Img}" HeightRequest="80"  Aspect="AspectFill" />
-                                    </Frame>
-
-
-                                    <Frame Padding="0" BackgroundColor="{StaticResource background}" Grid.Row="1">
-                                        <StackLayout Orientation="Vertical">
+                                            <Frame  Padding="0" BackgroundColor="Transparent" CornerRadius="10">
+                                                <Image Source="{Binding Cover_Img}" HeightRequest="80"  Aspect="AspectFill" />
+                                            </Frame>
 
 
-                                            <Label Text="{Binding Name}" TextColor="#191919" HorizontalOptions="Center" FontSize="16" />
-
-                                            <ScrollView Orientation="Horizontal">
-                                                <StackLayout Orientation="Horizontal" Spacing="0" Margin="7,0" >
-
-                                                    <CollectionView ItemsSource="{Binding Offers}" HeightRequest="24"  >
-                                                        <CollectionView.ItemsLayout>
-                                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
-                                                        </CollectionView.ItemsLayout>
-
-                                                        <CollectionView.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Frame Padding="5,1"  HeightRequest="17" x:DataType="micro:offer"   HasShadow="True" BorderColor="#303030" >
-                                                                    <Label Text="{Binding Name}" TextColor="#191919" />
-                                                                </Frame>
-                                                            </DataTemplate>
-                                                        </CollectionView.ItemTemplate>
-
-                                                    </CollectionView>
+                                            <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1">
+                                                <StackLayout Orientation="Vertical">
 
 
-                                                    <CollectionView ItemsSource="{Binding ExtraList}" HeightRequest="24" >
-                                                        <CollectionView.ItemsLayout>
-                                                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
-                                                        </CollectionView.ItemsLayout>
+                                                    <Label Text="{Binding Name}" TextColor="#191919" HorizontalOptions="Center" FontSize="16" />
 
-                                                        <CollectionView.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <Frame Padding="5,1" BackgroundColor="#000080" x:DataType="micro:offer"  HasShadow="True" BorderColor="#303030" >
-                                                                    <Label Text="{Binding Name}" TextColor="#fff" />
-                                                                </Frame>
-                                                            </DataTemplate>
-                                                        </CollectionView.ItemTemplate>
+                                                    <ScrollView Orientation="Horizontal">
+                                                        <StackLayout Orientation="Horizontal" Spacing="0" Margin="7,0" >
 
-                                                    </CollectionView>
+                                                            <CollectionView ItemsSource="{Binding Offers}" HeightRequest="24"  >
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                                                </CollectionView.ItemsLayout>
+
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Frame Padding="5,1"  HeightRequest="17" x:DataType="micro:offer" CornerRadius="10"   HasShadow="True" BorderColor="#787ff6" >
+                                                                            <Label Text="{Binding Name}" TextColor="#191919" />
+                                                                        </Frame>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+
+                                                            </CollectionView>
+
+
+                                                            <CollectionView ItemsSource="{Binding ExtraList}" HeightRequest="24" >
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                                                                </CollectionView.ItemsLayout>
+
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Frame Padding="5,1" BackgroundColor="#787ff6" x:DataType="micro:offer"  HasShadow="True" BorderColor="#303030" >
+                                                                            <Label Text="{Binding Name}" TextColor="#fff" />
+                                                                        </Frame>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+
+                                                            </CollectionView>
+
+
+                                                        </StackLayout>
+                                                    </ScrollView>
+
+
+
+                                                    <Label Text="Open untill 20h00" Margin="10,0"  TextColor="#191919" HorizontalOptions="End" />
+
+
+
+                                                    <Button Text="Visit" BackgroundColor="#591da9" HeightRequest="28" CornerRadius="10" Padding="0"   x:Name="visit"    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ShopViewModel}}, Path=ShopVisit}"		
+                                CommandParameter="{Binding .}" />
 
 
                                                 </StackLayout>
-                                            </ScrollView>
+
+                                            </Frame>
+
+                                        </Grid>
 
 
+                                    </punny:PancakeView>
 
-                                            <Label Text="Open untill 20h00" Margin="10,0"  TextColor="#191919" HorizontalOptions="End" />
-
-
-
-                                            <Button Text="Visit" HeightRequest="39"  x:Name="visit"  />
-
-
-                                        </StackLayout>
-
-                                    </Frame>
-
-                                </Grid>
-
-
-                            </punny:PancakeView>
-
-                        </DataTemplate>
+                                </DataTemplate>
                     </CollectionView.ItemTemplate>
 
 

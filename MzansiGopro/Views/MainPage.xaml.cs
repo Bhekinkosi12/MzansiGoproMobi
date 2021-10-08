@@ -11,6 +11,9 @@ using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using System.Collections.ObjectModel;
 using Plugin.Geolocator;
+using MzansiGopro.Views.PopupV.AlertsV;
+using Xamarin.CommunityToolkit.Extensions;
+
 
 
 namespace MzansiGopro.Views
@@ -47,7 +50,7 @@ namespace MzansiGopro.Views
             }
             catch
             {
-                await Shell.Current.DisplayAlert("Alert", "Please keep your location On for map functionality", "OK");
+                Shell.Current.ShowPopup(new KeepLocationOn());
             }
         }
 

@@ -8,6 +8,9 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using MzansiGopro.Models.microModel;
+using System.Threading.Tasks;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace MzansiGopro.ViewModels
 {
@@ -16,21 +19,41 @@ namespace MzansiGopro.ViewModels
 
         private bool isExpanded = false;
         bool isRefreashing = false;
+        ObservableCollection<Shop> shopList;
+        ObservableCollection<Pin> pins;
 
 
 
-       
+
 
         public Command<Shop> ShopTap { get; set; }
         public Command<Shop> ShopVisit { get; set; }
         public Command Expand { get; }
         public Command RefreshShop { get; }
+        public Command<offer> FilterTap { get; set; }
 
 
 
 
-        public ObservableCollection<Shop> ShopList { get; set; }
-        public ObservableCollection<Pin> Pins { get; set; }
+        public ObservableCollection<Shop> ShopList
+        {
+            get => shopList;
+            set
+            {
+                SetProperty(ref shopList, value);
+                OnPropertyChanged(nameof(ShopList));
+            }
+        }
+
+        public ObservableCollection<Pin> Pins
+        {
+            get => pins;
+            set
+            {
+                SetProperty(ref pins, value);
+                OnPropertyChanged(nameof(Pins));
+            }
+        }
         public ObservableCollection<offer> Filter { get; set; }
 
 
@@ -84,10 +107,16 @@ namespace MzansiGopro.ViewModels
             RefreshShop = new Command(UpDateShopList);
 
             ShopVisit = new Command<Shop>(OnShopVisit);
+            FilterTap = new Command<offer>(async (e) => await OnFilterTap(e));
         }
 
+
+
+
+
+
       
-        async void setData()
+         void setData()
         {
 
             Pins = new ObservableCollection<Pin>();
@@ -126,7 +155,7 @@ namespace MzansiGopro.ViewModels
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 
@@ -254,12 +283,16 @@ namespace MzansiGopro.ViewModels
                 }
 
             }
-            catch (Exception ex)
+            catch 
             {
-                await Shell.Current.DisplayAlert("Error", "Error While loading", "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
             }
+            finally
+            {
 
             IsRefreashing = false;
+            }
+
 
 
 
@@ -276,6 +309,32 @@ namespace MzansiGopro.ViewModels
         }
 
 
+        public async Task OnFilterTap(offer _offer)
+        {
+            try
+            {
+
+                string offerName = _offer.Name.ToLower();
+                var _shopList = ShopList;
+                ShopList.Clear();
+
+                foreach(var item in _shopList)
+                {
+                    foreach(var i in item.Offers)
+                    {
+                        if (i.Name.ToLower().Contains(offerName))
+                        {
+                            ShopList.Add(item);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
+            }
+
+        }
 
         
 
