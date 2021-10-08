@@ -13,7 +13,7 @@ using System.Collections.ObjectModel;
 using Plugin.Geolocator;
 using MzansiGopro.Views.PopupV.AlertsV;
 using Xamarin.CommunityToolkit.Extensions;
-
+using MzansiGopro.Services.BusinessData;
 
 
 namespace MzansiGopro.Views
@@ -246,5 +246,20 @@ namespace MzansiGopro.Views
             storeCollective.ItemsSource = _shopsList;
 
         }
+
+
+
+
+
+        protected override async void OnAppearing()
+        {
+         
+            base.OnAppearing();
+
+            var model = BindingContext as ShopViewModel;
+        }
+
+
+
     }
 }

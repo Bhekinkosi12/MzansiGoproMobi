@@ -3,8 +3,9 @@ using MzansiGopro.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using MzansiGopro.Services.BusinessData;
 using System.Threading.Tasks;
+using MzansiGopro.Services.EventsSV;
 
 namespace MzansiGopro
 {
@@ -30,7 +31,10 @@ namespace MzansiGopro
 
         protected override void OnStart()
         {
-
+            MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
+            businessDataBase.InitialData();
+            EventsServices _services = new EventsServices();
+            _services.eventData();
         }
 
         protected override void OnSleep()

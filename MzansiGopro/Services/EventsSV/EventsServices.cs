@@ -7,6 +7,11 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System.Threading.Tasks;
 using System.Linq;
+using MzansiGopro.Views.PopupV.AlertsV;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.Forms;
+
 
 namespace MzansiGopro.Services.EventsSV
 {
@@ -58,17 +63,25 @@ namespace MzansiGopro.Services.EventsSV
             };
         }        
 
-       async void eventData()
+     public  async void eventData()
         {
             List<Events> _events = new List<Events>();
             UserDataBase userData = new UserDataBase();
 
-           var items = await userData.GetAllEvents();
-
-            foreach(var i in items)
+            try
             {
-                _events.Add(i);
+               var items = await userData.GetAllEvents();
+
+                foreach(var i in items)
+                {
+                    _events.Add(i);
+                }
             }
+            catch
+            {
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
+
 
             Eventslist = _events;
 

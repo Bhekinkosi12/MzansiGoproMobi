@@ -102,7 +102,7 @@
 
                     <CollectionView.EmptyView>
                         
-                            <Label Text="No Events for now" TextColor="#191919" HorizontalOptions="Center" />
+                            <Label Text="No Events for now pull down to Refresh" TextColor="#191919" HorizontalOptions="Center" />
                         
                     </CollectionView.EmptyView>
 

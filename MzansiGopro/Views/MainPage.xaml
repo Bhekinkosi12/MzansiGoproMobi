@@ -186,8 +186,15 @@
                             <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"  />
                         </CollectionView.ItemsLayout>
 
-                        <CollectionView.EmptyView>
-                            <Label Text="Pull down to refreash" TextColor="#191919"  />
+                        <CollectionView.EmptyView >
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                
+                                            </Grid.RowDefinitions>
+                                            <BoxView BackgroundColor="#fff" Opacity="0.5" />
+                                            <Label Text="No Items Pull down on block to refreash" HorizontalOptions="Center" VerticalOptions="Center" FontSize="23" TextColor="#191919"  />
+                                        </Grid>
                         </CollectionView.EmptyView>
 
                         <CollectionView.ItemTemplate>

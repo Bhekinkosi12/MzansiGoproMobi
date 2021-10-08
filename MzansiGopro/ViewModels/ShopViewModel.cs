@@ -11,6 +11,7 @@ using MzansiGopro.Models.microModel;
 using System.Threading.Tasks;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Services.BusinessData;
 
 namespace MzansiGopro.ViewModels
 {
@@ -19,8 +20,8 @@ namespace MzansiGopro.ViewModels
 
         private bool isExpanded = false;
         bool isRefreashing = false;
-        ObservableCollection<Shop> shopList;
-        ObservableCollection<Pin> pins;
+        ObservableCollection<Shop> shopList = new ObservableCollection<Shop>();
+        ObservableCollection<Pin> pins = new ObservableCollection<Pin>();
 
 
 
@@ -96,10 +97,10 @@ namespace MzansiGopro.ViewModels
         UserDataBase userData = new UserDataBase();
 
         
-        public ShopViewModel()
+        public  ShopViewModel()
         {
         
-            setData();
+          
             ShopTap = new Command<Shop>(OnShopTap);
             defualtSearch();
             Expand = new Command(OnExpand);
@@ -116,7 +117,7 @@ namespace MzansiGopro.ViewModels
 
 
       
-         void setData()
+        public async Task setData()
         {
 
             Pins = new ObservableCollection<Pin>();
@@ -126,8 +127,10 @@ namespace MzansiGopro.ViewModels
                 ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
                 ObservableCollection<Shop> shops = new ObservableCollection<Shop>();
                 MockDataStore data = new MockDataStore();
+                MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
 
-                var items = data.ReturnList();
+                //  var items = data.ReturnList();
+             var items =   businessDataBase.ReturnShops();
 
             foreach(var i in items)
             {
@@ -239,9 +242,12 @@ namespace MzansiGopro.ViewModels
         {
             IsRefreashing = true;
             UserDataBase userDB = new UserDataBase();
+            MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
+
             try
             {
-               var _shopList = await userData.GetAllBusiness();
+            var _shopList = businessDataBase.ReturnShops();
+               // var _shopList = await userDB.GetAllBusiness();
 
 
                 if(_shopList != null)
@@ -283,9 +289,10 @@ namespace MzansiGopro.ViewModels
                 }
 
             }
-            catch 
+            catch (Exception ex)
             {
-                Shell.Current.ShowPopup(new InternetConnectionPop());
+                  Shell.Current.ShowPopup(new InternetConnectionPop());
+              //  await Shell.Current.DisplayAlert("error", ex.Message, "OK");
             }
             finally
             {

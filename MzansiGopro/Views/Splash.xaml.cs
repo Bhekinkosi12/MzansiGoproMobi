@@ -8,6 +8,7 @@ using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MzansiGopro.Services.BusinessData;
 
 namespace MzansiGopro.Views
 {
@@ -24,7 +25,7 @@ namespace MzansiGopro.Views
         {
             LocalUserService localDB = new LocalUserService();
             localDB.GetLocalUser();
-            
+          
 
             base.OnAppearing();
         }
