@@ -9,7 +9,7 @@
     <Frame Padding="10" BackgroundColor="#fff" CornerRadius="20">
 
 
-        <lottie:AnimationView  Animation="greetings.json" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="Json" AutoPlay="True"  >
+        <lottie:AnimationView  Animation="greetings.json" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="AssetOrBundle"  AutoPlay="True"  >
             
         </lottie:AnimationView>
 
