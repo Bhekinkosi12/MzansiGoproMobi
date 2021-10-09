@@ -10,7 +10,8 @@ using MzansiGopro.Models.CollectiveModel;
 using MzansiGopro.Services;
 using Xamarin.Essentials;
 using System.IO;
-
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using MzansiGopro.Services.AuthSercurity;
 
 namespace MzansiGopro.ViewModels.BusinessVM
@@ -20,7 +21,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
         string offerName;
         string layout;
-        List<Products> products;
+        List<Products> products = new List<Products>();
         Products selectedProduct;
 
 
@@ -34,8 +35,9 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
 
 
-        ObservableCollection<offer> offer;
-        ObservableCollection<Products> productList;
+
+        ObservableCollection<offer> offer = new ObservableCollection<offer>();
+        ObservableCollection<Products> productList = new ObservableCollection<Products>();
 
 
 
@@ -211,19 +213,27 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
         void GetData()
         {
-            AdminBusinessViewModel admin = new AdminBusinessViewModel();
-          var main =  admin.GetSelectedModel();
-            LastSelectedListModel = main;;
-            OfferName = main.ListName;
-            Products = main.Products;
-            Layout = main.Layout;
-
-
-            foreach(var _product in main.Products)
+            try
             {
-                ProductList.Add(_product);
-            }
+
+                AdminBusinessViewModel admin = new AdminBusinessViewModel();
+              var main =  admin.GetSelectedModel();
+                LastSelectedListModel = main;;
+                OfferName = main.ListName;
+                Products = main.Products;
+                Layout = main.Layout;
+
+
+                foreach(var _product in main.Products)
+                {
+                    ProductList.Add(_product);
+                }
             
+            }
+            catch (Exception ex)
+            {
+                
+            }
 
                 
         }
@@ -319,24 +329,33 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
             };
 
+            try
+            {
             _products = Products;
             _products.Add(_product);
 
 
             newProduct.Add(_product);
-            foreach(var item in ProductList)
-            {
-                newProduct.Add(item);
+                foreach(var item in ProductList)
+                {
+                    newProduct.Add(item);
             
-            }
+                }
 
-            newProduct.Remove(SelectedProduct);
+                newProduct.Remove(SelectedProduct);
+                 _products.Remove(SelectedProduct);
+            }
+            catch
+            {
+
+            }
+            
+            
             ProductList.Clear();
             ProductList = newProduct;
            
 
 
-             _products.Remove(SelectedProduct);
             
 
 
@@ -410,7 +429,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
             }
             catch (Exception)
             {
-                await Shell.Current.DisplayAlert("Error", "Check internet connection and retry", "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
             }
 
 
@@ -489,7 +508,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", "Unexpected Error", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 

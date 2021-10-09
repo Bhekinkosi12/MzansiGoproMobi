@@ -49,6 +49,38 @@
 
 
                         <Frame BackgroundColor="Transparent" Grid.Row="1" Padding="0" >
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="Layout: " TextColor="{StaticResource text}" FontSize="15" />
+
+
+                                        <Frame Padding="0" BorderColor="{StaticResource secondaryPurple}" BackgroundColor="Transparent" Grid.Column="1">
+                                            
+                                        <Grid Grid.Column="1" Padding="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button x:Name="cardBTN" Padding="0"  Text="Card" Clicked="cardBTN_Clicked" />
+                                            <Button x:Name="listBTN" Padding="0" Text="List" Grid.Column="1" Clicked="listBTN_Clicked" />
+                                            
+                                            
+
+
+                                        </Grid>
+                                        </Frame>
+
+
+                                    </Grid>
+                            
+                            <!--
                             <Label   Margin="15,0" >
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -59,7 +91,7 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            
+                            -->
                         </Frame>
 
 
@@ -70,6 +102,14 @@
 
 
 
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                         
+                            <Frame Padding="0" BackgroundColor="Transparent" x:Name="cardViewFrame" >
+                                
                 <ScrollView>
 
                     <StackLayout Orientation="Horizontal" Padding="10"  >
@@ -81,18 +121,28 @@
                                             <Button Text="Add" TextColor="#fff" Command="{Binding AddProduct}" BackgroundColor="{StaticResource defaultPurple}" Padding="0" CornerRadius="15" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                                         </Frame>
                                     </CollectionView.Header>
-                            
+                                            <CollectionView.EmptyViewTemplate>
 
-                            <CollectionView.EmptyViewTemplate>
-                                <DataTemplate>
+                                                <DataTemplate>
+
+
+                                                    <Frame >
+                                                    </Frame>
+                                                </DataTemplate>
+
+
+                                            </CollectionView.EmptyViewTemplate>
+
+
+                                            <CollectionView.EmptyView>
+                                
                                     <Frame >
                                         <StackLayout>
-                                            <Image Source="imageFolder.png" Aspect="AspectFit" />
-                                            <Label Text="No Items Yet" TextColor="#191919" />
+                                           
                                         </StackLayout>
                                     </Frame>
-                                </DataTemplate>
-                            </CollectionView.EmptyViewTemplate>
+                                
+                            </CollectionView.EmptyView>
 
 
                             <CollectionView.ItemsLayout>
@@ -221,6 +271,145 @@
 
                     </StackLayout>
                 </ScrollView>
+                            </Frame>
+                            
+                            <!--Card View-->
+
+
+
+
+                            <Frame Padding="0" BackgroundColor="Transparent" x:Name="listViewFrame" IsVisible="false">
+
+                                <ScrollView>
+
+                                    <StackLayout Orientation="Horizontal" Padding="10"  >
+
+                                        <CollectionView ItemsSource="{Binding ProductList}" >
+
+                                            <CollectionView.EmptyViewTemplate>
+
+                                                <DataTemplate>
+                                                    
+
+                                                <Frame >
+                                                </Frame>
+                                                </DataTemplate>
+                                                    
+
+                                            </CollectionView.EmptyViewTemplate>
+
+
+                                            <CollectionView.EmptyView>
+                                                
+                                                    <Frame >
+                                                       
+                                                    </Frame>
+                                                
+                                            </CollectionView.EmptyView>
+
+
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <Frame Padding="0" BackgroundColor="Transparent" >
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="auto" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Frame BackgroundColor="Transparent" Padding="0" >
+                                                                <Grid >
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="30" />
+                                                                        <RowDefinition Height="37" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <Label Text="{Binding Name}" FontSize="21"  TextColor="{StaticResource text}"/>
+
+
+
+                                                                    <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"  Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
+                                                                        <CollectionView.ItemsLayout>
+                                                                            <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                                                        </CollectionView.ItemsLayout>
+                                                                        <CollectionView.EmptyViewTemplate>
+                                                                            <DataTemplate>
+
+                                                                                <Label Text="No Ingrients" TextColor="#191919" />
+
+                                                                            </DataTemplate>
+
+                                                                        </CollectionView.EmptyViewTemplate>
+
+                                                                        <CollectionView.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Frame BackgroundColor="Transparent" Padding="0" x:DataType="micromodel:offer" Margin="0,2"   >
+                                                                                    <Grid>
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="*" />
+
+                                                                                        </Grid.ColumnDefinitions>
+
+                                                                                        <Label  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                                                                            <Label.FormattedText>
+                                                                                                <FormattedString>
+                                                                                                    <FormattedString.Spans>
+                                                                                                        <Span Text="{Binding Name}" TextColor="#191919" />
+                                                                                                        <Span Text=", " />
+                                                                                                    </FormattedString.Spans>
+                                                                                                </FormattedString>
+                                                                                            </Label.FormattedText>
+                                                                                        </Label>
+
+
+
+                                                                                    </Grid>
+                                                                                </Frame>
+                                                                            </DataTemplate>
+                                                                        </CollectionView.ItemTemplate>
+
+
+                                                                    </CollectionView>
+
+
+                                                                </Grid>
+
+                                                            </Frame>
+
+
+                                                            <Frame Padding="0" BackgroundColor="Transparent" Grid.Column="1" >
+                                                                <Label Text="{Binding Price}" TextColor="{StaticResource text}" />
+                                                            </Frame>
+
+
+                                                        </Grid>
+
+                                                    </Frame>
+
+
+
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+
+
+                                        </CollectionView>
+
+
+
+
+
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </Frame>
+
+                           
+
+                        </Grid>
 
 
 

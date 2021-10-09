@@ -602,7 +602,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 {
                     Layout = "Card",
                     ListName = item.Name,
-                    Products = new List<Products>(),
+                    Products = new List<Products>() { new Products { Name = "Default" } },
                      ListID = ""
             };
 
@@ -617,7 +617,8 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
             var businessOffer = new BusinessOffers()
             {
                   ProductListID = Guid.NewGuid().ToString(),
-                   OfferList = listModels
+                   OfferList = listModels,
+                     
                   
             };
 
@@ -654,6 +655,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                      Points = 0,
                       Visits = 0,
                        
+                        
                       
 
             };

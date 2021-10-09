@@ -24,7 +24,16 @@
                 </map:Map.ItemTemplate>
 
             </map:Map>
-            <Label Text="{Binding Name}" TextColor="{StaticResource text}" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Row="1" FontFamily="cursive" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                
+            <Label Text="{Binding Name}" TextColor="{StaticResource text}" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontFamily="cursive" />
+
+                <Label Text="{Binding PeopleGoing}" Grid.Column="1" TextColor="{StaticResource text}" />
+            </Grid>
 
 
             

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.IntroV;
 
 namespace MzansiGopro.Views
 {
@@ -30,7 +32,7 @@ namespace MzansiGopro.Views
 
         protected override void OnAppearing()
         {
-            
+            Shell.Current.ShowPopup(new AppIntroPop());
             base.OnAppearing();
         }
 

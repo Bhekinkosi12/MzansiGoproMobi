@@ -9,6 +9,8 @@ using MzansiGopro.Services.BusinessData;
 using MzansiGopro.Services;
 using Xamarin.Essentials;
 using System.IO;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 
 
 namespace MzansiGopro.ViewModels.BusinessVM
@@ -36,6 +38,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
         string number;
         string points;
         string visits;
+        string bio;
         
        ObservableCollection<ProductListModel> productModel;
         ObservableCollection<ProductListModel> productModelList;
@@ -47,6 +50,16 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
         public Command AddOffer { get; }
 
+
+        public string Bio
+        {
+            get => bio;
+            set
+            {
+                SetProperty(ref bio, value);
+                OnPropertyChanged(nameof(Bio));
+            }
+        }
 
 
         public string Points
@@ -162,10 +175,18 @@ namespace MzansiGopro.ViewModels.BusinessVM
             };
 
             var shop = RunTimeBusiness;
-           var list = shop.BusinessOffers.OfferList;
-            list.Add(productlist);
 
-            shop.BusinessOffers.OfferList = list;
+            List<ProductListModel> list_product = new List<ProductListModel>();
+
+           var list = shop.BusinessOffers.OfferList;
+            list_product.Add(productlist);
+
+            foreach(var i in list)
+            {
+                list_product.Add(i);
+            }
+
+            shop.BusinessOffers.OfferList = list_product;
 
             RunTimeBusiness = shop;
 
@@ -202,10 +223,18 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
       async void OnEditOffer(ProductListModel _productList)
         {
+            try
+            {
+
             if(_productList != null)
             {
                 OfferSelected = _productList;
                 await Shell.Current.GoToAsync("BusinessOfferEditPage");
+            }
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
         }
 
@@ -234,14 +263,19 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
            await dataBase.UpDateBusinessAsync(RunTimeBusiness);
             }
-            catch(Exception ex)
+            catch
             {
-                await Shell.Current.DisplayAlert("Error", "Check Internet connection", "OK");
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+
             }
+            finally
+            {
 
             GetAdminShop();
 
             IsBusy = false;
+            }
+
         }
 
       
@@ -271,14 +305,24 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
 
                 ObservableCollection<ProductListModel> listModels = new ObservableCollection<ProductListModel>();
+                ObservableCollection<ProductListModel> listModelsList = new ObservableCollection<ProductListModel>();
 
-                foreach(var iten in RunTimeBusiness.BusinessOffers.OfferList)
+                foreach (var iten in RunTimeBusiness.BusinessOffers.OfferList)
                 {
+                    if(iten.Layout == "Card")
+                    {
+
                     listModels.Add(iten);
+                    }
+                    else
+                    {
+                        listModelsList.Add(iten);
+                    }
                 }
 
 
                 Productmodel = listModels;
+                ProductModelList = listModelsList;
             }
             catch
             {

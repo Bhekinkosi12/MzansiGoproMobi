@@ -20,6 +20,7 @@ namespace MzansiGopro.ViewModels.EventsVM
         string location;
         string image;
         string name;
+        string peopleGoing;
         ObservableCollection<Pin> pins = new ObservableCollection<Pin>();
 
         public EventDisplayViewModel()
@@ -27,7 +28,15 @@ namespace MzansiGopro.ViewModels.EventsVM
             GetEvent();
         }
 
-
+        public string PeopleGoing
+        {
+            get => peopleGoing;
+            set
+            {
+                SetProperty(ref peopleGoing, value);
+                OnPropertyChanged(nameof(PeopleGoing));
+            }
+        }
         public string Name
         {
             get => name;
@@ -79,7 +88,8 @@ namespace MzansiGopro.ViewModels.EventsVM
 
             Location = events.Location;
             Image = events.Cover;
-
+            Name = events.Name;
+            PeopleGoing = $"{events.UsersComing} going";
             string EventDateNotify;
             int dateCompare = DateTime.Compare(events.EventDateTime, DateTime.Today);
 

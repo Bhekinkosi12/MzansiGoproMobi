@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+           xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+            Size="350,560" Color="Transparent"  BackgroundColor="Transparent" IsLightDismissEnabled="False"
+             x:Class="MzansiGopro.Views.PopupV.IntroV.AppIntroPop">
+
+    <Frame Padding="10" BackgroundColor="#fff" CornerRadius="20">
+
+
+        <lottie:AnimationView  Animation="greetings.json" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="Json" AutoPlay="True"  >
+            
+        </lottie:AnimationView>
+
+
+    </Frame>
+
+</xct:Popup>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using MzansiGopro.ViewModels.BusinessVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 
 namespace MzansiGopro.Views.CompanyV
 {
@@ -14,6 +16,8 @@ namespace MzansiGopro.Views.CompanyV
     {
         public BusinessOfferEditPage()
         {
+            var model = BindingContext as BusinessOfferEditViewModel;
+           
             InitializeComponent();
         }
 
@@ -51,9 +55,10 @@ namespace MzansiGopro.Views.CompanyV
 
                 }
             }
-            catch(Exception ex)
+            catch
             {
-                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+               
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 
@@ -91,6 +96,39 @@ namespace MzansiGopro.Views.CompanyV
             {
                 EntryPrice.TextColor = Color.Red;
             }
+        }
+
+        private void cardBTN_Clicked(object sender, EventArgs e)
+        {
+            onCardView();
+        }
+
+        private void listBTN_Clicked(object sender, EventArgs e)
+        {
+            onListView();
+        }
+
+
+
+       void onListView()
+        {
+            listBTN.BackgroundColor = Color.FromHex("#591da9");
+            listBTN.TextColor = Color.White;
+
+            cardBTN.BackgroundColor = Color.White;
+            cardBTN.TextColor = Color.FromHex("#591da9");
+            cardViewFrame.IsVisible = false;
+           listViewFrame.IsVisible = true;
+        }
+        void onCardView()
+        {
+            cardBTN.BackgroundColor = Color.FromHex("#591da9");
+            cardBTN.TextColor = Color.White;
+
+            listBTN.BackgroundColor = Color.White;
+            listBTN.TextColor = Color.FromHex("#591da9");
+           cardViewFrame.IsVisible = true;
+           listViewFrame.IsVisible = false;
         }
     }
 }
