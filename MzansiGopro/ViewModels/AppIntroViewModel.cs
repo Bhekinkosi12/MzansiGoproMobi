@@ -38,8 +38,18 @@ namespace MzansiGopro.ViewModels
                  },
                 new SplashData
                  {
-                       Image = "standOut.png",
-                       Description = "Learn to showcase your business and stand out from the crowd"
+                       Image = "locationReview.png",
+                       Description = "Help customers find your business and events"
+                 },
+                new SplashData
+                 {
+                       Image = "shopTab.png",
+                       Description = "Tap the image to pin point the business before you visit it"
+                 },
+                new SplashData
+                 {
+                       Image = "",
+                       Description = ""
                  }
             };
 

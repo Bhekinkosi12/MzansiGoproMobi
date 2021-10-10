@@ -39,7 +39,7 @@
 
 
 
-            <carousel:SfCarousel  Grid.RowSpan="3" ItemsSource="{Binding SplashData}" TabIndex="{Binding TabIndex}"  IsVisible="{Binding IsCarouselVisible,Mode=TwoWay}" x:Name="carouselView" SwipeEnded="carouselView_SwipeEnded"  >
+            <carousel:SfCarousel  Grid.RowSpan="3" Duration="10" ItemsSource="{Binding SplashData}" TabIndex="{Binding TabIndex}"  IsVisible="{Binding IsCarouselVisible,Mode=TwoWay}" x:Name="carouselView"  SelectedIndex="{Binding TabIndex}"  >
                 <carousel:SfCarousel.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="0" BackgroundColor="{StaticResource background}" BorderColor="Gray"   >
