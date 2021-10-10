@@ -67,7 +67,7 @@
                                 <punny:DropShadow BlurRadius="10" x:Name="numberShadow" Color="#191919" Offset="1,1" />
                             </punny:PancakeView.Shadow>
 
-                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Number}" TextChanged="entryNumber_TextChanged"  Placeholder="071........"  x:Name="entryNumber"/>
+                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Number}" Keyboard="Numeric" TextChanged="entryNumber_TextChanged"  Placeholder="071........"  x:Name="entryNumber"/>
                         </punny:PancakeView>
 
 

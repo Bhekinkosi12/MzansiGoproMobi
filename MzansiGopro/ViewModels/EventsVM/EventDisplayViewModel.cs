@@ -173,7 +173,7 @@ namespace MzansiGopro.ViewModels.EventsVM
                 }
                 else
                 {
-                    Shell.Current.ShowPopup(new UnexpectedErrorPop());
+                   
                 }
 
                 
@@ -188,6 +188,33 @@ namespace MzansiGopro.ViewModels.EventsVM
 
         }
 
+
+        public bool CheckIfGoing()
+        {
+            bool isGoing = false;
+           
+            EventsListViewModel eventsList = new EventsListViewModel();
+            try
+            {
+                var events = eventsList.GetSelectedEvent();
+                var user = RunTimeUser;
+
+                if (!user.EventsGoing.Contains(events))
+                {
+                    isGoing = false;
+                }
+                else
+                {
+                    isGoing = true;
+                }
+            }
+            catch
+            {
+
+            }
+
+            return isGoing;
+        }
 
     }
 }

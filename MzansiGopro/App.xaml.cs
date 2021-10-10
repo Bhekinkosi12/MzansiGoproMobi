@@ -18,7 +18,7 @@ namespace MzansiGopro
 
             DependencyService.Register<MockDataStore>();
 
-            splash();
+            MainPage = new AppShell();
         }
 
        async void splash()

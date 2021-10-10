@@ -16,5 +16,20 @@ namespace MzansiGopro.Views.PopupV.IntroV
         {
             InitializeComponent();
         }
+
+        private void skip_Clicked(object sender, EventArgs e)
+        {
+            Dismiss(null);
+        }
+
+        private void next_Clicked(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void carouselView_SwipeEnded(object sender, EventArgs e)
+        {
+            Dismiss(null);
+        }
     }
 }

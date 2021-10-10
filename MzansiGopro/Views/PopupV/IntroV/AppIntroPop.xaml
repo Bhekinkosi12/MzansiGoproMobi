@@ -2,16 +2,83 @@
 <xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-           xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-            Size="350,560" Color="Transparent"  BackgroundColor="Transparent" IsLightDismissEnabled="False"
+           xmlns:splash="clr-namespace:MzansiGopro.ViewModels"
+           xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms"
+           xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" xmlns:viewmodels="clr-namespace:MzansiGopro.ViewModels"
+           Size="350,560" Color="Transparent"  BackgroundColor="Transparent" IsLightDismissEnabled="False"
              x:Class="MzansiGopro.Views.PopupV.IntroV.AppIntroPop">
+    <xct:Popup.BindingContext>
+        <viewmodels:AppIntroViewModel />
+    </xct:Popup.BindingContext>
 
     <Frame Padding="10" BackgroundColor="#fff" CornerRadius="20">
 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="70" />
 
-        <lottie:AnimationView  Animation="greetings.json" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="AssetOrBundle"  AutoPlay="True"  >
+            </Grid.RowDefinitions>
+            
+            
+        <lottie:AnimationView  Animation="greetings.json" Grid.RowSpan="2" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="AssetOrBundle"  AutoPlay="True"  >
             
         </lottie:AnimationView>
+
+
+
+
+          
+
+
+
+            <Label Text="Welcome to Mzansi Go pro. Visit or host your business online for free! " Grid.Row="2" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
+
+
+
+
+            <carousel:SfCarousel  Grid.RowSpan="3" ItemsSource="{Binding SplashData}" TabIndex="{Binding TabIndex}"  IsVisible="{Binding IsCarouselVisible,Mode=TwoWay}" x:Name="carouselView" SwipeEnded="carouselView_SwipeEnded"  >
+                <carousel:SfCarousel.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="0" BackgroundColor="{StaticResource background}" BorderColor="Gray"   >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Image}" Aspect="AspectFit" />
+
+                                <Label Text="{Binding Description}" Grid.Row="1" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
+
+
+                            </Grid>
+                            
+                        </Frame>
+                    </DataTemplate>
+                </carousel:SfCarousel.ItemTemplate>
+                
+            </carousel:SfCarousel>
+
+            <Label Text="skip" TextColor="{StaticResource text}" Margin="10" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="skip_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+
+
+
+
+
+
+            <Button BackgroundColor="{StaticResource secondaryPurple}" x:Name="next" Command="{Binding Next}" Text="NEXT" TextColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="50" Padding="0"  Grid.Row="3"/>
+
+           
+            
+            
+        </Grid>
+
 
 
     </Frame>

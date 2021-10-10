@@ -237,6 +237,29 @@ namespace MzansiGopro.ViewModels
         }
 
 
+        public async Task GetStoresAsync()
+        {
+            UserDataBase userDB = new UserDataBase();
+
+            try
+            {
+
+            var shops =  userData.GetAllBusiness();
+
+                foreach(var i in await shops)
+                {
+                    ShopList.Add(i);
+                }
+
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
+            
+            
+
+        }
 
         public async void UpDateShopList()
         {
@@ -246,6 +269,10 @@ namespace MzansiGopro.ViewModels
 
             try
             {
+
+
+                
+
             var _shopList = businessDataBase.ReturnShops();
                // var _shopList = await userDB.GetAllBusiness();
 

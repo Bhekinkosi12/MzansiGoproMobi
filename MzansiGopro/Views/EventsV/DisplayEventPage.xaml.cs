@@ -29,7 +29,18 @@ namespace MzansiGopro.Views.EventsV
             locationMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(double.Parse(location[0]), double.Parse(location[1])), Distance.FromMeters(300)));
 
 
+            if (model.CheckIfGoing())
+            {
+                goingToEvent.BackgroundColor = Color.FromHex("#591da9");
+                goingToEvent.TextColor = Color.White;
+                goingToEvent.BorderColor = Color.FromHex("#591da9");
+                goingToEvent.BorderWidth = 1;
 
+            }
+            else
+            {
+
+            }
             
             
 

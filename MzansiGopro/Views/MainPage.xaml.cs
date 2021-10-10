@@ -253,10 +253,12 @@ namespace MzansiGopro.Views
 
         protected override async void OnAppearing()
         {
+            var model = BindingContext as ShopViewModel;
+            await model.GetStoresAsync();
          
             base.OnAppearing();
 
-            var model = BindingContext as ShopViewModel;
+            
         }
 
 
