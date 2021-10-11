@@ -48,7 +48,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Source="{Binding Image}" Aspect="AspectFit" />
+                                <Image Source="{Binding Image}" Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
 
                                 <Label Text="{Binding Description}" Grid.Row="1" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
 

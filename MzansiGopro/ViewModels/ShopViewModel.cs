@@ -109,10 +109,14 @@ namespace MzansiGopro.ViewModels
 
             ShopVisit = new Command<Shop>(OnShopVisit);
             FilterTap = new Command<offer>(async (e) => await OnFilterTap(e));
+            onsetData();
         }
 
 
-
+       async void onsetData()
+        {
+            await setData();
+        } 
 
 
 

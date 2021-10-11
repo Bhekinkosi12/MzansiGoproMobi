@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:admineventsvm="clr-namespace:MzansiGopro.ViewModels.EventsVM.AdminEventsVM"
+             x:Class="MzansiGopro.Views.EventsV.AdminEventsV.AdminDisplayEventPage">
+    <ContentPage.BindingContext>
+        <admineventsvm:AdminDisplayViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="50" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Text="Delete" x:Name="goingToEvent"  TextColor="#fff" BackgroundColor="{StaticResource secondaryPurple}" CornerRadius="8" HorizontalOptions="CenterAndExpand"  />
+
+            <map:Map x:Name="locationMap" ItemsSource="{Binding Pins}" MapType="Street" Grid.Row="1">
+                <map:Map.ItemTemplate>
+                    <DataTemplate>
+                        <map:Pin Position="{Binding Position}" Address="{Binding Address}" Label="{Binding Label}"   />
+                    </DataTemplate>
+                </map:Map.ItemTemplate>
+
+            </map:Map>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Name}" TextColor="{StaticResource text}" FontSize="23" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontFamily="cursive" />
+
+                <Label Text="{Binding PeopleGoing}" Grid.Column="1" TextColor="{StaticResource text}" />
+            </Grid>
+
+
+
+
+            <Image Source="{Binding Image}" Aspect="AspectFit" Grid.Row="3"  />
+
+
+           
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

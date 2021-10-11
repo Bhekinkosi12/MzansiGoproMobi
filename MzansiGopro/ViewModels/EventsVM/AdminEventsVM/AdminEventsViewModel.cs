@@ -200,9 +200,12 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
        async void OnSelectedEvent(Events _event)
         {
             SelectedEvent = _event;
-            await Shell.Current.GoToAsync("MainAddEventPage");
+            await Shell.Current.GoToAsync("AdminDisplayEventPage");
         }
-
+       public Events ReturnSelectedEvent()
+        {
+            return SelectedEvent;
+        }
        public async void OnAddMediaCover()
         {
             IsBusy = true;
