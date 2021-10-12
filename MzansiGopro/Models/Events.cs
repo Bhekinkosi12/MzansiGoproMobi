@@ -8,6 +8,7 @@ namespace MzansiGopro.Models
    public class Events
     {
         public string ID { get; set; }
+        public string Idetifier { get; set; }
         public string Name  { get; set; } 
         public DateTime EventDateTime { get; set; }
         public string Location { get; set; }

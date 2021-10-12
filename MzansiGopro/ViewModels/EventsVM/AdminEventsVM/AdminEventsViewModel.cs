@@ -129,11 +129,12 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
 
             var _event = new Events()
             {
-                 Location = Location,
-                  Name = Name,
-                   Cover = Cover,
-                    EventDateTime = EventDate,
-                     ID = $"{RunTimeUser.Name};;{RunTimeUser.Email}"
+                Location = Location,
+                Name = Name,
+                Cover = Cover,
+                EventDateTime = EventDate,
+                ID = $"{RunTimeUser.Name};;{RunTimeUser.Email}",
+                Idetifier = Guid.NewGuid().ToString()
             };
 
 
@@ -154,15 +155,30 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
 
                 if(SelectedEvent != null)
                 {
+                    try
+                    {
+
                     await userData.UpdateEvent(SelectedEvent, _event);
+                    }
+                    catch
+                    {
+                        Shell.Current.ShowPopup(new InternetConnectionPop());
+                    }
                     _user.EventsHoted.Remove(SelectedEvent);
                     _user.EventsHoted.Add(_event);
                 }
                 else
                 {
+                        try { 
+                    await userData.AddEventAsync(_event);
 
-                await userData.AddEventAsync(_event);
-                    _user.EventsHoted.Add(_event);
+                    }
+                        catch
+                {
+                    Shell.Current.ShowPopup(new InternetConnectionPop());
+                }
+
+            _user.EventsHoted.Add(_event);
                 }
 
                 RunTimeUser = _user;
