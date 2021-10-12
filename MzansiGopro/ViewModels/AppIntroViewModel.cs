@@ -13,6 +13,7 @@ namespace MzansiGopro.ViewModels
         public Command Next { get; }
         bool isCarouselVisible = false;
 
+        public bool IsDefaultVisible { get; set; } = true;
        public bool IsCarouselVisible
         {
             get => isCarouselVisible;
@@ -58,18 +59,41 @@ namespace MzansiGopro.ViewModels
 
        
 
-        void OnNext()
+       public void OnNext()
         {
+           
             if (IsCarouselVisible)
             {
+              
                 TabIndex += 1;
                 OnPropertyChanged(nameof(TabIndex));
+               
             }
             else
             {
                 IsCarouselVisible = true;
+                IsDefaultVisible = false;
+                OnPropertyChanged(nameof(IsDefaultVisible));
+                OnPropertyChanged(nameof(IsCarouselVisible));
+            }
+
+
+           
+
+        }
+
+        public bool IsCarouselComplete()
+        {
+            if(TabIndex == 3)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
+
 
     }
 

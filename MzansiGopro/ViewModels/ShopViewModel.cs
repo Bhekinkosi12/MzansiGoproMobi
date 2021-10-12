@@ -19,7 +19,7 @@ namespace MzansiGopro.ViewModels
     {
 
         private bool isExpanded = false;
-        bool isRefreashing = false;
+        bool isRefreashing = true;
         ObservableCollection<Shop> shopList = new ObservableCollection<Shop>();
         ObservableCollection<Pin> pins = new ObservableCollection<Pin>();
 
@@ -109,14 +109,17 @@ namespace MzansiGopro.ViewModels
 
             ShopVisit = new Command<Shop>(OnShopVisit);
             FilterTap = new Command<offer>(async (e) => await OnFilterTap(e));
-            onsetData();
+
+
+            onSetData();
+            
         }
 
 
-       async void onsetData()
+      async void onSetData()
         {
             await setData();
-        } 
+        }
 
 
 
@@ -125,7 +128,7 @@ namespace MzansiGopro.ViewModels
         {
 
             Pins = new ObservableCollection<Pin>();
-
+            UserDataBase userDB = new UserDataBase();
             try
             {
                 ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
@@ -134,7 +137,8 @@ namespace MzansiGopro.ViewModels
                 MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
 
                 //  var items = data.ReturnList();
-             var items =   businessDataBase.ReturnShops();
+                //var items =   businessDataBase.ReturnShops();
+                var items = await userDB.GetAllBusiness();
 
             foreach(var i in items)
             {
@@ -162,7 +166,11 @@ namespace MzansiGopro.ViewModels
             }
             catch (Exception ex)
             {
-                Shell.Current.ShowPopup(new UnexpectedErrorPop());
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
+            finally
+            {
+                IsRefreashing = false;
             }
 
 

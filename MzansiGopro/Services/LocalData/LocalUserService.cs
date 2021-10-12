@@ -71,7 +71,9 @@ namespace MzansiGopro.Services.LocalData
 
         public void ClearLocalDB()
         {
-            Preferences.Clear();
+          
+            var id = Preferences.Get("ShopId", string.Empty);
+            Preferences.Remove(id);
         }
       
 
@@ -94,6 +96,10 @@ namespace MzansiGopro.Services.LocalData
 
         }
 
+        public void AddFirstUse()
+        {
+            Preferences.Set("FirstUse", "not first use");
+        }
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MzansiGopro.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,18 @@ namespace MzansiGopro.Views.PopupV.IntroV
 
         private void next_Clicked(object sender, EventArgs e)
         {
-            
+            var model = BindingContext as AppIntroViewModel;
+
+            var isComplete = model.IsCarouselComplete();
+            if (isComplete)
+            {
+                Dismiss(null);
+            }
+            else
+            {
+                carouselView.IsVisible = true;
+            }
+
         }
 
         private void carouselView_SwipeEnded(object sender, EventArgs e)

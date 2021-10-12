@@ -20,6 +20,8 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
         string peopleGoing;
         ObservableCollection<Pin> pins = new ObservableCollection<Pin>();
 
+        public Command Delete { get; }
+
         public AdminDisplayViewModel()
         {
             GetEvent();
@@ -212,6 +214,15 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
             }
 
             return isGoing;
+        }
+
+
+        void OnDelete()
+        {
+
+
+
+
         }
 
     }

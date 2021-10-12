@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MzansiGopro.Views.CompanyV;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 using MzansiGopro.ViewModels;
 using MzansiGopro.ViewModels.ProfileVM;
@@ -19,11 +20,13 @@ namespace MzansiGopro.Views.ProfileV
             InitializeComponent();
         }
 
-        private async void business_Tapped(object sender, EventArgs e)
+        private  void business_Tapped(object sender, EventArgs e)
         {
-            
-            
-            await Shell.Current.GoToAsync("CompanyMainPage");
+            var model = BindingContext as ProfileViewModel;
+            model.BusinessValable();
+
+
+
         }
 
         private async void events_Tapped(object sender, EventArgs e)

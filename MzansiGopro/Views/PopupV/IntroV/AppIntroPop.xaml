@@ -21,34 +21,34 @@
                 <RowDefinition Height="70" />
 
             </Grid.RowDefinitions>
-            
-            
-        <lottie:AnimationView  Animation="greetings.json" Grid.RowSpan="2" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="AssetOrBundle"  AutoPlay="True"  >
+
+
+            <lottie:AnimationView  Animation="greetings.json"  x:Name="welcomeAnima" IsVisible="{Binding IsDefaultVisible}"  Grid.RowSpan="2" WidthRequest="300" HeightRequest="400" EnableMergePathsForKitKatAndAbove="True" RepeatMode="Infinite" Visual="Material" AnimationSource="AssetOrBundle"  AutoPlay="True"  >
             
         </lottie:AnimationView>
 
 
 
 
-          
-
-
-
-            <Label Text="Welcome to Mzansi Go pro. Visit or host your business online for free! " Grid.Row="2" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
 
 
 
 
-            <carousel:SfCarousel  Grid.RowSpan="3" Duration="10" ItemsSource="{Binding SplashData}" TabIndex="{Binding TabIndex}"  IsVisible="{Binding IsCarouselVisible,Mode=TwoWay}" x:Name="carouselView"  SelectedIndex="{Binding TabIndex}"  >
+            <Label Text="Welcome to Mzansi Go pro. Visit or host your business online for free! " IsVisible="{Binding IsDefaultVisible}" Grid.Row="2" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
+
+
+
+
+            <carousel:SfCarousel  Grid.RowSpan="2" Grid.Row="1" Duration="10" ItemsSource="{Binding SplashData}"    IsVisible="{Binding IsCarouselVisible,Mode=TwoWay}" x:Name="carouselView"  SelectedIndex="{Binding TabIndex,Mode=TwoWay}"  >
                 <carousel:SfCarousel.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="0" BackgroundColor="{StaticResource background}" BorderColor="Gray"   >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="180" />
                                 </Grid.RowDefinitions>
-                                <Image Source="{Binding Image}" Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                                <Image Source="{Binding Image}" Aspect="AspectFit" VerticalOptions="End" HorizontalOptions="CenterAndExpand" />
 
                                 <Label Text="{Binding Description}" Grid.Row="1" TextColor="{StaticResource text}" FontSize="21" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="15,0" />
 
@@ -72,7 +72,7 @@
 
 
 
-            <Button BackgroundColor="{StaticResource secondaryPurple}" x:Name="next" Command="{Binding Next}" Text="NEXT" TextColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="50" Padding="0"  Grid.Row="3"/>
+            <Button BackgroundColor="{StaticResource secondaryPurple}" x:Name="next" Command="{Binding Next}" Clicked="next_Clicked" Text="NEXT" TextColor="#fff" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="50" Padding="0"  Grid.Row="3"/>
 
            
             

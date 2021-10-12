@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MzansiGopro.Services.LocalData;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Views.PopupV.IntroV;
@@ -32,7 +33,19 @@ namespace MzansiGopro.Views
 
         protected override void OnAppearing()
         {
+           var id = Preferences.Get("FirstUse", string.Empty);
+
+            if (string.IsNullOrEmpty(id))
+            {
+                LocalUserService localUser = new LocalUserService();
+                localUser.AddFirstUse();
             Shell.Current.ShowPopup(new AppIntroPop());
+
+            }
+            else
+            {
+
+            }
             base.OnAppearing();
         }
 

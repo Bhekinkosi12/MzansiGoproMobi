@@ -4,6 +4,9 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using MzansiGopro.Services.LocalData;
+using MzansiGopro.Services;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace MzansiGopro.ViewModels.ProfileVM
 {
@@ -35,12 +38,13 @@ namespace MzansiGopro.ViewModels.ProfileVM
         }
 
 
-        void OnLogOut()
+       async void OnLogOut()
         {
             LocalUserService localUser = new LocalUserService();
             localUser.ClearLocalDB();
             RunTimeBusiness = null;
             RunTimeUser = null;
+            await Shell.Current.GoToAsync("..");
         }
 
         public void OnIsLogged()
@@ -53,6 +57,8 @@ namespace MzansiGopro.ViewModels.ProfileVM
                 {
 
                 IsLogged = true;
+
+
                 }
                 else
                 {
@@ -72,7 +78,48 @@ namespace MzansiGopro.ViewModels.ProfileVM
             
         }
 
+        public async void BusinessValable()
+        {
+            var id = Preferences.Get("UserID", string.Empty);
+            UserDataBase userData = new UserDataBase();
 
+            if (!string.IsNullOrEmpty(id))
+            {
+
+                try
+                {
+
+                   RunTimeUser = await userData.GetUserById(id);
+
+                    RunTimeBusiness = await userData.GetShopById(id);
+
+                    if(RunTimeUser != null)
+                    {
+
+
+                        await Shell.Current.GoToAsync("CompanyMainPage");
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch
+                {
+                    Shell.Current.ShowPopup(new InternetConnectionPop());
+                }
+
+
+
+
+
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("LoginPage");
+            }
+
+        }
        async void OnToBusiness()
         {
             if(RunTimeUser != null)
