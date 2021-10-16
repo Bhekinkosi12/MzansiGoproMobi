@@ -34,5 +34,6 @@ namespace MzansiGopro.Models
         public bool IsActivated {get; set;} = false; 
         public List<Events> EventsHoted { get; set; }
         public List<Events> EventsGoing { get; set; }
+        public List<string> VisitedShopsId { get; set; }
     }
 }
