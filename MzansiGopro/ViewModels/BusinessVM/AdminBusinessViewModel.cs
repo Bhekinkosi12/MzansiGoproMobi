@@ -39,9 +39,10 @@ namespace MzansiGopro.ViewModels.BusinessVM
         string points;
         string visits;
         string bio;
-        
-       ObservableCollection<ProductListModel> productModel;
-        ObservableCollection<ProductListModel> productModelList;
+
+        ObservableCollection<ProductListModel> productModel = new ObservableCollection<ProductListModel>();
+
+        ObservableCollection<ProductListModel> productModelList = new ObservableCollection<ProductListModel>();
         ObservableCollection<image> storeImages = new ObservableCollection<image>(); 
 
         public Command<ProductListModel> EditProductList { get; set; }

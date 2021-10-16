@@ -175,457 +175,418 @@
             <Label Text="Bussiness" TextColor="{StaticResource text}" FontSize="28" FontFamily="cursive" />
                 </Frame>
 
-                    <Frame Padding="0" BackgroundColor="Transparent" MinimumHeightRequest="50" >
 
-                        <CollectionView ItemsSource="{Binding ProductModelList}" MinimumHeightRequest="50">
-                            <CollectionView.EmptyView>
-                                <Frame BackgroundColor="Transparent" HeightRequest="1">
-                                    
-                                </Frame>
-                            </CollectionView.EmptyView>
-
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
-                            </CollectionView.ItemsLayout>
-
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <community:Expander x:DataType="compound:ProductListModel"  Margin="0,15">
-                                        <community:Expander.Header>
-                                            <Frame Padding="15,0" Margin="10,0" CornerRadius="15"  BackgroundColor="#eee" HeightRequest="60"  >
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="100" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <Label Text="{Binding ListName}" TextColor="{StaticResource text}" FontSize="18" VerticalOptions="Center" />
-
-                                                    <Label TextColor="#000080"  Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Edit" >
-                                                        <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:AdminBusinessViewModel}}, Path=EditProductList}" CommandParameter="{Binding .}" />
-                                                        </Label.GestureRecognizers>
-                                                    </Label>
-
-                                                </Grid>
-
-                                            </Frame>
-                                        </community:Expander.Header>
+                    <Frame BackgroundColor="Transparent" Padding="0" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="120" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
 
-                                        <ScrollView>
-
-                                            <StackLayout Orientation="Horizontal" Padding="10"  >
-
-                                                <CollectionView ItemsSource="{Binding Products}" HeightRequest="200" >
-
-                                                    <CollectionView.EmptyViewTemplate>
-                                                        <DataTemplate>
-                                                            <Frame >
-                                                                <StackLayout>
-                                                                
-                                                                </StackLayout>
-                                                            </Frame>
-                                                        </DataTemplate>
-                                                    </CollectionView.EmptyViewTemplate>
+                            <Frame BackgroundColor="Transparent" Padding="0" >
+                                <Grid ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
 
-                                                    <CollectionView.ItemsLayout>
-                                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
-                                                    </CollectionView.ItemsLayout>
+                                    <Button Text="Card" x:Name="cardBTN" CornerRadius="11" FontSize="21" Clicked="cardBTN_Clicked" />
+                                    <Button Text="List" Grid.Column="1" x:Name="listBTN" FontSize="21" CornerRadius="11" Clicked="listBTN_Clicked" />
 
-                                                    <CollectionView.ItemTemplate>
-                                                        <DataTemplate>
 
-                                                            <Frame Padding="0" BackgroundColor="Transparent" x:DataType="model:Products">
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*" />
-                                                                        <ColumnDefinition Width="auto" />
-                                                                    </Grid.ColumnDefinitions>
-
-                                                                    <Frame BackgroundColor="Transparent" Padding="0" >
-                                                                        <Grid >
-                                                                            <Grid.RowDefinitions>
-                                                                                <RowDefinition Height="30" />
-                                                                                <RowDefinition Height="37" />
-                                                                            </Grid.RowDefinitions>
-                                                                            <Label Text="{Binding Name}" FontSize="21"  TextColor="{StaticResource text}"/>
+                                </Grid>
+                                
+                            </Frame>
 
 
 
-                                                                            <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"  Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
-                                                                                <CollectionView.ItemsLayout>
-                                                                                    <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
-                                                                                </CollectionView.ItemsLayout>
-                                                                                <CollectionView.EmptyViewTemplate>
-                                                                                    <DataTemplate>
-                                                                                        
-                                                                                            <Label Text="No Ingrients" TextColor="#191919" />
-                                                                                        
-                                                                                    </DataTemplate>
-
-                                                                                </CollectionView.EmptyViewTemplate>
-
-                                                                                <CollectionView.ItemTemplate>
-                                                                                    <DataTemplate>
-                                                                                        <Frame BackgroundColor="Transparent" Padding="0" x:DataType="micromodel:offer" Margin="0,2"   >
-                                                                                            <Grid>
-                                                                                                <Grid.ColumnDefinitions>
-                                                                                                    <ColumnDefinition Width="*" />
-
-                                                                                                </Grid.ColumnDefinitions>
-
-                                                                                                <Label  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
-                                                                                                    <Label.FormattedText>
-                                                                                                        <FormattedString>
-                                                                                                            <FormattedString.Spans>
-                                                                                                                <Span Text="{Binding Name}" TextColor="#191919" />
-                                                                                                                <Span Text=", " />
-                                                                                                            </FormattedString.Spans>
-                                                                                                        </FormattedString>
-                                                                                                    </Label.FormattedText>
-                                                                                                </Label>
 
 
 
-                                                                                            </Grid>
-                                                                                        </Frame>
-                                                                                    </DataTemplate>
-                                                                                </CollectionView.ItemTemplate>
+                            <Frame Padding="0" BackgroundColor="Transparent" MinimumHeightRequest="50" Grid.Row="1" IsVisible="false" x:Name="listFrame">
+
+                                <CollectionView ItemsSource="{Binding ProductModelList}" MinimumHeightRequest="50">
+                                    <CollectionView.EmptyView>
+                                        <Frame BackgroundColor="Transparent" HeightRequest="1">
+
+                                        </Frame>
+                                    </CollectionView.EmptyView>
+
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <community:Expander x:DataType="compound:ProductListModel"  Margin="0,15">
+                                                <community:Expander.Header>
+                                                    <Frame Padding="15,0" Margin="10,0" CornerRadius="15"  BackgroundColor="#eee" HeightRequest="60"  >
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="100" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Text="{Binding ListName}" TextColor="{StaticResource text}" FontSize="18" VerticalOptions="Center" />
+
+                                                            <Label TextColor="#000080"  Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Edit" >
+                                                                <Label.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:AdminBusinessViewModel}}, Path=EditProductList}" CommandParameter="{Binding .}" />
+                                                                </Label.GestureRecognizers>
+                                                            </Label>
+
+                                                        </Grid>
+
+                                                    </Frame>
+                                                </community:Expander.Header>
 
 
-                                                                            </CollectionView>
+                                                <ScrollView>
 
+                                                    <StackLayout Orientation="Horizontal" Padding="10"  >
 
-                                                                        </Grid>
-                                                                        
+                                                        <CollectionView ItemsSource="{Binding Products}" HeightRequest="200" >
+
+                                                            <CollectionView.EmptyViewTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame >
+                                                                        <StackLayout>
+
+                                                                        </StackLayout>
                                                                     </Frame>
+                                                                </DataTemplate>
+                                                            </CollectionView.EmptyViewTemplate>
 
 
-                                                                    <Frame Padding="0" BackgroundColor="Transparent" Grid.Column="1" >
-                                                                        <Label Text="{Binding Price}" TextColor="{StaticResource text}" />
-                                                                    </Frame>
-                                                                    
-                                                                    
-                                                                </Grid>
-                                                                
-                                                            </Frame>
-                                                            
-                                                            <!--
-                                                            <Frame BackgroundColor="Transparent" Margin="0,10" Padding="10" BorderColor="#000" x:DataType="model:Products" WidthRequest="190"  CornerRadius="15">
-                                                                <Grid  >
+                                                            <CollectionView.ItemsLayout>
+                                                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                                                            </CollectionView.ItemsLayout>
 
-                                                                    <Grid.RowDefinitions>
-                                                                        <RowDefinition Height="90" />
-                                                                        <RowDefinition Height="50" />
-                                                                        <RowDefinition Height="30" />
-                                                                    </Grid.RowDefinitions>
+                                                            <CollectionView.ItemTemplate>
+                                                                <DataTemplate>
 
-                                                                    <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15">
-
-                                                                        <Image Source="{Binding Image}" Aspect="AspectFill"  />
-                                                                    </Frame>
-
-
-                                                                    <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" >
-                                                                        <Grid RowSpacing="5">
-                                                                            <Grid.RowDefinitions>
-                                                                                <RowDefinition Height="20" />
-                                                                                <RowDefinition Height="30" />
-                                                                            </Grid.RowDefinitions>
+                                                                    <Frame Padding="0" BackgroundColor="Transparent" x:DataType="model:Products" >
+                                                                        <Grid>
                                                                             <Grid.ColumnDefinitions>
                                                                                 <ColumnDefinition Width="*" />
                                                                                 <ColumnDefinition Width="auto" />
                                                                             </Grid.ColumnDefinitions>
-                                                                            <Label Text="{Binding Name}" TextColor="{StaticResource text}" />
 
-
-                                                                            <Label  Margin="10,0" TextColor="{StaticResource text}"  Grid.Column="1" >
-                                                                                <Label.FormattedText>
-                                                                                    <FormattedString>
-                                                                                        <Span Text="R " TextColor="{StaticResource text}" />
-                                                                                        <Span Text="{Binding Price}" TextColor="{StaticResource text}"/>
-                                                                                    </FormattedString>
-                                                                                </Label.FormattedText>
-                                                                            </Label>
-
-                                                                            <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"   HeightRequest="37" Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
-                                                                                <CollectionView.ItemsLayout>
-                                                                                    <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
-                                                                                </CollectionView.ItemsLayout>
-                                                                                <CollectionView.EmptyViewTemplate>
-                                                                                    <DataTemplate>
-                                                                                        <Frame CornerRadius="10" BorderColor="#000080" BackgroundColor="Transparent" Padding="7,3" >
-                                                                                            <Label Text="Add item Ingrient" TextColor="#191919" />
-                                                                                        </Frame>
-                                                                                    </DataTemplate>
-
-                                                                                </CollectionView.EmptyViewTemplate>
-
-                                                                                <CollectionView.ItemTemplate>
-                                                                                    <DataTemplate>
-                                                                                        <Frame BackgroundColor="Transparent" Padding="7,3" x:DataType="micromodel:offer" Margin="0,2" CornerRadius="10" BorderColor="#000080"  >
-                                                                                            <Grid>
-                                                                                                <Grid.ColumnDefinitions>
-                                                                                                    <ColumnDefinition Width="*" />
-
-                                                                                                </Grid.ColumnDefinitions>
-
-                                                                                                <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                                                            <Frame BackgroundColor="Transparent" Padding="0" >
+                                                                                <Grid >
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="30" />
+                                                                                        <RowDefinition Height="37" />
+                                                                                    </Grid.RowDefinitions>
+                                                                                    <Label Text="{Binding Name}" FontSize="21"  TextColor="{StaticResource text}"/>
 
 
 
-                                                                                            </Grid>
-                                                                                        </Frame>
-                                                                                    </DataTemplate>
-                                                                                </CollectionView.ItemTemplate>
+                                                                                    <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"  Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
+                                                                                        <CollectionView.ItemsLayout>
+                                                                                            <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                                                                        </CollectionView.ItemsLayout>
+                                                                                        <CollectionView.EmptyViewTemplate>
+                                                                                            <DataTemplate>
+
+                                                                                                <Label Text="No Ingrients" TextColor="#191919" />
+
+                                                                                            </DataTemplate>
+
+                                                                                        </CollectionView.EmptyViewTemplate>
+
+                                                                                        <CollectionView.ItemTemplate>
+                                                                                            <DataTemplate>
+                                                                                                <Frame BackgroundColor="Transparent" BorderColor="#eee"  Padding="0" x:DataType="micromodel:offer" Margin="0,2"   >
+                                                                                                    <Grid>
+                                                                                                        <Grid.ColumnDefinitions>
+                                                                                                            <ColumnDefinition Width="*" />
+
+                                                                                                        </Grid.ColumnDefinitions>
+
+                                                                                                        <Label  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" >
+                                                                                                            <Label.FormattedText>
+                                                                                                                <FormattedString>
+                                                                                                                    <FormattedString.Spans>
+                                                                                                                        <Span Text="{Binding Name}" TextColor="#191919" />
+                                                                                                                        <Span Text=", " />
+                                                                                                                    </FormattedString.Spans>
+                                                                                                                </FormattedString>
+                                                                                                            </Label.FormattedText>
+                                                                                                        </Label>
 
 
-                                                                            </CollectionView>
+
+                                                                                                    </Grid>
+                                                                                                </Frame>
+                                                                                            </DataTemplate>
+                                                                                        </CollectionView.ItemTemplate>
+
+
+                                                                                    </CollectionView>
+
+
+                                                                                </Grid>
+
+                                                                            </Frame>
+
+
+                                                                            <Frame Padding="0" BackgroundColor="Transparent" Grid.Column="1" >
+                                                                                <Label>
+                                                                                    <Label.FormattedText>
+                                                                                        <FormattedString>
+                                                                                            <FormattedString.Spans>
+                                                                                                <Span Text="R " TextColor="{StaticResource text}" />
+                                                                                                <Span  Text="{Binding Price}" TextColor="{StaticResource text}"  />
+                                                                                            </FormattedString.Spans>
+                                                                                        </FormattedString>
+                                                                                    </Label.FormattedText>
+                                                                                </Label>
+                                                                            </Frame>
+
+
+                                                                        </Grid>
+
+                                                                    </Frame>
+
+                                                                  
+
+                                                                </DataTemplate>
+                                                            </CollectionView.ItemTemplate>
+
+
+                                                        </CollectionView>
 
 
 
+
+
+
+                                                    </StackLayout>
+                                                </ScrollView>
+
+
+
+
+                                            </community:Expander>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+
+                                </CollectionView>
+
+
+
+                            </Frame>
+
+
+                            <Frame Padding="0" BackgroundColor="Transparent" Grid.Row="1" x:Name="carfFrame" >
+
+
+                                <CollectionView ItemsSource="{Binding Productmodel}" MinimumHeightRequest="50" >
+
+
+
+                                    <CollectionView.EmptyViewTemplate>
+                                        <DataTemplate>
+                                            <Frame HeightRequest="1" BackgroundColor="Transparent" Padding="0">
+
+
+
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.EmptyViewTemplate>
+                                    <CollectionView.EmptyView>
+                                        <Frame  HeightRequest="1" BackgroundColor="Transparent" Padding="0">
+
+
+
+                                        </Frame>
+                                    </CollectionView.EmptyView>
+
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <community:Expander x:DataType="compound:ProductListModel"  Margin="0,15">
+                                                <community:Expander.Header>
+                                                    <Frame Padding="15,0" Margin="10,0" CornerRadius="15"  BackgroundColor="#eee" HeightRequest="60"  >
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="100" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Text="{Binding ListName}" TextColor="{StaticResource text}" FontSize="18" VerticalOptions="Center" />
+
+                                                            <Label TextColor="#000080"  Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Edit" >
+                                                                <Label.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:AdminBusinessViewModel}}, Path=EditProductList}" CommandParameter="{Binding .}" />
+                                                                </Label.GestureRecognizers>
+                                                            </Label>
+
+                                                        </Grid>
+
+                                                    </Frame>
+                                                </community:Expander.Header>
+
+
+                                                <ScrollView>
+
+                                                    <StackLayout Orientation="Horizontal" Padding="10"  >
+
+                                                        <CollectionView ItemsSource="{Binding Products}" HeightRequest="200" >
+
+                                                            <CollectionView.EmptyViewTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame >
+                                                                        <StackLayout>
+                                                                            <Image Source="imageFolder.png" Aspect="AspectFit" />
+                                                                            <Label Text="No Items Yet" TextColor="#191919" />
+                                                                        </StackLayout>
+                                                                    </Frame>
+                                                                </DataTemplate>
+                                                            </CollectionView.EmptyViewTemplate>
+
+
+                                                            <CollectionView.ItemsLayout>
+                                                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15" />
+                                                            </CollectionView.ItemsLayout>
+
+                                                            <CollectionView.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Frame BackgroundColor="Transparent" Margin="0,10" Padding="10" BorderColor="#000" x:DataType="model:Products" WidthRequest="190"  CornerRadius="15">
+                                                                        <Grid  >
+
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="90" />
+                                                                                <RowDefinition Height="50" />
+                                                                                
+                                                                            </Grid.RowDefinitions>
+
+                                                                            <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15">
+
+                                                                                <Image Source="{Binding Image}" Aspect="AspectFill"  />
+                                                                            </Frame>
+
+
+                                                                            <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" >
+                                                                                <Grid RowSpacing="5">
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="20" />
+                                                                                        <RowDefinition Height="30" />
+                                                                                    </Grid.RowDefinitions>
+                                                                                    <Grid.ColumnDefinitions>
+                                                                                        <ColumnDefinition Width="*" />
+                                                                                        <ColumnDefinition Width="auto" />
+                                                                                    </Grid.ColumnDefinitions>
+                                                                                    <Label Text="{Binding Name}" TextColor="{StaticResource text}" />
+
+
+                                                                                    <Label  Margin="10,0" TextColor="{StaticResource text}"  Grid.Column="1" >
+                                                                                        <Label.FormattedText>
+                                                                                            <FormattedString>
+                                                                                                <Span Text="R " TextColor="{StaticResource text}" />
+                                                                                                <Span Text="{Binding Price}" TextColor="{StaticResource text}"/>
+                                                                                            </FormattedString>
+                                                                                        </Label.FormattedText>
+                                                                                    </Label>
+
+                                                                                    <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"   HeightRequest="37" Margin="10,3" ItemSizingStrategy="MeasureAllItems" >
+                                                                                        <CollectionView.ItemsLayout>
+                                                                                            <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
+                                                                                        </CollectionView.ItemsLayout>
+                                                                                        <CollectionView.EmptyViewTemplate>
+                                                                                            <DataTemplate>
+                                                                                                <Frame CornerRadius="10" BorderColor="#000080" BackgroundColor="Transparent" Padding="7,3" >
+                                                                                                    <Label Text="Add item Ingrient" TextColor="#191919" />
+                                                                                                </Frame>
+                                                                                            </DataTemplate>
+
+                                                                                        </CollectionView.EmptyViewTemplate>
+
+                                                                                        <CollectionView.ItemTemplate>
+                                                                                            <DataTemplate>
+                                                                                                <Frame BackgroundColor="Transparent" Padding="7,3" x:DataType="micromodel:offer" Margin="0,2" CornerRadius="10" BorderColor="#000080"  >
+                                                                                                    <Grid>
+                                                                                                        <Grid.ColumnDefinitions>
+                                                                                                            <ColumnDefinition Width="*" />
+
+                                                                                                        </Grid.ColumnDefinitions>
+
+                                                                                                        <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+
+
+                                                                                                    </Grid>
+                                                                                                </Frame>
+                                                                                            </DataTemplate>
+                                                                                        </CollectionView.ItemTemplate>
+
+
+                                                                                    </CollectionView>
+
+
+
+
+
+                                                                                </Grid>
+
+
+                                                                            </Frame>
+
+
+                                                                           
 
 
                                                                         </Grid>
 
 
+
                                                                     </Frame>
 
-
-                                                                    <Button Text="View" BackgroundColor="#591da9" Padding="0"  CornerRadius="15" TextColor="{StaticResource background}" Grid.Row="2" />
-
-
-
-                                                                </Grid>
+                                                                </DataTemplate>
+                                                            </CollectionView.ItemTemplate>
 
 
-
-                                                            </Frame>
-                                                            -->
-
-                                                        </DataTemplate>
-                                                    </CollectionView.ItemTemplate>
-
-
-                                                </CollectionView>
+                                                        </CollectionView>
 
 
 
 
 
 
-                                            </StackLayout>
-                                        </ScrollView>
+                                                    </StackLayout>
+                                                </ScrollView>
 
 
 
 
-                                    </community:Expander>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                            
-                            
-                        </CollectionView>
-                        
+                                            </community:Expander>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+                                </CollectionView>
+
+
+
+
+                            </Frame>
+
+
+
+
+
+
+
+                        </Grid>
                         
                         
                     </Frame>
+            
 
-
-            <Frame Padding="0" BackgroundColor="Transparent" >
-
-
-                    <CollectionView ItemsSource="{Binding Productmodel}" MinimumHeightRequest="50" >
-
-                        
-
-                            <CollectionView.EmptyViewTemplate>
-                            <DataTemplate>
-                                <Frame HeightRequest="1" BackgroundColor="Transparent" Padding="0">
-                                   
-                                        
-                                       
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.EmptyViewTemplate>
-                            <CollectionView.EmptyView>
-                                <Frame  HeightRequest="1" BackgroundColor="Transparent" Padding="0">
-
-
-
-                                </Frame>
-                            </CollectionView.EmptyView>
-
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <community:Expander x:DataType="compound:ProductListModel"  Margin="0,15">
-                                    <community:Expander.Header>
-                                        <Frame Padding="15,0" Margin="10,0" CornerRadius="15"  BackgroundColor="#eee" HeightRequest="60"  >
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="100" />
-                                                </Grid.ColumnDefinitions>
-                                                
-                                            <Label Text="{Binding ListName}" TextColor="{StaticResource text}" FontSize="18" VerticalOptions="Center" />
-
-                                                    <Label TextColor="#000080"  Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Edit" >
-                                                        <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type businessvm:AdminBusinessViewModel}}, Path=EditProductList}" CommandParameter="{Binding .}" />
-                                                        </Label.GestureRecognizers>
-                                                    </Label>
-
-                                            </Grid>
-
-                                        </Frame>
-                                    </community:Expander.Header>
-
-
-                                    <ScrollView>
-
-                                        <StackLayout Orientation="Horizontal" Padding="10"  >
-
-                                            <CollectionView ItemsSource="{Binding Products}" HeightRequest="200" >
-
-                                                <CollectionView.EmptyViewTemplate>
-                                                    <DataTemplate>
-                                                        <Frame >
-                                                            <StackLayout>
-                                                                <Image Source="imageFolder.png" Aspect="AspectFit" />
-                                                                <Label Text="No Items Yet" TextColor="#191919" />
-                                                            </StackLayout>
-                                                        </Frame>
-                                                    </DataTemplate>
-                                                </CollectionView.EmptyViewTemplate>
-                                                
-                                                
-                                                <CollectionView.ItemsLayout>
-                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15" />
-                                                </CollectionView.ItemsLayout>
-
-                                                <CollectionView.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Frame BackgroundColor="Transparent" Margin="0,10" Padding="10" BorderColor="#000" x:DataType="model:Products" WidthRequest="190"  CornerRadius="15">
-                                                            <Grid  >
-
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="90" />
-                                                                    <RowDefinition Height="50" />
-                                                                    <RowDefinition Height="30" />
-                                                                </Grid.RowDefinitions>
-
-                                                                    <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15">
-                                                                        
-                                                                <Image Source="{Binding Image}" Aspect="AspectFill"  />
-                                                                    </Frame>
-
-
-                                                                    <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" >
-                                                                        <Grid RowSpacing="5">
-                                                                            <Grid.RowDefinitions>
-                                                                                <RowDefinition Height="20" />
-                                                                                <RowDefinition Height="30" />
-                                                                            </Grid.RowDefinitions>
-                                                                            <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="*" />
-                                                                                <ColumnDefinition Width="auto" />
-                                                                            </Grid.ColumnDefinitions>
-                                                                            <Label Text="{Binding Name}" TextColor="{StaticResource text}" />
-
-
-                                                                            <Label  Margin="10,0" TextColor="{StaticResource text}"  Grid.Column="1" >
-                                                                    <Label.FormattedText>
-                                                                        <FormattedString>
-                                                                            <Span Text="R " TextColor="{StaticResource text}" />
-                                                                            <Span Text="{Binding Price}" TextColor="{StaticResource text}"/>
-                                                                        </FormattedString>
-                                                                    </Label.FormattedText>
-                                                                </Label>
-
-                                                                            <CollectionView ItemsSource="{Binding Ingredient}"  Grid.Row="1"   HeightRequest="37" Margin="10,0" ItemSizingStrategy="MeasureAllItems" >
-                                                                                <CollectionView.ItemsLayout>
-                                                                                    <LinearItemsLayout Orientation="Horizontal"  ItemSpacing="10"/>
-                                                                                </CollectionView.ItemsLayout>
-                                                                                <CollectionView.EmptyViewTemplate>
-                                                                                    <DataTemplate>
-                                                                                        <Frame CornerRadius="10" BorderColor="#000080" BackgroundColor="Transparent" Padding="7,3" >
-                                                                                            <Label Text="Add item Ingrient" TextColor="#191919" />
-                                                                                        </Frame>
-                                                                                    </DataTemplate>
-
-                                                                                </CollectionView.EmptyViewTemplate>
-
-                                                                                <CollectionView.ItemTemplate>
-                                                                                    <DataTemplate>
-                                                                                        <Frame BackgroundColor="Transparent" Padding="7,3" x:DataType="micromodel:offer" Margin="0,2" CornerRadius="10" BorderColor="#000080"  >
-                                                                                            <Grid>
-                                                                                                <Grid.ColumnDefinitions>
-                                                                                                    <ColumnDefinition Width="*" />
-
-                                                                                                </Grid.ColumnDefinitions>
-
-                                                                                                <Label Text="{Binding Name}" TextColor="#191919" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-
-
-                                                                                            </Grid>
-                                                                                        </Frame>
-                                                                                    </DataTemplate>
-                                                                                </CollectionView.ItemTemplate>
-
-
-                                                                            </CollectionView>
-
-
-
-
-
-                                                                        </Grid>
-                                                                        
-                                                                        
-                                                                    </Frame>
-
-
-                                                                    <Button Text="View" BackgroundColor="#591da9" Padding="0"  CornerRadius="15" TextColor="{StaticResource background}" Grid.Row="2" />
-
-
-
-                                                            </Grid>
-
-
-
-                                                        </Frame>
-
-                                                    </DataTemplate>
-                                                </CollectionView.ItemTemplate>
-                                                
-                                                
-                                            </CollectionView>
-                                            
-                                            
-                                            
-
-                                           
-
-                                        </StackLayout>
-                                    </ScrollView>
-
-
-
-
-                                </community:Expander>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        
-                    </CollectionView>
-
-               
-                
-                
-            </Frame>
+                   
             
           
 

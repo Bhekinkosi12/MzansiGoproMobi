@@ -38,8 +38,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
         ObservableCollection<offer> offer = new ObservableCollection<offer>();
         ObservableCollection<Products> productList = new ObservableCollection<Products>();
-
-
+      
 
         public Command<Products> SelectItem { get; set; }
         public Command<Products> DeleteRequest { get; set; }
@@ -506,7 +505,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
                 businessViewModel.SaveSelectedOffer(product);
                 await Shell.Current.GoToAsync("../../CompanyMainPage");
             }
-            catch (Exception ex)
+            catch 
             {
                 Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }

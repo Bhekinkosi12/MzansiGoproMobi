@@ -101,11 +101,17 @@ namespace MzansiGopro.Views.CompanyV
         private void cardBTN_Clicked(object sender, EventArgs e)
         {
             onCardView();
+            var model = BindingContext as BusinessOfferEditViewModel;
+            model.Layout = "Card";
+
         }
 
         private void listBTN_Clicked(object sender, EventArgs e)
         {
+          
             onListView();
+            var model = BindingContext as BusinessOfferEditViewModel;
+            model.Layout = "List";
         }
 
 

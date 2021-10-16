@@ -19,6 +19,8 @@ namespace MzansiGopro.ViewModels.BusinessVM
         string location;
         string email;
         string number;
+        string points;
+        string visits;
 
         ObservableCollection<ProductListModel> productModel = new ObservableCollection<ProductListModel>();
 
@@ -32,7 +34,8 @@ namespace MzansiGopro.ViewModels.BusinessVM
             Location = SelectedShop.Location;
             Email = SelectedShop.Email;
             Number = SelectedShop.Number;
-
+            Points = $"{SelectedShop.Points} pts";
+            Visits = $"{SelectedShop.Visits} views";
             ObservableCollection<ProductListModel> CardList = new ObservableCollection<ProductListModel>();
             ObservableCollection<image> _storeImages = new ObservableCollection<image>();
 
@@ -63,7 +66,27 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
 
 
+        public string Points
+        {
+            get => points;
+            set
+            {
+                SetProperty(ref points, value);
+                OnPropertyChanged(nameof(Points));
+            }
+        }
 
+        public string Visits
+        {
+            get => visits;
+            set
+            {
+                SetProperty(ref visits, value);
+                OnPropertyChanged(nameof(Visits));
+            }
+
+
+        }
 
 
         public ObservableCollection<ProductListModel> ProductModelList
