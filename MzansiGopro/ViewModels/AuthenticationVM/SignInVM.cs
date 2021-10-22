@@ -33,8 +33,8 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         string coverImage;
         bool createProgress;
         private string location;
-             
-        private ObservableCollection<offer> offer;
+
+        private ObservableCollection<offer> offer = new ObservableCollection<offer>();
         private ObservableCollection<offer> extraOffer;
         private ObservableCollection<image> images = new ObservableCollection<image>();
 
@@ -70,7 +70,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         public SignInVM()
         {
             SignIn = new Command(Onsignin);
-            defaultItem();
+           // defaultItem();
             AddItem = new Command(onAddItem);
             AddExtraItem = new Command(onAddExtraItem);
             AddMedia = new Command(OnAddMedia);
@@ -361,6 +361,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
         void defaultItem()
         {
+
             if(Offer == null)
             {
                 Offer = new ObservableCollection<offer>()

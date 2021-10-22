@@ -285,6 +285,11 @@
                                     <StackLayout Orientation="Horizontal" Padding="10"  >
 
                                         <CollectionView ItemsSource="{Binding ProductList}" >
+                                            <CollectionView.Header>
+                                                <Frame BackgroundColor="Transparent" Padding="10,0" HeightRequest="30">
+                                                    <Button Text="Add" TextColor="#fff" Command="{Binding AddProduct}" BackgroundColor="{StaticResource defaultPurple}" Padding="0" CornerRadius="15" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                                                </Frame>
+                                            </CollectionView.Header>
 
                                             <CollectionView.EmptyViewTemplate>
 
@@ -443,15 +448,15 @@
 
 
 
-                            <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15" >
+                            <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15" IsVisible="{Binding IsList}" >
                                 <Image Source="{Binding SelectedImage}" Aspect="AspectFill" />
                             </Frame>
-                            <BoxView BackgroundColor="#000" Opacity="0.5" CornerRadius="15">
+                            <BoxView BackgroundColor="#000" Opacity="0.5" CornerRadius="15" IsVisible="{Binding IsList}">
                                 <BoxView.GestureRecognizers>
                                     <TapGestureRecognizer x:Name="selectImageBox" Tapped="selectImageBox_Tapped" />
                                 </BoxView.GestureRecognizers>
                             </BoxView>
-                            <Label Text="Tap To Select New Image" TextColor="#fff"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+                            <Label IsVisible="{Binding IsList}" Text="Tap To Select New Image" TextColor="#fff"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
 
 
                             <Frame Grid.Row="1" BackgroundColor="Transparent" Padding="0" >

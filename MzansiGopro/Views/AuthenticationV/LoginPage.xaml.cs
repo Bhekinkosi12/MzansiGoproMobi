@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Firebase.Auth;
+using MzansiGopro.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,6 +21,9 @@ namespace MzansiGopro.Views.AuthenticationV
 
         private async void sign_Tapped(object sender, EventArgs e)
         {
+
+            
+
             await Shell.Current.GoToAsync("SignInPage");
         }
     }

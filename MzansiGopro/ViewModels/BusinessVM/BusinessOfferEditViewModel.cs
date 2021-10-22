@@ -30,6 +30,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
         string selectedName;
         string selectedPrice;
         bool isSelected = false;
+         bool isList = false;
         bool isDelete = false;
         string offerInput;
 
@@ -77,6 +78,15 @@ namespace MzansiGopro.ViewModels.BusinessVM
             DeleteOffer = new Command<offer>(OnDeleteOffer);
 
             
+        }
+        public bool IsList
+        {
+            get => isList;
+            set
+            {
+                SetProperty(ref isList, value);
+                OnPropertyChanged(nameof(IsList));
+            }
         }
        static Products DeleteItem { get; set; }
         public ObservableCollection<Products> ProductList
@@ -517,6 +527,14 @@ namespace MzansiGopro.ViewModels.BusinessVM
         void OnAddProduct()
         {
             IsSelected = true;
+            if(Layout == "Card")
+            {
+                IsList = false;
+            }
+            else
+            {
+                IsList = true;
+            }
             
         }
 

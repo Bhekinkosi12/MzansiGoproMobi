@@ -16,9 +16,17 @@ namespace MzansiGopro.Views.CompanyV
     {
         public BusinessOfferEditPage()
         {
-            var model = BindingContext as BusinessOfferEditViewModel;
-           
             InitializeComponent();
+            var model = BindingContext as BusinessOfferEditViewModel;
+            if(model.Layout == "Card")
+            {
+                onCardView();
+            }
+            else
+            {
+                onListView();
+            }
+           
         }
 
         private void editName_Tapped(object sender, EventArgs e)

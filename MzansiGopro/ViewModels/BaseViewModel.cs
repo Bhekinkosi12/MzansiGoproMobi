@@ -13,7 +13,8 @@ namespace MzansiGopro.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-       
+
+       public string APIKEY = "AIzaSyDmxGAWsjTu7ei3RJjJtiKCjsFWtnZL4O0";
 
         bool isBusy = false;
         public bool IsBusy
