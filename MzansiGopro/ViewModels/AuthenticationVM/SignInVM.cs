@@ -281,10 +281,20 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
       public async void Onsignin()
         {
-            
+            AuthenticationService authentication = new AuthenticationService();
             PasswordAbcHash abcHash = new PasswordAbcHash();
             UserDataBase userDB = new UserDataBase();
             LocalUserService localDB = new LocalUserService();
+
+
+            var IsLoged = await authentication.Signup(Email, Password);
+
+            if (IsLoged != "")
+            {
+               
+           
+
+
             if (IsShop == true)
             {
 
@@ -300,8 +310,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                     IsShop = IsShop,
                     Name = Name,
                     Number = Number,
-                    PasswordConfigID = "std",
-                    Password = abcHash.StandardPasswordHash(Password),
+                    Password = "null",
                     AutomatedId = $"{Email};;{Name}"
 
                 };
@@ -311,10 +320,27 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
                 localDB.AddUser(RunTimeUser);
 
+                    try
+                    {
+                        var complete = await userDB.AddUserAsync(user);
+
+                        if (complete)
+                        {
+                            await Shell.Current.GoToAsync("StoreSetupPage");
+
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+                    catch
+                    {
+
+                    }
 
 
-
-                await Shell.Current.GoToAsync("StoreSetupPage");
             }
             else
             {
@@ -327,8 +353,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                     IsShop = IsShop,
                     Name = Name,
                     Number = Number,
-                    PasswordConfigID = "std",
-                    Password = abcHash.StandardPasswordHash(Password),
+                    Password = "null",
                     AutomatedId = $"{Email};;{Name}",
                      EventsHoted = new List<Events>(),
                       EventsGoing = new List<Events>()
@@ -341,7 +366,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 var complete = await userDB.AddUserAsync(user);
                 if (complete)
                 {
-                    await userDB.AddEmailAndPassword(Email,abcHash.StandardPasswordHash(Password), IsShop);
+                  //  await userDB.AddEmailAndPassword(Email,abcHash.StandardPasswordHash(Password), IsShop);
                     Shell.Current.ShowPopup(new SuccessSigninPop());
                     await Shell.Current.GoToAsync("//TabbedPage");
                 }
@@ -353,6 +378,16 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
             }
+
+
+
+            }
+            else
+            {
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
+
+
 
             IsBusy = false;
 
@@ -405,23 +440,13 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                     Name = OfferInput
                 };
 
-                var firstItem = Offer[0];
+              
 
-                if (firstItem.Name == "Add")
-                {
-                    Offer.Clear();
-                    Offer = _offer;
-                    Offer.Add(Currentitem);
-
-                    
-                    
-                }
-                else
-                {
+                
                     Offer.Add(Currentitem);
 
                    
-                }
+               
 
 
 
@@ -605,7 +630,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                     ListName = item.Name,
                     Products = new List<Products>() { new Products { Name = "Default" } },
                      ListID = ""
-            };
+                    };
 
                 listModels.Add(productlist);
             }
@@ -625,7 +650,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
             List<offer> _offers = new List<offer>();
-            List<offer> _Extraoffers = new List<offer>();
+          
             List<image> _images = new List<image>();
             foreach(var item in Offer)
             {
@@ -635,10 +660,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
             {
                 _images.Add(item);
             }
-            foreach(var item in ExtraOffer)
-            {
-                _Extraoffers.Add(item);
-            }
+            
 
 
 
@@ -647,7 +669,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 Email = RunTimeUser.Email,
                 Name = ShopName,
                 ID = $"{RunTimeUser.Email}and{RunTimeUser.Name}",
-                ExtraList = _Extraoffers,
+                
                  StoreImage = _images,
                   Offers = _offers,
                    Location = Location,
@@ -669,8 +691,9 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
             var isCompleted = await userDB.AddBusinessAsync(shop);
             
 
-         var IsComplete = await userDB.AddUserAsync(RunTimeUser);
-             await userDB.AddEmailAndPassword(RunTimeUser.Email, abcHash.StandardPasswordHash(RunTimeUser.Password), true);
+             var IsComplete = await userDB.AddUserAsync(RunTimeUser);
+
+             await userDB.AddEmailAndPassword(RunTimeUser.Email, "null", true);
 
 
 
@@ -713,7 +736,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 Name = Name,
                 Number = Number,
                 PasswordConfigID = "std",
-                Password = abcHash.StandardPasswordHash(Password),
+                Password = "null",
                 AutomatedId = $"{Email};;{Name}",
                  EventsHoted = new List<Events>(),
                   EventsGoing = new List<Events>()

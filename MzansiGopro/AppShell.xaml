@@ -104,6 +104,9 @@
         <ShellContent Route="TabbedPage" ContentTemplate="{DataTemplate local:TabbedPage}" />
     </TabBar>
     <TabBar >
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate Auth:LoginPage}" />
+    </TabBar>
+    <TabBar >
         <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
     </TabBar>
    

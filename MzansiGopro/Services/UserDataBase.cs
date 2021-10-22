@@ -90,6 +90,27 @@ namespace MzansiGopro.Services
                 return null;
             }
         }
+
+
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            try
+            {
+                var user = (await client
+                    .Child("Users")
+                    .Child("NotBusiness")
+                    .OnceAsync<User>()).Where(x => x.Object.Email == email).FirstOrDefault();
+
+                return await Task.FromResult(user.Object);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
         public async Task<Shop> GetShopById(string id)
         {
             try

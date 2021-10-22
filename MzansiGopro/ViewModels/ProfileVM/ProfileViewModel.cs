@@ -7,6 +7,7 @@ using MzansiGopro.Services.LocalData;
 using MzansiGopro.Services;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using Xamarin.CommunityToolkit.Extensions;
+using Newtonsoft.Json;
 
 namespace MzansiGopro.ViewModels.ProfileVM
 {
@@ -44,7 +45,8 @@ namespace MzansiGopro.ViewModels.ProfileVM
             localUser.ClearLocalDB();
             RunTimeBusiness = null;
             RunTimeUser = null;
-            await Shell.Current.GoToAsync("..");
+            Preferences.Remove("RefreshToken");
+            await Shell.Current.GoToAsync("//LoginPage");
         }
 
         public void OnIsLogged()
@@ -80,24 +82,38 @@ namespace MzansiGopro.ViewModels.ProfileVM
 
         public async void BusinessValable()
         {
-            var id = Preferences.Get("UserID", string.Empty);
+            var id = Preferences.Get("RefreshToken", string.Empty);
             UserDataBase userData = new UserDataBase();
 
-            if (!string.IsNullOrEmpty(id))
+
+          
+
+            if (id != string.Empty)
             {
 
                 try
                 {
+            var savedAuth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("RefreshToken", ""));
 
-                   RunTimeUser = await userData.GetUserById(id);
+                   RunTimeUser = await userData.GetUserByEmailAsync(savedAuth.User.Email);
 
-                    RunTimeBusiness = await userData.GetShopById(id);
+
 
                     if(RunTimeUser != null)
                     {
 
+                    RunTimeBusiness = await userData.GetShopById(RunTimeUser.AutomatedId);
 
+                        if(RunTimeBusiness != null)
+                        {
                         await Shell.Current.GoToAsync("CompanyMainPage");
+
+                        }
+                        else
+                        {
+
+                        }
+
                     }
                     else
                     {
@@ -125,14 +141,36 @@ namespace MzansiGopro.ViewModels.ProfileVM
             if(RunTimeUser != null)
             {
 
-                if(RunTimeBusiness != null)
+                UserDataBase userData = new UserDataBase();
+
+                if (RunTimeUser != null)
                 {
-                    await Shell.Current.GoToAsync("CompanyMainPage");
+
+                    RunTimeBusiness = await userData.GetShopById(RunTimeUser.AutomatedId);
+
+                    if (RunTimeBusiness != null)
+                    {
+                        await Shell.Current.GoToAsync("CompanyMainPage");
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync("StoreSetupPage");
+                    }
+
                 }
                 else
                 {
-                    await Shell.Current.GoToAsync("StoreSetupPage");
+
                 }
+
+
+
+
+
+
+
+
+                
 
 
 

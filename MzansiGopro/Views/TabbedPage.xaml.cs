@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MzansiGopro.Services.LocalData;
+using MzansiGopro.Services.AuthSercurity;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
@@ -31,11 +32,14 @@ namespace MzansiGopro.Views
             await Shell.Current.GoToAsync("MainUserProfilePage");
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
            var id = Preferences.Get("FirstUse", string.Empty);
+            var token = Preferences.Get("RefreshToken", string.Empty);
 
-            if (string.IsNullOrEmpty(id))
+            AuthenticationService authentication = new AuthenticationService();
+
+            if (id == string.Empty)
             {
                 LocalUserService localUser = new LocalUserService();
                 localUser.AddFirstUse();
@@ -46,8 +50,25 @@ namespace MzansiGopro.Views
             {
 
             }
+
+            if(token != string.Empty)
+            {
+
+              await authentication.AutoLogin();
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
+
+
             base.OnAppearing();
         }
+
+
+
+
+       
 
     }
 }

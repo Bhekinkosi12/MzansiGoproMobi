@@ -46,72 +46,32 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
 
-       async void OnLogin()
+     public  async void OnLogin()
         {
             IsBusy = true;
-            if(string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+           
+            if(!string.IsNullOrEmpty(Username) || Password.Length > 6)
             {
-                await Shell.Current.GoToAsync("CompanyMainPage");
-            }
-            else
-            {
-                UserDataBase userData = new UserDataBase();
-                PasswordAbcHash passChange = new PasswordAbcHash();
-                bool IsVerified = false;
 
-                try
+                AuthenticationService authentication = new AuthenticationService();
+               var IsLoged = await authentication.Login(Username, Password);
+
+                if (IsLoged)
                 {
-
-
-                    string HashedPass = passChange.StandardPasswordHash(Password);
-
-                    //  var process = await userData.CheckEmailAndPass(Username, HashedPass);
-
-                 //   var position = await userData.CheckEmailAndPasswordAsync(Username, HashedPass);
-
-
-              //      var userGot = await userData.GetUserByEmail(Username);
-
-                    var authsLiat = await userData.GetAllAuths();
-
-
-                    foreach(var auth in authsLiat)
-                    {
-                        if(auth.Email == Username && auth.Password == HashedPass)
-                        {
-                            IsVerified = true;
-                        }
-                    }
-                  
-
-                    
-
-
-
-
-                }
-                catch(Exception ex)
-                {
-                    await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
-                }
-
-
-
-
-                if (IsVerified)
-                {
-                    await Shell.Current.DisplayAlert("Success", "You are loged in", "OK");
+                    await Shell.Current.GoToAsync("//TabbedPage");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Success", "You are No loged in", "OK");
+
                 }
 
-
-
-
+            }
+            else
+            {
 
             }
+
+
             IsBusy = false;
         }
 

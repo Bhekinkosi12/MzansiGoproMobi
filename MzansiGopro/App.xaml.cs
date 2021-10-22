@@ -21,6 +21,9 @@ namespace MzansiGopro
             MainPage = new AppShell();
         }
 
+
+        
+
        async void splash()
         {
             MainPage = new Splash();
