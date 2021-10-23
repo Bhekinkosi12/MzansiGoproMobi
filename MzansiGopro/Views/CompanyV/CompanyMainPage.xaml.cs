@@ -66,5 +66,55 @@ namespace MzansiGopro.Views.CompanyV
                 cardBTN.TextColor = Color.FromHex("#591da9");
             }
         }
+
+
+        void IsOpen(bool isOpen)
+        {
+            if (isOpen)
+            {
+
+                open.BackgroundColor = Color.FromHex("#591da9");
+                open.TextColor = Color.White;
+
+                close.BackgroundColor = Color.White;
+                close.BorderColor = Color.FromHex("#591da9");
+                close.BorderWidth = 1;
+                close.TextColor = Color.FromHex("#591da9");
+
+            }
+            else
+            {
+                close.BackgroundColor = Color.FromHex("#591da9");
+                close.TextColor = Color.White;
+
+                open.BackgroundColor = Color.White;
+                open.BorderColor = Color.FromHex("#591da9");
+                open.BorderWidth = 1;
+                open.TextColor = Color.FromHex("#591da9");
+            }
+
+
+        }
+
+
+        private void open_Clicked(object sender, EventArgs e)
+        {
+            var pageModel = BindingContext as AdminBusinessViewModel;
+            pageModel.IsOpen = true;
+
+            IsOpen(true);
+            
+
+        }
+
+        private void close_Clicked(object sender, EventArgs e)
+        {
+            var pageModel = BindingContext as AdminBusinessViewModel;
+            pageModel.IsOpen = true;
+
+            IsOpen(false);
+
+
+        }
     }
 }

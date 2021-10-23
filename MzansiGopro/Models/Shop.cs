@@ -29,6 +29,8 @@ namespace MzansiGopro.Models
         public DateTime ExpireDate { get; set; }
         public double Points { get; set; }
         public int Visits { get; set; }
+        public string IsOpen { get; set; } = "Open";
+
 
     }
 }

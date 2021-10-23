@@ -39,6 +39,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
         string points;
         string visits;
         string bio;
+        bool isOpen;
 
         ObservableCollection<ProductListModel> productModel = new ObservableCollection<ProductListModel>();
 
@@ -51,6 +52,17 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
         public Command AddOffer { get; }
 
+
+        public bool IsOpen
+        {
+            get => isOpen;
+            set
+            {
+                SetProperty(ref isOpen, value);
+                OnIsOpenChanged(value);
+                OnPropertyChanged(nameof(IsOpen));
+            }
+        }
 
         public string Bio
         {
@@ -297,6 +309,16 @@ namespace MzansiGopro.ViewModels.BusinessVM
                 Number = RunTimeBusiness.Number;
                 Visits = $"{RunTimeBusiness.Visits}";
                 Points = $"{RunTimeBusiness.Points}pts";
+
+                if(RunTimeBusiness.IsOpen == "Open")
+                {
+
+                    IsOpen = true;
+                }
+                else
+                {
+                    IsOpen = false;
+                }
                 foreach(var item in RunTimeBusiness.StoreImage)
                 {
                     images_.Add(item);
@@ -381,6 +403,39 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
             IsBusy = false;
 
+
+        }
+
+
+
+
+        async void OnIsOpenChanged(bool _isOpen)
+        {
+
+            UserDataBase dataBase = new UserDataBase();
+
+            var shop = RunTimeBusiness;
+
+            if (IsOpen)
+            {
+
+            shop.IsOpen = "Open";
+            }
+            else
+            {
+                shop.IsOpen = "Closed";
+            }
+
+            RunTimeBusiness = shop;
+
+            try
+            {
+                await dataBase.UpDateBusinessAsync(RunTimeBusiness);
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
 
         }
 

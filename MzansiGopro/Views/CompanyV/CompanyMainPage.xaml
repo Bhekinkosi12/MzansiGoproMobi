@@ -44,9 +44,9 @@
 
                             <Label  Text="{Binding Name}" TextColor="#fff" FontSize="27" Grid.RowSpan="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
-                           
-                            <Button Text="Edit" HorizontalOptions="EndAndExpand" TextColor="#fff" BackgroundColor="Transparent" BorderColor="#fff" BorderWidth="1" />
                            <!--
+                            <Button Text="Edit" HorizontalOptions="EndAndExpand" TextColor="#fff" BackgroundColor="Transparent" BorderColor="#fff" BorderWidth="1" />
+                           
                             <Button Text="Setting" HorizontalOptions="StartAndExpand" TextColor="#fff" BackgroundColor="Transparent" BorderColor="#fff" BorderWidth="1" />
 
                           -->
@@ -97,19 +97,22 @@
 
 
 
+            <!--
             <Frame Padding="0" BackgroundColor="Transparent" >
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="15,5" FontSize="17"  TextColor="{StaticResource text}" Text="The Bio is gonna be displayed in this particular rigi and this is a template for testing the resposiveness of the bio tab for this particular time" />
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="15,5" FontSize="17"  TextColor="{StaticResource text}" Text="" />
 
                     
 
                 </Grid>
                 
             </Frame>
+            
+            -->
 
 
 
@@ -168,6 +171,27 @@
                 
             </Frame>
 
+
+
+
+                    <Frame BackgroundColor="Transparent" Padding="5" HeightRequest="40">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Text="Open" x:Name="open" Clicked="open_Clicked" />
+
+                            <Button Text="Close" x:Name="close" Grid.Column="1"  Clicked="close_Clicked" />
+
+
+
+                        </Grid>
+                        
+                    </Frame>
+            
 
 
                 <Frame BackgroundColor="Transparent" >

@@ -269,7 +269,7 @@
 
 
 
-                                                <Label Text="Open untill 20h00" Margin="10,0"  TextColor="#191919" HorizontalOptions="End" />
+                                                <Label Text="{Binding IsOpen}" Margin="10,0"  TextColor="#191919" HorizontalOptions="End" />
 
 
 

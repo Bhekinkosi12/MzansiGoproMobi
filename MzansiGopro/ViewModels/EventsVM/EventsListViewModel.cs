@@ -53,6 +53,14 @@ namespace MzansiGopro.ViewModels.EventsVM
 
             SelectEvent = new Command<Events>(OnSelectEvent);
             RefreshEvents = new Command(async () => await OnRefreshEvents());
+
+
+            launch();
+        }
+
+       async void launch()
+        {
+            await OnRefreshEvents();
         }
 
 
