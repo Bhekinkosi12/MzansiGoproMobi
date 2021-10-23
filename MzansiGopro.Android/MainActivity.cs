@@ -46,8 +46,12 @@ namespace MzansiGopro.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTIzNjE5QDMxMzkyZTMzMmUzMGdsNEFCd3psbHE3VFNxZXRrNEFBN05iT3F2L2pLTTBVbFErWkNuMGVmRk09;NTIzNjIwQDMxMzkyZTMzMmUzMGlNVS90OEhkc2duTytZb0xtUFB5ZGRub0FsNHFwZms2dUM4SytqemxJV1k9;NTIzNjIxQDMxMzkyZTMzMmUzMFFtOXFyczBGeHE1bjR3ZlJUZHhEdExSNk9jT0tEOFA0aHNVbnh3ZUdoWEE9");
+          
 
             base.OnCreate(savedInstanceState);
             NativeMedia.Platform.Init(this, savedInstanceState);

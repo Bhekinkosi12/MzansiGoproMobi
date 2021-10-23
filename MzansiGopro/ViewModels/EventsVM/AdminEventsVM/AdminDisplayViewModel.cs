@@ -81,9 +81,11 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
 
         void GetEvent()
         {
+            AdminEventsViewModel eventtsA = new AdminEventsViewModel();
             EventsListViewModel eventsList = new EventsListViewModel();
             ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
-            var events = eventsList.GetSelectedEvent();
+            //  var events = eventsList.GetSelectedEvent();
+            var events = eventtsA.ReturnSelectedEvent();
 
             Location = events.Location;
             Image = events.Cover;

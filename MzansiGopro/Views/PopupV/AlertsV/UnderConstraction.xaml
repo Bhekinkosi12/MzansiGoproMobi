@@ -14,7 +14,7 @@
 
             <Image Source="contentTeam.png" Aspect="AspectFit" />
 
-            <Label Grid.Row="1" Text="Current Business Under Constraction " TextColor="#191919" FontSize="17" HorizontalTextAlignment="Center" />
+            <Label Grid.Row="1" Text="Current Business Under Constraction " TextColor="#191919" FontSize="17" Margin="10" HorizontalTextAlignment="Center" />
 
 
             <Button Text="OKAY" Clicked="Button_Clicked"  TextColor="{StaticResource secondaryPurple}" BorderColor="{StaticResource secondaryPurple}" Grid.Row="2" BorderWidth="1" CornerRadius="5" BackgroundColor="Transparent" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Shell.NavBarIsVisible="False"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:admineventsvm="clr-namespace:MzansiGopro.ViewModels.EventsVM.AdminEventsVM"
              x:Class="MzansiGopro.Views.EventsV.AdminEventsV.AdminDisplayEventPage">
     <ContentPage.BindingContext>
@@ -15,8 +15,10 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Button Text="Delete" x:Name="goingToEvent"  TextColor="#fff" BackgroundColor="{StaticResource secondaryPurple}" CornerRadius="8" HorizontalOptions="CenterAndExpand"  />
+            <!--
+            <Button Text="Delete" Margin="7,3" x:Name="DeleteEvent"  TextColor="#fff" BackgroundColor="{StaticResource secondaryPurple}" CornerRadius="8" HorizontalOptions="EndAndExpand"  />
 
+            -->
             <map:Map x:Name="locationMap" ItemsSource="{Binding Pins}" MapType="Street" Grid.Row="1">
                 <map:Map.ItemTemplate>
                     <DataTemplate>

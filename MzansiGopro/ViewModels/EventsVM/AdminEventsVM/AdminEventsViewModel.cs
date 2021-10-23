@@ -150,11 +150,15 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
             try
             {
 
-           await userData.UpdateUserAsync(RunTimeUser);
+                await userData.UpdateUserAsync(RunTimeUser);
 
 
                 if(SelectedEvent != null)
                 {
+
+
+
+
                     try
                     {
 
@@ -166,17 +170,22 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
                     }
                     _user.EventsHoted.Remove(SelectedEvent);
                     _user.EventsHoted.Add(_event);
+
+
+
+
+
                 }
                 else
                 {
-                        try { 
-                    await userData.AddEventAsync(_event);
+                                try { 
+                                    await userData.AddEventAsync(_event);
 
-                    }
-                        catch
-                {
-                    Shell.Current.ShowPopup(new InternetConnectionPop());
-                }
+                                 }
+                                catch
+                                {
+                                    Shell.Current.ShowPopup(new InternetConnectionPop());
+                                }
 
             _user.EventsHoted.Add(_event);
                 }
@@ -216,7 +225,15 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
        async void OnSelectedEvent(Events _event)
         {
             SelectedEvent = _event;
+            try
+            {
             await Shell.Current.GoToAsync("AdminDisplayEventPage");
+
+            }
+            catch(Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
        public Events ReturnSelectedEvent()
         {
