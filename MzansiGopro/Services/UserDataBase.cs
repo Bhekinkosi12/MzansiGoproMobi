@@ -174,6 +174,32 @@ namespace MzansiGopro.Services
 
         }
 
+
+
+
+        public async Task DeleteEvent(Events _events)
+        {
+            try
+            {
+                var item = (await client
+                     .Child("Events")
+                     .OnceAsync<Events>()).Where(x => x.Object.Idetifier == _events.Idetifier).FirstOrDefault();
+
+                await client.Child("Events").Child(item.Key).DeleteAsync();
+                    
+            }
+            catch
+            {
+
+            }
+        }
+
+
+
+
+
+
+
         public async Task<List<Events>> GetAllEvents()
         {
                 List<Events> _events = new List<Events>();
@@ -227,9 +253,17 @@ namespace MzansiGopro.Services
 
         public async Task UpdateEvent(Events events,Events newEvent)
         {
+            try
+            {
+
             var item = (await client.Child("Events").OnceAsync<Events>()).Where(x => x.Object == events).FirstOrDefault();
 
             await client.Child("Events").Child(item.Key).PutAsync(newEvent);
+            }
+            catch
+            {
+                
+            }
 
 
         }
@@ -432,6 +466,7 @@ namespace MzansiGopro.Services
             }
             catch(Exception ex)
             {
+                
                 await Shell.Current.DisplayAlert("Error","Please check your internet connection and retry.", "OK");
             }
         }

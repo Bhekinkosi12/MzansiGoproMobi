@@ -245,9 +245,12 @@ namespace MzansiGopro.ViewModels
        async void OnShopVisit(Shop shop)
         {
             SelectedShop = shop;
-
+            var _shop = shop;
+            _shop.Visits += 1;
+            UserDataBase userData = new UserDataBase();
             try
             {
+               await userData.UpDateBusinessAsync(_shop);
 
             await Shell.Current.GoToAsync("BusinessDisplayPage");
             }

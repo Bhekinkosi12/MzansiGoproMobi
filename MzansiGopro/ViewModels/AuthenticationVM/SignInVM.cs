@@ -669,7 +669,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 Email = RunTimeUser.Email,
                 Name = ShopName,
                 ID = $"{RunTimeUser.Email}and{RunTimeUser.Name}",
-                
+                  BusinessOfferID = $"{RunTimeUser.Email}and{RunTimeUser.Name}",
                  StoreImage = _images,
                   Offers = _offers,
                    Location = Location,

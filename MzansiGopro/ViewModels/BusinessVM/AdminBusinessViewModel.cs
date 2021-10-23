@@ -409,7 +409,7 @@ namespace MzansiGopro.ViewModels.BusinessVM
 
 
 
-        async void OnIsOpenChanged(bool _isOpen)
+       public async void OnIsOpenChanged(bool _isOpen)
         {
 
             UserDataBase dataBase = new UserDataBase();

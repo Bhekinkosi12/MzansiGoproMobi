@@ -16,6 +16,9 @@ namespace MzansiGopro.Views.CompanyV
         {
             InitializeComponent();
             SelectedLayout("Card");
+            var pageModel = BindingContext as AdminBusinessViewModel;
+            IsOpen(pageModel.IsOpen);
+            
         }
 
         protected override void OnAppearing()
@@ -101,6 +104,7 @@ namespace MzansiGopro.Views.CompanyV
         {
             var pageModel = BindingContext as AdminBusinessViewModel;
             pageModel.IsOpen = true;
+            pageModel.OnIsOpenChanged(true);
 
             IsOpen(true);
             
@@ -110,7 +114,8 @@ namespace MzansiGopro.Views.CompanyV
         private void close_Clicked(object sender, EventArgs e)
         {
             var pageModel = BindingContext as AdminBusinessViewModel;
-            pageModel.IsOpen = true;
+            pageModel.IsOpen = false;
+            pageModel.OnIsOpenChanged(false);
 
             IsOpen(false);
 
