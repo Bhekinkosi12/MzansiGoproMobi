@@ -132,6 +132,28 @@ namespace MzansiGopro.Services
 
 
 
+        public async Task<Shop> GetShopByEmailAsync(string email)
+        {
+            try
+            {
+                var shop = (await client
+                    .Child("Users")
+                    .Child("IsBusiness")
+                    .OnceAsync<Shop>()).Where(x => x.Object.Email == email).FirstOrDefault();
+
+
+                return await Task.FromResult(shop.Object);
+
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+
+
         public async Task<bool> AddEventAsync(Events _event)
         {
 

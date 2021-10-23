@@ -37,14 +37,24 @@ namespace MzansiGopro.ViewModels.BusinessVM
             Points = $"{SelectedShop.Points} pts";
             Visits = $"{SelectedShop.Visits} views";
             ObservableCollection<ProductListModel> CardList = new ObservableCollection<ProductListModel>();
+            ObservableCollection<ProductListModel> ListList = new ObservableCollection<ProductListModel>();
             ObservableCollection<image> _storeImages = new ObservableCollection<image>();
 
             foreach (var item in SelectedShop.BusinessOffers.OfferList)
             {
+                if(item.Layout == "Card")
+                {
+
                 CardList.Add(item);
+                }
+                else
+                {
+                    ListList.Add(item);
+                }
             }
 
             productModel = CardList;
+            productModelList = ListList;
 
             foreach(var item in SelectedShop.StoreImage)
             {

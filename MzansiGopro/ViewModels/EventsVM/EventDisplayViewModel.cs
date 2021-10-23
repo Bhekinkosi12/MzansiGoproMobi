@@ -151,7 +151,7 @@ namespace MzansiGopro.ViewModels.EventsVM
 
                     catch
                     {
-
+                        Shell.Current.ShowPopup(new InternetConnectionPop());
                     }
 
 
@@ -182,7 +182,7 @@ namespace MzansiGopro.ViewModels.EventsVM
             }
             catch
             {
-                await Shell.Current.GoToAsync("LoginPage");
+                //await Shell.Current.GoToAsync("LoginPage");
             }
 
 

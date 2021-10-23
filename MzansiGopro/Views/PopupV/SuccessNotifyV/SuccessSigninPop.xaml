@@ -13,7 +13,7 @@
             </Grid.RowDefinitions>
             <Label Text="Welcome to Mzansi Go pro" TextColor="#000" FontSize="30" FontFamily="cursive" HorizontalOptions="Center" />
 
-            <Image Source="joinTeam.jpg" Grid.Row="1" Aspect="AspectFit" />
+            <Image Source="celebrate.png" Grid.Row="1" Aspect="AspectFit" />
 
 
             <Button Text="Continue" Clicked="Button_Clicked" TextColor="{StaticResource secondaryPurple}" BorderColor="{StaticResource secondaryPurple}" Grid.Row="2" BorderWidth="1" CornerRadius="5" BackgroundColor="Transparent" />

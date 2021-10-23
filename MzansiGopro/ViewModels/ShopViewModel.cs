@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Services.BusinessData;
+using MzansiGopro.Views.PopupV.AlertsV;
 
 namespace MzansiGopro.ViewModels
 {
@@ -244,7 +245,16 @@ namespace MzansiGopro.ViewModels
        async void OnShopVisit(Shop shop)
         {
             SelectedShop = shop;
+
+            try
+            {
+
             await Shell.Current.GoToAsync("BusinessDisplayPage");
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new UnderConstraction());
+            }
 
         }
 

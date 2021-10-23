@@ -54,8 +54,8 @@ namespace MzansiGopro.ViewModels.ProfileVM
             string name;
             try
             {
-                var id = Preferences.Get("UserID", string.Empty);
-                if (!string.IsNullOrEmpty(id))
+                var id = Preferences.Get("RefreshToken", string.Empty);
+                if (id != string.Empty)
                 {
 
                 IsLogged = true;
@@ -102,7 +102,7 @@ namespace MzansiGopro.ViewModels.ProfileVM
                     if(RunTimeUser != null)
                     {
 
-                    RunTimeBusiness = await userData.GetShopById(RunTimeUser.AutomatedId);
+                    RunTimeBusiness = await userData.GetShopByEmailAsync(savedAuth.User.Email);
 
                         if(RunTimeBusiness != null)
                         {
@@ -142,11 +142,11 @@ namespace MzansiGopro.ViewModels.ProfileVM
             {
 
                 UserDataBase userData = new UserDataBase();
+                var savedAuth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("RefreshToken", ""));
 
-                if (RunTimeUser != null)
-                {
+               
 
-                    RunTimeBusiness = await userData.GetShopById(RunTimeUser.AutomatedId);
+                    RunTimeBusiness = await userData.GetShopByEmailAsync(savedAuth.User.Email);
 
                     if (RunTimeBusiness != null)
                     {
@@ -157,11 +157,7 @@ namespace MzansiGopro.ViewModels.ProfileVM
                         await Shell.Current.GoToAsync("StoreSetupPage");
                     }
 
-                }
-                else
-                {
-
-                }
+              
 
 
 
