@@ -55,7 +55,7 @@
                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
                             </punny:PancakeView.Shadow>
 
-                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Password}" Placeholder="Password" />
+                            <Entry Style="{StaticResource EntryGL}" IsPassword="True" Text="{Binding Password}" Placeholder="Password" />
                         </punny:PancakeView>
 
 
@@ -81,12 +81,19 @@
                 <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="No Account:" TextColor="#191919" >
                     
                 </Label>
-                
+
+
+                    <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Forgot Passwprd" TextColor="#591da9" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="forgot" Tapped="forgot_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
 
 
 
 
-            </Grid>
+
+                </Grid>
             
         </punny:PancakeView>
 

@@ -26,5 +26,10 @@ namespace MzansiGopro.Views.AuthenticationV
 
             await Shell.Current.GoToAsync("SignInPage");
         }
+
+        private async void forgot_Tapped(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("ForgotPasswordPage");
+        }
     }
 }

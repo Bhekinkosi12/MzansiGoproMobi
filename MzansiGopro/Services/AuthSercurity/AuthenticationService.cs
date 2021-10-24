@@ -235,6 +235,34 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
         }
+
+
+
+
+        public async Task<bool> ForgotPassword(string email)
+        {
+
+            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
+
+            try
+            {
+
+               await authProvider.SendPasswordResetEmailAsync(email);
+
+                return await Task.FromResult(true);
+
+            }
+            catch
+            {
+                //Shell.Current.ShowPopup(new InternetConnectionPop());
+
+                return false;
+            }
+
+
+        }
+
+
     
     }
 }

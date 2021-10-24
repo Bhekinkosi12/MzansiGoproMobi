@@ -15,14 +15,30 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
         private string username;
         private string password;
+        bool isSent = false;
         public Command login { get; }
+
+        public Command ResetPassword { get; }
+
+
 
 
         public LoginVM()
         {
             login = new Command(OnLogin);
+            ResetPassword = new Command(OnForgotPassword);
         }
 
+
+        public bool IsSent
+        {
+            get => isSent;
+            set
+            {
+                SetProperty(ref isSent, value);
+                OnPropertyChanged(nameof(IsSent));
+            }
+        }
         public string Username
         {
             get => username;
@@ -45,6 +61,26 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
 
+        public async void OnForgotPassword()
+        {
+            IsBusy = true;
+            AuthenticationService authentication = new AuthenticationService();
+            if(Username.Length > 4)
+            {
+               var _IsSent = await authentication.ForgotPassword(Username);
+
+                if (_IsSent)
+                {
+                    IsSent = true;
+                }
+                else
+                {
+                    IsSent = false;
+                }
+            }
+
+            IsBusy = false;
+        }
 
      public  async void OnLogin()
         {
