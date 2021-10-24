@@ -189,7 +189,7 @@ namespace MzansiGopro.Views
             searchTerm = searchTerm.ToLowerInvariant();
 
 
-            
+
 
 
             var filteredItems = model.ShopList.Where(x => x.Name.ToLowerInvariant().Contains(searchTerm)).ToList();
@@ -241,7 +241,7 @@ namespace MzansiGopro.Views
 
             //model.ShopList.Clear();
             // model.ShopList = _shops;
-
+            _shopsList.Reverse();
             
             storeCollective.ItemsSource = _shopsList;
 
