@@ -34,22 +34,12 @@ namespace MzansiGopro.Views
 
         protected async override void OnAppearing()
         {
-           var id = Preferences.Get("FirstUse", string.Empty);
+           
             var token = Preferences.Get("RefreshToken", string.Empty);
 
             AuthenticationService authentication = new AuthenticationService();
 
-            if (id == string.Empty)
-            {
-                LocalUserService localUser = new LocalUserService();
-                localUser.AddFirstUse();
-            Shell.Current.ShowPopup(new AppIntroPop());
-
-            }
-            else
-            {
-
-            }
+            
 
             if(token != string.Empty)
             {
