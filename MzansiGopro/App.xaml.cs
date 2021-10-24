@@ -2,6 +2,7 @@
 using MzansiGopro.Views;
 using System;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 using MzansiGopro.Services.BusinessData;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace MzansiGopro
 
         public App()
         {
+            VersionTracking.Track();
             InitializeComponent();
+
 
             DependencyService.Register<MockDataStore>();
 
