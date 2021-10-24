@@ -45,7 +45,7 @@ namespace MzansiGopro.Views.CompanyV
             }
         }
 
-        private async void productsave_Clicked(object sender, EventArgs e)
+        private void productsave_Clicked(object sender, EventArgs e)
         {
             var model = BindingContext as BusinessOfferEditViewModel;
 
@@ -53,7 +53,7 @@ namespace MzansiGopro.Views.CompanyV
             try
             {
 
-                if (!string.IsNullOrEmpty(model.SelectedName) && !string.IsNullOrEmpty(model.SelectedImage) )
+                if (!string.IsNullOrEmpty(model.SelectedName)  )
                 {
                     model.OnSaveEditedProduct();
                 model.IsSelected = false;
