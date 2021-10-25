@@ -101,6 +101,9 @@
     <EmbeddedResource Update="Views\PopupV\AlertsV\UnderConstraction.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopupV\AlertsV\UpdateAppPop.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PopupV\ErrorHandlingV\InternetConnectionPop.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

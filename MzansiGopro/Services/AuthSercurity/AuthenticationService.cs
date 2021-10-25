@@ -80,6 +80,8 @@ namespace MzansiGopro.Services.AuthSercurity
 
                 Preferences.Set("RefreshToken", serial);
 
+                
+
 
 
 
@@ -146,6 +148,37 @@ namespace MzansiGopro.Services.AuthSercurity
 
         }
 
+
+
+
+        public async Task<bool> CheckEmailExist(string email)
+        {
+            bool IsAvailable = false;
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
+            try
+            {
+
+              var a =  await authProvider.GetLinkedAccountsAsync(email);
+
+
+                if (a.IsForExistingProvider)
+                {
+                    IsAvailable = true;
+                }
+                else
+                {
+
+                }
+
+
+            }
+            catch
+            {
+
+            }
+
+            return await Task.FromResult(IsAvailable);
+        }
 
 
 

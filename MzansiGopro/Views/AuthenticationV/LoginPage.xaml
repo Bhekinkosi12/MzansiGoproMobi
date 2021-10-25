@@ -83,7 +83,7 @@
                 </Label>
 
 
-                    <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Forgot Passwprd" TextColor="#591da9" >
+                    <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Forgot Password" TextColor="#591da9" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer x:Name="forgot" Tapped="forgot_Tapped" />
                         </Label.GestureRecognizers>

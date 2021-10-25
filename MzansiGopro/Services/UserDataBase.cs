@@ -7,14 +7,18 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using MzansiGopro.Models;
 using MzansiGopro.Models.microModel;
+using MzansiGopro.Views.PopupV.AlertsV;
 using SQLite;
 using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Extensions;
+
 
 namespace MzansiGopro.Services
 {
    public class UserDataBase
     {
         FirebaseClient client;
+        string Cversion = "1";
 
         public UserDataBase()
         {
@@ -29,6 +33,39 @@ namespace MzansiGopro.Services
 
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
         }
+
+
+
+        public async Task GetNetVersion()
+        {
+
+            try
+            {
+                var item = (await client.Child("Version").OnceAsync<string>()).FirstOrDefault();
+               var a = item.Object;
+
+
+
+                if(Cversion == a)
+                {
+
+
+                }
+                else
+                {
+                    Shell.Current.ShowPopup(new UpdateAppPop());
+                   
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
+
+
 
 
 
