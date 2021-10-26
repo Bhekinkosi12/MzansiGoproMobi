@@ -39,6 +39,12 @@
 
                 <ScrollView Orientation="Vertical" Grid.Row="2" VerticalOptions="CenterAndExpand">
                     <StackLayout Spacing="20">
+
+                            <Frame Padding="0" BackgroundColor="Transparent" IsVisible="false">
+                                <Label Text="Email or Password is invalid" TextColor="Red" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                            </Frame>
+                              
+                        
                         <punny:PancakeView Style="{StaticResource entryPan}">
                             <punny:PancakeView.Shadow>
                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />

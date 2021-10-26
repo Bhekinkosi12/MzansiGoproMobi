@@ -39,8 +39,7 @@ namespace MzansiGopro
         {
             MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
             businessDataBase.InitialData();
-            EventsServices _services = new EventsServices();
-            _services.eventData();
+           
         }
 
         protected override void OnSleep()

@@ -16,6 +16,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         private string username;
         private string password;
         bool isSent = false;
+        bool isError = false;
         public Command login { get; }
 
         public Command ResetPassword { get; }
@@ -27,6 +28,16 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         {
             login = new Command(OnLogin);
             ResetPassword = new Command(OnForgotPassword);
+        }
+
+        public bool IsError
+        {
+            get => isError;
+            set
+            {
+                SetProperty(ref isSent, value);
+                OnPropertyChanged(nameof(IsError));
+            }
         }
 
 
@@ -98,7 +109,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
                 }
                 else
                 {
-
+                    IsError = true;
                 }
 
             }
