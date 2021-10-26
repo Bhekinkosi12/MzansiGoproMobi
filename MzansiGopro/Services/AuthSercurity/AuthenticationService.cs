@@ -38,14 +38,14 @@ namespace MzansiGopro.Services.AuthSercurity
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 string getToken = auth.FirebaseToken;
-
+                
 
 
                 var serial = JsonConvert.SerializeObject(auth);
 
                 Preferences.Set("RefreshToken", serial);
 
-
+                await authProvider.SendEmailVerificationAsync(getToken);
 
 
 

@@ -14,6 +14,8 @@ using MzansiGopro.Models.microModel;
 using MzansiGopro.Services;
 using Plugin.Geolocator;
 using Xamarin.Forms.Maps;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
 
 namespace MzansiGopro.Views.AuthenticationV
 {
@@ -90,7 +92,7 @@ namespace MzansiGopro.Views.AuthenticationV
             }
             catch(Exception)
             {
-                await Shell.Current.DisplayAlert("Error", "Something went wrong!", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
             finally
             {
@@ -104,7 +106,7 @@ namespace MzansiGopro.Views.AuthenticationV
 
             if(files == null)
             {
-                await Shell.Current.DisplayAlert("Error", "Abnormal Load", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 
@@ -180,7 +182,7 @@ namespace MzansiGopro.Views.AuthenticationV
             var model = BindingContext as SignInVM;
             model.IsBusy = true;
 
-            if(model.Offer != null && model.Images.Count != 0)
+            if(model.Offer.Count != 0 && model.Images.Count != 0)
             {
                 model.AddUserToDB();
             }
