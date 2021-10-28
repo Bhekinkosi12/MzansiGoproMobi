@@ -156,7 +156,7 @@
 
                     <Frame BackgroundColor="Transparent" >
 
-                        <Label Text="Bussiness" TextColor="{StaticResource text}" FontSize="28" FontFamily="cursive" />
+                        <Label Text="Business" TextColor="{StaticResource text}" FontSize="28" FontFamily="cursive" />
                     </Frame>
 
 
@@ -248,7 +248,7 @@
                                                             <CollectionView.ItemTemplate>
                                                                 <DataTemplate>
 
-                                                                    <Frame Padding="0" BackgroundColor="Transparent" BorderColor="#eee" x:DataType="model:Products" >
+                                                                    <Frame  BackgroundColor="Transparent" Padding="7" CornerRadius="7"  BorderColor="#eee" x:DataType="model:Products" >
                                                                         <Grid>
                                                                             <Grid.ColumnDefinitions>
                                                                                 <ColumnDefinition Width="*" />
@@ -443,7 +443,7 @@
                                                                             <Grid.RowDefinitions>
                                                                                 <RowDefinition Height="90" />
                                                                                 <RowDefinition Height="50" />
-                                                                                <RowDefinition Height="30" />
+                                                                                
                                                                             </Grid.RowDefinitions>
 
                                                                             <Frame Padding="0" BackgroundColor="Transparent" CornerRadius="15">
@@ -518,9 +518,7 @@
                                                                             </Frame>
 
 
-                                                                            <Button Text="View" BackgroundColor="#591da9" Padding="0"  CornerRadius="15" TextColor="{StaticResource background}" Grid.Row="2" />
-
-
+                                                                            
 
                                                                         </Grid>
 

@@ -57,9 +57,9 @@ namespace MzansiGopro.Views.AuthenticationV
         {
             AuthenticationService authenticationService = new AuthenticationService();
             var model = BindingContext as SignInVM;
-            model.IsBusy = true;
             if (!InputCheckIsError())
             {
+            model.IsBusy = true;
                 // Check if email is already registered
 
 
@@ -98,6 +98,10 @@ namespace MzansiGopro.Views.AuthenticationV
             {
 
             }
+
+
+            model.IsBusy = false;
+
         }
 
 

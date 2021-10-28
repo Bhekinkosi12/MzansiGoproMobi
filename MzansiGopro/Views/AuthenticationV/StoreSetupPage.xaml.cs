@@ -36,9 +36,9 @@ namespace MzansiGopro.Views.AuthenticationV
             if (string.IsNullOrEmpty(model.Location))
             {
                 //  await Shell.Current.DisplayAlert("Alert", "Invalid location", "OK");
-            
 
-
+                currentLocation.TextColor = Color.Red;
+                currentLocation.BorderColor = Color.Red;
 
             }
             else

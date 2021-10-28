@@ -196,7 +196,7 @@
 
                 <Frame BackgroundColor="Transparent" >
                     
-            <Label Text="Bussiness" TextColor="{StaticResource text}" FontSize="28" FontFamily="cursive" />
+            <Label Text="Business" TextColor="{StaticResource text}" FontSize="28" FontFamily="cursive" />
                 </Frame>
 
 
@@ -291,7 +291,7 @@
                                                             <CollectionView.ItemTemplate>
                                                                 <DataTemplate>
 
-                                                                    <Frame Padding="0" BackgroundColor="Transparent" x:DataType="model:Products" >
+                                                                    <Frame Padding="7" CornerRadius="7" BorderColor="#eee" BackgroundColor="Transparent" x:DataType="model:Products"  >
                                                                         <Grid>
                                                                             <Grid.ColumnDefinitions>
                                                                                 <ColumnDefinition Width="*" />
@@ -323,7 +323,7 @@
 
                                                                                         <CollectionView.ItemTemplate>
                                                                                             <DataTemplate>
-                                                                                                <Frame BackgroundColor="Transparent" BorderColor="#eee"  Padding="0" x:DataType="micromodel:offer" Margin="0,2"   >
+                                                                                                <Frame BackgroundColor="Transparent"   Padding="0" x:DataType="micromodel:offer" Margin="0,2"   >
                                                                                                     <Grid>
                                                                                                         <Grid.ColumnDefinitions>
                                                                                                             <ColumnDefinition Width="*" />

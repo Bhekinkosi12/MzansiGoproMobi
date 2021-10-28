@@ -34,7 +34,7 @@
                         <StackLayout >
                            
 
-                                <Label Text="Shop Cover Image(Requered)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Text="Shop Cover Image(Required)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
 
                             <punny:PancakeView HeightRequest="150" Margin="15,10" >
                                 <punny:PancakeView.Shadow>
@@ -57,7 +57,7 @@
                                     <Entry Style="{StaticResource EntryGL}" Text="{Binding ShopName}" Placeholder="Business Name" MaxLength="15"/>
                                 </punny:PancakeView>
                                 <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
-                            <Label Text="Where are you located?" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Text="Where are you located? *" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
 
 
                             <Frame Padding="0" BackgroundColor="Transparent" x:Name="signFrame" IsVisible="false" HeightRequest="150" >
@@ -122,8 +122,8 @@
                             
                         
                         <StackLayout Spacing="7" >
-                            <Label Text="Bussiness Profile" FontSize="30" FontFamily="cursive" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
-                            <Label Text="What services do you offer?"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
+                            <Label Text="Business Profile" FontSize="30" FontFamily="cursive" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Text="What services do you offer? *"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
 
 
                             <Grid Padding="10,0">
