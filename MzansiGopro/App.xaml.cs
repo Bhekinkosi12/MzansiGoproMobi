@@ -37,8 +37,7 @@ namespace MzansiGopro
 
         protected override void OnStart()
         {
-            MainBusinessDataBase businessDataBase = new MainBusinessDataBase();
-            businessDataBase.InitialData();
+           
            
         }
 

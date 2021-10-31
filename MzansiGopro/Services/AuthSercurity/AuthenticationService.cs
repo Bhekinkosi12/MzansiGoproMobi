@@ -63,7 +63,7 @@ namespace MzansiGopro.Services.AuthSercurity
         }
 
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<string> Login(string email, string password)
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
             UserDataBase userDataBase = new UserDataBase();
@@ -79,8 +79,8 @@ namespace MzansiGopro.Services.AuthSercurity
                 var serial = JsonConvert.SerializeObject(content);
 
                 Preferences.Set("RefreshToken", serial);
-
-                
+                 
+               var  s =  content.FirebaseToken;
 
 
 
@@ -139,11 +139,11 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
-                return await Task.FromResult(true);
+                return await Task.FromResult(content.FirebaseToken);
             }
             catch
             {
-                return await Task.FromResult(false);
+                return await Task.FromResult(string.Empty);
             }
 
         }
@@ -185,6 +185,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
         public async Task<string> AutoLogin()
         {
+            AuthMemory authMemory = new AuthMemory();
             UserDataBase userDataBase = new UserDataBase();
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
             try
@@ -199,6 +200,8 @@ namespace MzansiGopro.Services.AuthSercurity
                 
                 var serial = JsonConvert.SerializeObject(user);
 
+                authMemory.SetToken(user.FirebaseToken);
+                
 
                 Preferences.Set("RefreshToken", serial);
 

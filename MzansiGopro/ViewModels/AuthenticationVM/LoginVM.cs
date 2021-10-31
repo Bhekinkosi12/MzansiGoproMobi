@@ -99,12 +99,13 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
            
             if(!string.IsNullOrEmpty(Username) || Password.Length > 6)
             {
-
+                AuthMemory authMemory = new AuthMemory();
                 AuthenticationService authentication = new AuthenticationService();
                var IsLoged = await authentication.Login(Username, Password);
 
-                if (IsLoged)
+                if (IsLoged != string.Empty)
                 {
+                    authMemory.SetToken(IsLoged);
                     await Shell.Current.GoToAsync("//TabbedPage");
                 }
                 else

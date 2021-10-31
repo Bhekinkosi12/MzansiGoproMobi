@@ -138,7 +138,8 @@ namespace MzansiGopro.ViewModels.ProfileVM
         }
        async void OnToBusiness()
         {
-            if(RunTimeUser != null)
+            var id = Preferences.Get("RefreshToken", string.Empty);
+            if (id != string.Empty)
             {
 
                 UserDataBase userData = new UserDataBase();
@@ -178,7 +179,8 @@ namespace MzansiGopro.ViewModels.ProfileVM
         } 
         async void OnTOEvent()
         {
-            if(RunTimeUser == null)
+            var id = Preferences.Get("RefreshToken", string.Empty);
+            if (id == string.Empty)
             {
                 await Shell.Current.GoToAsync("LoginPage");
             }

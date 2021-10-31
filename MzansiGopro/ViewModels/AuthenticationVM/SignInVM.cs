@@ -281,6 +281,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
       public async void Onsignin()
         {
+            AuthMemory authMemory = new AuthMemory();
             AuthenticationService authentication = new AuthenticationService();
             PasswordAbcHash abcHash = new PasswordAbcHash();
             UserDataBase userDB = new UserDataBase();
@@ -291,8 +292,8 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
             if (IsLoged != "")
             {
-               
-           
+
+                authMemory.SetToken(IsLoged);
 
 
             if (IsShop == true)

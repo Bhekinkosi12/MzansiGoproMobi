@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 using MzansiGopro.Models;
+using MzansiGopro.Services.AuthSercurity;
 using MzansiGopro.Models.microModel;
 using MzansiGopro.Views.PopupV.AlertsV;
 using SQLite;
@@ -22,7 +23,9 @@ namespace MzansiGopro.Services
 
         public UserDataBase()
         {
-          //  var auth = "kasiT";
+
+            AuthMemory authMemory = new AuthMemory();
+            var auth = authMemory.GetToken();
 
             /*
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
@@ -30,6 +33,7 @@ namespace MzansiGopro.Services
                 AuthTokenAsyncFactory = () => Task.FromResult(auth)
             }) ;
             */
+            
 
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
         }
