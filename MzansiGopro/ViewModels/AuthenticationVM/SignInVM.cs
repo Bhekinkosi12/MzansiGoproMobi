@@ -14,6 +14,7 @@ using MzansiGopro.Services.AuthSercurity;
 using MzansiGopro.Services.LocalData;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV;
 using MzansiGopro.Views.PopupV.SuccessNotifyV;
 
 namespace MzansiGopro.ViewModels.AuthenticationVM
@@ -606,6 +607,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
 
+        
 
 
 
@@ -711,14 +713,18 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
             }
-            catch(Exception ex)
+            catch
             {
                 Shell.Current.ShowPopup(new UnexpectedErrorPop());
+            }
+            finally
+            {
+            IsBusy = false;
+
             }
 
 
 
-            IsBusy = false;
 
 
         }

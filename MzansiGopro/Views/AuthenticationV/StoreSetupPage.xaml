@@ -100,11 +100,12 @@
                 
                 
             </punny:PancakeView>
-            
-            
-            
-            
-            
+
+
+           
+
+
+
             <!--Second Slide-->
             <punny:PancakeView x:Name="second" IsVisible="False">
 
@@ -280,6 +281,60 @@
 
 
             </punny:PancakeView>
+
+
+
+
+
+
+
+
+
+            <punny:PancakeView x:Name="locationFrame" IsVisible="False">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+
+
+                    <map:Map  Grid.RowSpan="2" x:Name="map" PropertyChanged="Map_PropertyChanged" >
+
+
+                    </map:Map>
+                    <Image Source="Plocation.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="20" WidthRequest="20" Grid.RowSpan="2" />
+
+                    <Frame Padding="0"  BackgroundColor="Transparent" Grid.RowSpan="2" x:Name="notified" >
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="maptouch_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <BoxView BackgroundColor="#000" Opacity="0.6" />
+
+                            <Label Text="Span Map to location. Tap to continue" TextColor="#fff" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                        </Grid>
+                    </Frame>
+
+
+
+                    <Button x:Name="select" CornerRadius="15"  Text="Select" BackgroundColor="White" BorderColor="{StaticResource secondaryPurple}" BorderWidth="1" TextColor="{StaticResource secondaryPurple}"  Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" />
+
+
+
+
+                </Grid>
+            </punny:PancakeView>
+
+
 
 
             <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />
