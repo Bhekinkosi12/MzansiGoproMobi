@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Size="340,500"  Color="Transparent" BackgroundColor="Transparent"
+              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="MzansiGopro.Views.PopupV.LocationSelectPage">
+
+    <Frame Padding="10" BackgroundColor="#fff" CornerRadius="15" >
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+
+
+            <map:Map  Grid.RowSpan="2" x:Name="map" PropertyChanged="Map_PropertyChanged" >
+               
+                
+            </map:Map>
+            <Image Source="Plocation.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="20" WidthRequest="20" Grid.RowSpan="2" />
+
+            <Frame Padding="0"  BackgroundColor="Transparent" Grid.RowSpan="2" x:Name="notified" >
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="maptouch_Tapped" />
+                </Frame.GestureRecognizers>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <BoxView BackgroundColor="#000" Opacity="0.6" />
+
+                    <Label Text="Span Map to location. Tap to continue" TextColor="#fff" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                </Grid>
+            </Frame>
+
+
+
+        <Button x:Name="select" CornerRadius="15" Clicked="select_Clicked" Text="Select" BackgroundColor="White" BorderColor="{StaticResource secondaryPurple}" BorderWidth="1" TextColor="{StaticResource secondaryPurple}"  Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" />
+
+
+
+
+    </Grid>
+    </Frame>
+    
+</xct:Popup>
