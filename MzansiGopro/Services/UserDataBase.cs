@@ -46,47 +46,36 @@ namespace MzansiGopro.Services
               
                     try
                     {
-                      var token = await authenticationService.AutoLogin();
+                    var token =  authenticationService.ReturnToken();
 
                         if(token != "")
                         {
                             Token = token;
 
 
-                        client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
-                        {
-                            AuthTokenAsyncFactory = () => Task.FromResult(Token),
-                            AsAccessToken = true,
-                            SyncPeriod = TimeSpan.FromSeconds(5),
-
-                        });
-
-                    }
+                      
+                        }
 
 
                     }
                     catch
                     {
-                    
+
                    
                     }
 
                 
             }
-            else
-            {
+          
+
 
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
             {
                 AuthTokenAsyncFactory = () => Task.FromResult(Token),
-                 AsAccessToken = true,
-                  SyncPeriod = TimeSpan.FromSeconds(5),
-                    
+                AsAccessToken = true,
+              
+
             });
-            }
-
-
-
 
 
 

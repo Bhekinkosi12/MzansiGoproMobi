@@ -14,7 +14,7 @@ namespace MzansiGopro.Services.AuthSercurity
 {
    public class AuthenticationService : BaseViewModel
     {
-
+        static string Token { get; set; } = string.Empty;
 
         public AuthenticationService()
         {
@@ -45,9 +45,9 @@ namespace MzansiGopro.Services.AuthSercurity
 
                 Preferences.Set("RefreshToken", serial);
 
-                
 
 
+                Token = getToken;
 
 
                 return await Task.FromResult(getToken);
@@ -82,7 +82,7 @@ namespace MzansiGopro.Services.AuthSercurity
                 Preferences.Set("RefreshToken", serial);
                  
                var  s =  content.FirebaseToken;
-
+                Token = s;
 
 
 
@@ -202,7 +202,8 @@ namespace MzansiGopro.Services.AuthSercurity
                 var serial = JsonConvert.SerializeObject(user);
 
                 authMemory.SetToken(user.FirebaseToken);
-                
+
+                Token = user.FirebaseToken;
 
                 Preferences.Set("RefreshToken", serial);
 
@@ -223,9 +224,13 @@ namespace MzansiGopro.Services.AuthSercurity
 
                         try
                         {
-                            var shop = await userDataBase.GetShopById(RunTimeUser.AutomatedId);
+                            if(RunTimeUser != null)
+                            {
+                                var shop = await userDataBase.GetShopById(RunTimeUser.AutomatedId);
 
-                            RunTimeBusiness = shop;
+                                RunTimeBusiness = shop;
+
+                            }
 
                         }
                         catch
@@ -258,7 +263,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
-
+                
 
                 return await Task.FromResult(user.FirebaseToken);
 
@@ -276,7 +281,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
         }
 
-
+        
 
 
         public async Task<bool> ForgotPassword(string email)
@@ -302,6 +307,13 @@ namespace MzansiGopro.Services.AuthSercurity
 
         }
 
+
+
+
+        public string ReturnToken()
+        {
+            return Token;
+        }
 
     
     }

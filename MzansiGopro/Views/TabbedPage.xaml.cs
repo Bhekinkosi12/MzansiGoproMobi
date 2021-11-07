@@ -41,17 +41,25 @@ namespace MzansiGopro.Views
 
             AuthenticationService authentication = new AuthenticationService();
 
-            
 
-            if(token != string.Empty)
+            try
             {
 
-              await authentication.AutoLogin();
+                if(token != string.Empty)
+                {
+
+                  await authentication.AutoLogin();
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                await Shell.Current.GoToAsync("//LoginPage");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
+
 
 
             base.OnAppearing();
