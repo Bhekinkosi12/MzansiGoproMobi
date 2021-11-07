@@ -96,28 +96,41 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
      public  async void OnLogin()
         {
             IsBusy = true;
-           
-            if(!string.IsNullOrEmpty(Username) || Password.Length > 6)
-            {
-                AuthMemory authMemory = new AuthMemory();
-                AuthenticationService authentication = new AuthenticationService();
-               var IsLoged = await authentication.Login(Username, Password);
 
-                if (IsLoged != string.Empty)
+            try
+            {
+
+                if(!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
                 {
-                    authMemory.SetToken(IsLoged);
-                    await Shell.Current.GoToAsync("//TabbedPage");
+                    AuthMemory authMemory = new AuthMemory();
+                    AuthenticationService authentication = new AuthenticationService();
+                   var IsLoged = await authentication.Login(Username, Password);
+
+                    if (IsLoged != string.Empty)
+                    {
+                        authMemory.SetToken(IsLoged);
+                        await Shell.Current.GoToAsync("//TabbedPage");
+                    }
+                    else
+                    {
+                        IsError = true;
+                    }
+
                 }
                 else
                 {
                     IsError = true;
                 }
-
             }
-            else
+            catch
             {
-
+                IsError = true;
             }
+            finally
+            {
+                IsBusy = false;
+            }
+           
 
 
             IsBusy = false;

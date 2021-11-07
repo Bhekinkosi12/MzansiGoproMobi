@@ -45,7 +45,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
                 Preferences.Set("RefreshToken", serial);
 
-                await authProvider.SendEmailVerificationAsync(getToken);
+                
 
 
 
@@ -74,6 +74,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
 
+                
                 var content = await auth.GetFreshAuthAsync();
 
                 var serial = JsonConvert.SerializeObject(content);
@@ -90,7 +91,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
                     var _user = await userDataBase.GetUserByEmailAsync(auth.User.Email);
 
-
+                    
 
                     if (_user != null)
                     {
@@ -239,8 +240,9 @@ namespace MzansiGopro.Services.AuthSercurity
                     }
                     else
                     {
-                       Shell.Current.ShowPopup(new InternetConnectionPop());
+                       //Shell.Current.ShowPopup(new InternetConnectionPop());
                       
+
                     }
 
 
@@ -263,7 +265,9 @@ namespace MzansiGopro.Services.AuthSercurity
             }
             catch(Exception ex)
             {
-                Shell.Current.ShowPopup(new InternetConnectionPop());
+                 Shell.Current.ShowPopup(new InternetConnectionPop());
+                
+
 
                
                 return "";

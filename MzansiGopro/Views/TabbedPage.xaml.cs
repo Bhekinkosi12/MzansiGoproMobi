@@ -30,8 +30,8 @@ namespace MzansiGopro.Views
 
         private async void center_Clicked(object sender, EventArgs e)
         {
-            // await Shell.Current.GoToAsync("MainUserProfilePage");
-            Shell.Current.ShowPopup(new LocationSelectPage());
+             await Shell.Current.GoToAsync("MainUserProfilePage");
+           // Shell.Current.ShowPopup(new LocationSelectPage());
         }
 
         protected async override void OnAppearing()

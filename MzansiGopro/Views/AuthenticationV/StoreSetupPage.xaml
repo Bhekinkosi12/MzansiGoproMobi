@@ -290,7 +290,7 @@
 
 
 
-            <punny:PancakeView x:Name="locationFrame" IsVisible="False">
+            <punny:PancakeView x:Name="locationFrame" IsVisible="False" BackgroundColor="#FFF">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -302,7 +302,7 @@
 
 
 
-                    <map:Map  Grid.RowSpan="2" x:Name="map" PropertyChanged="Map_PropertyChanged" >
+                    <map:Map  Grid.RowSpan="2" IsShowingUser="False"  x:Name="map" PropertyChanged="Map_PropertyChanged" >
 
 
                     </map:Map>
@@ -326,7 +326,7 @@
 
 
 
-                    <Button x:Name="select" CornerRadius="15"  Text="Select" BackgroundColor="White" BorderColor="{StaticResource secondaryPurple}" BorderWidth="1" TextColor="{StaticResource secondaryPurple}"  Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Button x:Name="select" CornerRadius="15"  Text="Select" Clicked="select_Clicked" BackgroundColor="White" BorderColor="{StaticResource secondaryPurple}" BorderWidth="1" TextColor="{StaticResource secondaryPurple}"  Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" />
 
 
 

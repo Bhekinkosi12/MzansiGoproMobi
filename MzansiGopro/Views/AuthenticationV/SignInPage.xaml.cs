@@ -75,7 +75,7 @@ namespace MzansiGopro.Views.AuthenticationV
                     if (model.IsShop)
                     {
                         model.AddUserRunTimeUser();
-                        await Shell.Current.GoToAsync("StoreSetupPage");
+                        
                     }
                     else
                     {

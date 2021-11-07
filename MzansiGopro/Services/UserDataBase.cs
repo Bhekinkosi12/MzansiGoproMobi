@@ -20,24 +20,80 @@ namespace MzansiGopro.Services
     {
         FirebaseClient client;
         string Cversion = "1";
+        static string Token { get; set; } = string.Empty;
+
+
 
         public UserDataBase()
         {
+            Init();
+        }
 
+
+
+
+        async void Init()
+        {
+            AuthenticationService authenticationService = new AuthenticationService();
             AuthMemory authMemory = new AuthMemory();
             var auth = authMemory.GetToken();
 
-            /*
+           
+
+            if(Token == string.Empty)
+            {
+
+              
+                    try
+                    {
+                      var token = await authenticationService.AutoLogin();
+
+                        if(token != "")
+                        {
+                            Token = token;
+
+
+                        client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
+                        {
+                            AuthTokenAsyncFactory = () => Task.FromResult(Token),
+                            AsAccessToken = true,
+                            SyncPeriod = TimeSpan.FromSeconds(5),
+
+                        });
+
+                    }
+
+
+                    }
+                    catch
+                    {
+                    
+                   
+                    }
+
+                
+            }
+            else
+            {
+
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
             {
-                AuthTokenAsyncFactory = () => Task.FromResult(auth)
-            }) ;
-            */
-            
+                AuthTokenAsyncFactory = () => Task.FromResult(Token),
+                 AsAccessToken = true,
+                  SyncPeriod = TimeSpan.FromSeconds(5),
+                    
+            });
+            }
 
-            client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
+
+
+
+
+
+
+
+            //  client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
         }
-
 
 
         public async Task GetNetVersion()
@@ -145,8 +201,9 @@ namespace MzansiGopro.Services
 
                 return await Task.FromResult(user.Object);
             }
-            catch
+            catch(Exception ex)
             {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
                 return null;
             }
         }
