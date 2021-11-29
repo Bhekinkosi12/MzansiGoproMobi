@@ -39,6 +39,10 @@
 
                 <ScrollView Orientation="Vertical" Grid.Row="2" VerticalOptions="CenterAndExpand">
                     <StackLayout Spacing="20">
+
+                           
+                              
+                        
                         <punny:PancakeView Style="{StaticResource entryPan}">
                             <punny:PancakeView.Shadow>
                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
@@ -46,11 +50,13 @@
                             
                         <Entry Style="{StaticResource EntryGL}" Text="{Binding Username}" Placeholder="User Name"/>
                         </punny:PancakeView>
-                        
-                        
-                        
-                        
-                        <punny:PancakeView Style="{StaticResource entryPan}">
+
+                            <Frame Padding="0" BackgroundColor="Transparent" IsVisible="{Binding IsError,Mode=TwoWay}" HeightRequest="30">
+                                <Label Text="Email or Password is invalid" TextColor="Red" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                            </Frame>
+
+
+                            <punny:PancakeView Style="{StaticResource entryPan}">
                             <punny:PancakeView.Shadow>
                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
                             </punny:PancakeView.Shadow>
@@ -83,7 +89,7 @@
                 </Label>
 
 
-                    <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Forgot Passwprd" TextColor="#591da9" >
+                    <Label HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="4" FontAttributes="Bold" Text="Forgot Password" TextColor="#591da9" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer x:Name="forgot" Tapped="forgot_Tapped" />
                         </Label.GestureRecognizers>

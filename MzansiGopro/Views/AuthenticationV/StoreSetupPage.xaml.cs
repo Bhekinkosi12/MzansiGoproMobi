@@ -14,6 +14,12 @@ using MzansiGopro.Models.microModel;
 using MzansiGopro.Services;
 using Plugin.Geolocator;
 using Xamarin.Forms.Maps;
+using Xamarin.CommunityToolkit.Extensions;
+using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV;
+using Plugin.Geolocator;
+using MzansiGopro.Views.PopupV.AlertsV;
+using Xamarin.CommunityToolkit.Extensions;
 
 namespace MzansiGopro.Views.AuthenticationV
 {
@@ -23,6 +29,7 @@ namespace MzansiGopro.Views.AuthenticationV
         public StoreSetupPage()
         {
             InitializeComponent();
+            current_Location();
         }
 
         private async void firstNext_Clicked(object sender, EventArgs e)
@@ -34,9 +41,9 @@ namespace MzansiGopro.Views.AuthenticationV
             if (string.IsNullOrEmpty(model.Location))
             {
                 //  await Shell.Current.DisplayAlert("Alert", "Invalid location", "OK");
-            
 
-
+                currentLocation.TextColor = Color.Red;
+                currentLocation.BorderColor = Color.Red;
 
             }
             else
@@ -90,7 +97,7 @@ namespace MzansiGopro.Views.AuthenticationV
             }
             catch(Exception)
             {
-                await Shell.Current.DisplayAlert("Error", "Something went wrong!", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
             finally
             {
@@ -104,7 +111,7 @@ namespace MzansiGopro.Views.AuthenticationV
 
             if(files == null)
             {
-                await Shell.Current.DisplayAlert("Error", "Abnormal Load", "OK");
+                Shell.Current.ShowPopup(new UnexpectedErrorPop());
             }
 
 
@@ -132,6 +139,10 @@ namespace MzansiGopro.Views.AuthenticationV
         private async void currentLocation_Clicked(object sender, EventArgs e)
         {
             var model = BindingContext as SignInVM;
+
+            locationFrame.IsVisible = true;
+
+            /*
             model.IsBusy = true;
 
             try
@@ -155,10 +166,15 @@ namespace MzansiGopro.Views.AuthenticationV
                 await Shell.Current.DisplayAlert("Alert", "Please allow location permission within your settings and keep location On", "OK");
 
             }
+            finally
+            {
 
             model.IsBusy = false;
-           
-           
+            }
+
+            */
+
+
 
         }
 
@@ -180,7 +196,7 @@ namespace MzansiGopro.Views.AuthenticationV
             var model = BindingContext as SignInVM;
             model.IsBusy = true;
 
-            if(model.Offer != null && model.Images.Count != 0)
+            if(model.Offer.Count != 0 && model.Images.Count != 0)
             {
                 model.AddUserToDB();
             }
@@ -190,5 +206,95 @@ namespace MzansiGopro.Views.AuthenticationV
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        bool firstTime = true;
+        string location_ { get; set; } = "";
+        private void Map_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
+            var a = (Xamarin.Forms.Maps.Map)sender;
+
+            if (a.VisibleRegion != null)
+            {
+                if (firstTime)
+                {
+                    firstTime = false;
+                    return;
+                }
+
+
+                if (location_ != "")
+                {
+                    select.BackgroundColor = Color.FromHex("#591da9");
+                    select.TextColor = Color.FromHex("#fff");
+
+                }
+
+                location_ = $"{a.VisibleRegion.Center.Latitude};{a.VisibleRegion.Center.Longitude}";
+
+            }
+
+
+
+        }
+
+        async void current_Location()
+        {
+
+            try
+            {
+
+                var locator = CrossGeolocator.Current;
+                var position = await locator.GetPositionAsync();
+
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude), Distance.FromMeters(400)));
+
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new KeepLocationOn());
+            }
+        }
+
+        private void select_Clicked(object sender, EventArgs e)
+        {
+                var model = BindingContext as SignInVM;
+
+            if (!string.IsNullOrEmpty(location_))
+            {
+                model.Location = location_;
+                locationFrame.IsVisible = false;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void maptouch_Tapped(object sender, EventArgs e)
+        {
+            notified.IsVisible = false;
+        }
+
+
+
+
+
+
+
+
     }
 }

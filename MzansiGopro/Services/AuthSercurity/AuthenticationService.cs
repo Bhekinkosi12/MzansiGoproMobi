@@ -14,7 +14,7 @@ namespace MzansiGopro.Services.AuthSercurity
 {
    public class AuthenticationService : BaseViewModel
     {
-
+        static string Token { get; set; } = string.Empty;
 
         public AuthenticationService()
         {
@@ -38,7 +38,7 @@ namespace MzansiGopro.Services.AuthSercurity
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
 
                 string getToken = auth.FirebaseToken;
-
+                
 
 
                 var serial = JsonConvert.SerializeObject(auth);
@@ -47,7 +47,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
-
+                Token = getToken;
 
 
                 return await Task.FromResult(getToken);
@@ -63,7 +63,7 @@ namespace MzansiGopro.Services.AuthSercurity
         }
 
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<string> Login(string email, string password)
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
             UserDataBase userDataBase = new UserDataBase();
@@ -74,12 +74,15 @@ namespace MzansiGopro.Services.AuthSercurity
 
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
 
+                
                 var content = await auth.GetFreshAuthAsync();
 
                 var serial = JsonConvert.SerializeObject(content);
 
                 Preferences.Set("RefreshToken", serial);
-
+                 
+               var  s =  content.FirebaseToken;
+                Token = s;
 
 
 
@@ -88,7 +91,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
                     var _user = await userDataBase.GetUserByEmailAsync(auth.User.Email);
 
-
+                    
 
                     if (_user != null)
                     {
@@ -137,11 +140,11 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
-                return await Task.FromResult(true);
+                return await Task.FromResult(content.FirebaseToken);
             }
             catch
             {
-                return await Task.FromResult(false);
+                return await Task.FromResult(string.Empty);
             }
 
         }
@@ -149,9 +152,41 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
+        public async Task<bool> CheckEmailExist(string email)
+        {
+            bool IsAvailable = false;
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
+            try
+            {
+
+              var a =  await authProvider.GetLinkedAccountsAsync(email);
+
+
+                if (a.IsForExistingProvider)
+                {
+                    IsAvailable = true;
+                }
+                else
+                {
+
+                }
+
+
+            }
+            catch
+            {
+
+            }
+
+            return await Task.FromResult(IsAvailable);
+        }
+
+
+
 
         public async Task<string> AutoLogin()
         {
+            AuthMemory authMemory = new AuthMemory();
             UserDataBase userDataBase = new UserDataBase();
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(APIKEY));
             try
@@ -166,6 +201,9 @@ namespace MzansiGopro.Services.AuthSercurity
                 
                 var serial = JsonConvert.SerializeObject(user);
 
+                authMemory.SetToken(user.FirebaseToken);
+
+                Token = user.FirebaseToken;
 
                 Preferences.Set("RefreshToken", serial);
 
@@ -186,9 +224,13 @@ namespace MzansiGopro.Services.AuthSercurity
 
                         try
                         {
-                            var shop = await userDataBase.GetShopById(RunTimeUser.AutomatedId);
+                            if(RunTimeUser != null)
+                            {
+                                var shop = await userDataBase.GetShopById(RunTimeUser.AutomatedId);
 
-                            RunTimeBusiness = shop;
+                                RunTimeBusiness = shop;
+
+                            }
 
                         }
                         catch
@@ -203,8 +245,9 @@ namespace MzansiGopro.Services.AuthSercurity
                     }
                     else
                     {
-                       Shell.Current.ShowPopup(new InternetConnectionPop());
+                       //Shell.Current.ShowPopup(new InternetConnectionPop());
                       
+
                     }
 
 
@@ -220,14 +263,16 @@ namespace MzansiGopro.Services.AuthSercurity
 
 
 
-
+                
 
                 return await Task.FromResult(user.FirebaseToken);
 
             }
             catch(Exception ex)
             {
-                Shell.Current.ShowPopup(new InternetConnectionPop());
+                 Shell.Current.ShowPopup(new InternetConnectionPop());
+                
+
 
                
                 return "";
@@ -236,7 +281,7 @@ namespace MzansiGopro.Services.AuthSercurity
 
         }
 
-
+        
 
 
         public async Task<bool> ForgotPassword(string email)
@@ -262,6 +307,13 @@ namespace MzansiGopro.Services.AuthSercurity
 
         }
 
+
+
+
+        public string ReturnToken()
+        {
+            return Token;
+        }
 
     
     }

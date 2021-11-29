@@ -34,7 +34,7 @@
                         <StackLayout >
                            
 
-                                <Label Text="Shop Cover Image(Requered)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Text="Shop Cover Image(Required)" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
 
                             <punny:PancakeView HeightRequest="150" Margin="15,10" >
                                 <punny:PancakeView.Shadow>
@@ -57,7 +57,7 @@
                                     <Entry Style="{StaticResource EntryGL}" Text="{Binding ShopName}" Placeholder="Business Name" MaxLength="15"/>
                                 </punny:PancakeView>
                                 <BoxView BackgroundColor="#000080" HeightRequest="1"  Margin="10" />
-                            <Label Text="Where are you located?" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Text="Where are you located? *" FontSize="17" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
 
 
                             <Frame Padding="0" BackgroundColor="Transparent" x:Name="signFrame" IsVisible="false" HeightRequest="150" >
@@ -100,11 +100,12 @@
                 
                 
             </punny:PancakeView>
-            
-            
-            
-            
-            
+
+
+           
+
+
+
             <!--Second Slide-->
             <punny:PancakeView x:Name="second" IsVisible="False">
 
@@ -122,8 +123,8 @@
                             
                         
                         <StackLayout Spacing="7" >
-                            <Label Text="Bussiness Profile" FontSize="30" FontFamily="cursive" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
-                            <Label Text="What services do you offer?"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
+                            <Label Text="Business Profile" FontSize="30" FontFamily="cursive" TextColor="#191919" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Label Text="What services do you offer? *"  FontSize="16" TextColor="#191919" HorizontalOptions="Start" Margin="10,25,0,0" VerticalOptions="Center" />
 
 
                             <Grid Padding="10,0">
@@ -280,6 +281,60 @@
 
 
             </punny:PancakeView>
+
+
+
+
+
+
+
+
+
+            <punny:PancakeView x:Name="locationFrame" IsVisible="False" BackgroundColor="#FFF">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+
+
+                    <map:Map  Grid.RowSpan="2" IsShowingUser="False"  x:Name="map" PropertyChanged="Map_PropertyChanged" >
+
+
+                    </map:Map>
+                    <Image Source="Plocation.png" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="20" WidthRequest="20" Grid.RowSpan="2" />
+
+                    <Frame Padding="0"  BackgroundColor="Transparent" Grid.RowSpan="2" x:Name="notified" >
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="maptouch_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <BoxView BackgroundColor="#000" Opacity="0.6" />
+
+                            <Label Text="Span Map to location. Tap to continue" TextColor="#fff" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                        </Grid>
+                    </Frame>
+
+
+
+                    <Button x:Name="select" CornerRadius="15"  Text="Select" Clicked="select_Clicked" BackgroundColor="White" BorderColor="{StaticResource secondaryPurple}" BorderWidth="1" TextColor="{StaticResource secondaryPurple}"  Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center" />
+
+
+
+
+                </Grid>
+            </punny:PancakeView>
+
+
 
 
             <BoxView BackgroundColor="#fff" IsVisible="{Binding IsBusy}" Opacity="0.5" />

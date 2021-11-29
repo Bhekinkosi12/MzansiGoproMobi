@@ -14,6 +14,7 @@ using Plugin.Geolocator;
 using MzansiGopro.Views.PopupV.AlertsV;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Services.BusinessData;
+using MzansiGopro.Services;
 
 
 namespace MzansiGopro.Views
@@ -255,6 +256,12 @@ namespace MzansiGopro.Views
         {
             var model = BindingContext as ShopViewModel;
             await model.GetStoresAsync();
+
+
+            UserDataBase userDataBase = new UserDataBase();
+
+           await userDataBase.GetNetVersion();
+            
          
             base.OnAppearing();
 

@@ -232,7 +232,7 @@ namespace MzansiGopro.ViewModels.EventsVM.AdminEventsVM
             }
             catch(Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+               
             }
         }
        public Events ReturnSelectedEvent()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MzansiGopro.ViewModels.AuthenticationVM;
+using MzansiGopro.Services.AuthSercurity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -54,47 +55,73 @@ namespace MzansiGopro.Views.AuthenticationV
 
         private async void signIn_Clicked(object sender, EventArgs e)
         {
+            AuthenticationService authenticationService = new AuthenticationService();
             var model = BindingContext as SignInVM;
-            model.IsBusy = true;
             if (!InputCheckIsError())
             {
-                if (model.IsShop)
+            model.IsBusy = true;
+                // Check if email is already registered
+
+
+                var isRegistered = await authenticationService.CheckEmailExist(entryEmail.Text);
+
+                if (isRegistered)
                 {
-                    model.AddUserRunTimeUser();
-                    await Shell.Current.GoToAsync("StoreSetupPage");
+                    emailError.IsVisible = true;
                 }
                 else
                 {
 
+                    if (model.IsShop)
+                    {
+                        model.AddUserRunTimeUser();
+                        
+                    }
+                    else
+                    {
+
                    
 
 
-                    model.Onsignin();
+                        model.Onsignin();
 
 
-
-
-
+                    }
                 }
+
+
+
+
+
             }
             else
             {
 
             }
+
+
+            model.IsBusy = false;
+
         }
 
 
 
 
-        bool InputCheckIsError()
+       bool InputCheckIsError()
         {
            bool IsError = false;
+            
 
+             
 
             if (string.IsNullOrEmpty(entryFullName.Text))
             {
                 IsError = true;
                 entryFullName.TextColor = Color.FromHex(errorColor);
+
+            }
+            else
+            {
 
             }
 
@@ -105,19 +132,24 @@ namespace MzansiGopro.Views.AuthenticationV
                 entryEmail.TextColor = Color.FromHex(errorColor);
 
             }
+            else
+            {
+
+            }
             
             if(string.IsNullOrEmpty(entryNumber.Text) || entryNumber.Text.Length != 10)
             {
                 IsError = true;
                 entryNumber.TextColor = Color.FromHex(errorColor);
             }
+            else { }
 
 
            if(password.Text != confirmPassword.Text || string.IsNullOrEmpty(password.Text))
             {
                 IsError = true;
                 confirmPassword.TextColor = Color.FromHex(errorColor);
-            }
+            }else { }
 
             return IsError;
 

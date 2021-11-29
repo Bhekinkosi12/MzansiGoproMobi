@@ -14,6 +14,7 @@ using MzansiGopro.Services.AuthSercurity;
 using MzansiGopro.Services.LocalData;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Views.PopupV.ErrorHandlingV;
+using MzansiGopro.Views.PopupV;
 using MzansiGopro.Views.PopupV.SuccessNotifyV;
 
 namespace MzansiGopro.ViewModels.AuthenticationVM
@@ -281,6 +282,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
       public async void Onsignin()
         {
+            AuthMemory authMemory = new AuthMemory();
             AuthenticationService authentication = new AuthenticationService();
             PasswordAbcHash abcHash = new PasswordAbcHash();
             UserDataBase userDB = new UserDataBase();
@@ -291,8 +293,8 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
             if (IsLoged != "")
             {
-               
-           
+
+                authMemory.SetToken(IsLoged);
 
 
             if (IsShop == true)
@@ -605,6 +607,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
 
+        
 
 
 
@@ -710,39 +713,82 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
 
 
             }
-            catch(Exception ex)
+            catch
             {
                 Shell.Current.ShowPopup(new UnexpectedErrorPop());
+            }
+            finally
+            {
+            IsBusy = false;
+
             }
 
 
 
-            IsBusy = false;
 
 
         }
 
 
 
-        public  void AddUserRunTimeUser()
+        public async void AddUserRunTimeUser()
         {
-            PasswordAbcHash abcHash = new PasswordAbcHash();
-            var user = new User()
-            {
-                CompanyName = ShopName,
-                Email = Email,
-                Location = Location,
-                IsShop = IsShop,
-                Name = Name,
-                Number = Number,
-                PasswordConfigID = "std",
-                Password = "null",
-                AutomatedId = $"{Email};;{Name}",
-                 EventsHoted = new List<Events>(),
-                  EventsGoing = new List<Events>()
 
-            };
-            RunTimeUser = user;
+            AuthenticationService authentication = new AuthenticationService();
+            UserDataBase userDB = new UserDataBase();
+            try
+            {
+                var auth = await authentication.Signup(Email, Password);
+
+                if(auth != "")
+                {
+                    var user = new User()
+                    {
+                        CompanyName = ShopName,
+                        Email = Email,
+                        Location = Location,
+                        IsShop = IsShop,
+                        Name = Name,
+                        Number = Number,
+                        PasswordConfigID = "std",
+                        Password = "null",
+                        AutomatedId = $"{Email};;{Name}",
+                        EventsHoted = new List<Events>(),
+                        EventsGoing = new List<Events>()
+
+                    };
+                    RunTimeUser = user;
+
+                    var IsComplete = await userDB.AddUserAsync(RunTimeUser);
+
+                    if (IsComplete)
+                    {
+                    await Shell.Current.GoToAsync("StoreSetupPage");
+
+                    }
+                    else
+                    {
+                        Shell.Current.ShowPopup(new InternetConnectionPop());
+                    }
+                }
+                else
+                {
+                    
+                }
+
+
+            }
+            catch
+            {
+                Shell.Current.ShowPopup(new InternetConnectionPop());
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+          
+            
         }
 
     }

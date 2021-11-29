@@ -11,6 +11,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 using Xamarin.CommunityToolkit.Extensions;
 using MzansiGopro.Views.PopupV.IntroV;
+using MzansiGopro.Views.PopupV;
 
 namespace MzansiGopro.Views
 {
@@ -29,7 +30,8 @@ namespace MzansiGopro.Views
 
         private async void center_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("MainUserProfilePage");
+             await Shell.Current.GoToAsync("MainUserProfilePage");
+           // Shell.Current.ShowPopup(new LocationSelectPage());
         }
 
         protected async override void OnAppearing()
@@ -39,17 +41,25 @@ namespace MzansiGopro.Views
 
             AuthenticationService authentication = new AuthenticationService();
 
-            
 
-            if(token != string.Empty)
+            try
             {
 
-              await authentication.AutoLogin();
+                if(token != string.Empty)
+                {
+
+                  await authentication.AutoLogin();
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                await Shell.Current.GoToAsync("//LoginPage");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
+
 
 
             base.OnAppearing();

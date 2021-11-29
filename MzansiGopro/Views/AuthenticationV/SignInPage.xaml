@@ -52,13 +52,16 @@
 
 
 
+                            <Frame Padding="5" BackgroundColor="Transparent" x:Name="emailError" IsVisible="false">
+                                <Label Text="Email provided is already in use" TextColor="Red" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                            </Frame>
 
                         <punny:PancakeView Style="{StaticResource entryPan}">
                             <punny:PancakeView.Shadow>
                                 <punny:DropShadow BlurRadius="10" Color="#191919" Offset="1,1" />
                             </punny:PancakeView.Shadow>
 
-                            <Entry Style="{StaticResource EntryGL}" Text="{Binding Email}" x:Name="entryEmail" TextChanged="entryEmail_TextChanged" Placeholder="Email" />
+                            <Entry Style="{StaticResource EntryGL}"  Text="{Binding Email}" x:Name="entryEmail" TextChanged="entryEmail_TextChanged" Placeholder="Email" />
                         </punny:PancakeView>
                         
                         

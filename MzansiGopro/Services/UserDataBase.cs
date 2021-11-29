@@ -6,29 +6,115 @@ using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 using MzansiGopro.Models;
+using MzansiGopro.Services.AuthSercurity;
 using MzansiGopro.Models.microModel;
+using MzansiGopro.Views.PopupV.AlertsV;
 using SQLite;
 using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Extensions;
+
 
 namespace MzansiGopro.Services
 {
    public class UserDataBase
     {
         FirebaseClient client;
+        string Cversion = "1";
+        static string Token { get; set; } = string.Empty;
+
+
 
         public UserDataBase()
         {
-          //  var auth = "kasiT";
+            Init();
+        }
 
-            /*
+
+
+
+        async void Init()
+        {
+            AuthenticationService authenticationService = new AuthenticationService();
+            AuthMemory authMemory = new AuthMemory();
+            var auth = authMemory.GetToken();
+
+           
+
+            if(Token == string.Empty)
+            {
+
+              
+                    try
+                    {
+                    var token =  authenticationService.ReturnToken();
+
+                        if(token != "")
+                        {
+                            Token = token;
+
+
+                      
+                        }
+
+
+                    }
+                    catch
+                    {
+
+                   
+                    }
+
+                
+            }
+          
+
+
             client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/", new FirebaseOptions
             {
-                AuthTokenAsyncFactory = () => Task.FromResult(auth)
-            }) ;
-            */
+                AuthTokenAsyncFactory = () => Task.FromResult(Token),
+                AsAccessToken = true,
+              
 
-            client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
+            });
+
+
+
+
+
+            //  client = new FirebaseClient("https://mzansi-go-pro-default-rtdb.firebaseio.com/");
         }
+
+
+        public async Task GetNetVersion()
+        {
+
+            try
+            {
+                var item = (await client.Child("Version").OnceAsync<string>()).FirstOrDefault();
+               var a = item.Object;
+
+
+
+                if(Cversion == a)
+                {
+
+
+                }
+                else
+                {
+                    Shell.Current.ShowPopup(new UpdateAppPop());
+                   
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
+
+
 
 
 
@@ -104,8 +190,9 @@ namespace MzansiGopro.Services
 
                 return await Task.FromResult(user.Object);
             }
-            catch
+            catch(Exception ex)
             {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
                 return null;
             }
         }

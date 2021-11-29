@@ -16,6 +16,7 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         private string username;
         private string password;
         bool isSent = false;
+        bool isError = false;
         public Command login { get; }
 
         public Command ResetPassword { get; }
@@ -27,6 +28,16 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
         {
             login = new Command(OnLogin);
             ResetPassword = new Command(OnForgotPassword);
+        }
+
+        public bool IsError
+        {
+            get => isError;
+            set
+            {
+                SetProperty(ref isSent, value);
+                OnPropertyChanged(nameof(IsError));
+            }
         }
 
 
@@ -85,27 +96,41 @@ namespace MzansiGopro.ViewModels.AuthenticationVM
      public  async void OnLogin()
         {
             IsBusy = true;
-           
-            if(!string.IsNullOrEmpty(Username) || Password.Length > 6)
+
+            try
             {
 
-                AuthenticationService authentication = new AuthenticationService();
-               var IsLoged = await authentication.Login(Username, Password);
-
-                if (IsLoged)
+                if(!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
                 {
-                    await Shell.Current.GoToAsync("//TabbedPage");
+                    AuthMemory authMemory = new AuthMemory();
+                    AuthenticationService authentication = new AuthenticationService();
+                   var IsLoged = await authentication.Login(Username, Password);
+
+                    if (IsLoged != string.Empty)
+                    {
+                        authMemory.SetToken(IsLoged);
+                        await Shell.Current.GoToAsync("//TabbedPage");
+                    }
+                    else
+                    {
+                        IsError = true;
+                    }
+
                 }
                 else
                 {
-
+                    IsError = true;
                 }
-
             }
-            else
+            catch
             {
-
+                IsError = true;
             }
+            finally
+            {
+                IsBusy = false;
+            }
+           
 
 
             IsBusy = false;

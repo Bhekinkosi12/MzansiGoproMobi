@@ -106,7 +106,7 @@ namespace MzansiGopro.ViewModels
             defualtSearch();
             Expand = new Command(OnExpand);
 
-            RefreshShop = new Command(UpDateShopList);
+            RefreshShop = new Command(async () => { await setData(); });
 
             ShopVisit = new Command<Shop>(OnShopVisit);
             FilterTap = new Command<offer>(async (e) => await OnFilterTap(e));
@@ -165,7 +165,7 @@ namespace MzansiGopro.ViewModels
 
 
             }
-            catch (Exception ex)
+            catch 
             {
                 Shell.Current.ShowPopup(new InternetConnectionPop());
             }
