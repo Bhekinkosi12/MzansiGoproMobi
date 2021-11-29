@@ -32,6 +32,7 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />  
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2083" />  
+    <PackageReference Include="Xamarin.Forms.OpenWhatsApp" Version="1.0.1" />  
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.763-beta" />  
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2083" />  
     <PackageReference Include="Xamarin.MediaGallery" Version="1.0.2.1" />
